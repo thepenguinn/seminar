@@ -1,0 +1,104 @@
+\documentclass{beamer}
+
+% \input{../preamble.tex}
+
+% \usepackage{minted}
+
+\usepackage[size=custom,width=16,height=9,scale=0.35]{beamerposter}
+
+\usepackage[T1]{fontenc}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{blindtext}
+\usepackage{tcolorbox}
+\usepackage{svg}
+\usepackage{fontspec}
+\usepackage{booktabs}
+\usepackage[style = ieee]{biblatex}
+
+\usetikzlibrary{calc}
+
+% \usefonttheme{serif}
+% \usepackage{beamercolorthemedracula}
+
+% \addbibresource{abstract.bib} %Import the bibliography file
+
+\usetheme{metropolis}
+
+\definecolor{forestbg}      {RGB} {31, 30, 24}
+
+\title{TinyML in Agriculture Sector}
+
+\subtitle{Awakening of Minds in Low Power Edge Devices}
+
+\date{\today}
+
+\author{
+    Daniel V Mathew
+}
+
+\institute{Rajiv Gandhi Institute of Technology, Kottayam}
+
+\def\supervisor{
+    Prof. Sujithamol S
+}
+
+\def\leafColorPrimaryName{Sage}
+\def\leafColorPrimaryRGB{138, 184, 114}
+\def\leafColorPrimaryHex{\#8AB872}
+\definecolor{leafColorPrimary} {RGB} {\leafColorPrimaryRGB}
+%%
+\def\leafColorSecondaryName{Cactus Spike}
+\def\leafColorSecondaryRGB{204, 224, 153}
+\def\leafColorSecondaryHex{\#CCE099}
+\definecolor{leafColorSecondary} {RGB} {\leafColorSecondaryRGB}
+
+\newcommand\tableBox[2] {
+    \begin{tcolorbox}[
+            coltitle = leafColorPrimary,
+            colbacktitle = leafColorSecondary,
+            colback = leafColorSecondary,
+            colframe = leafColorSecondary,
+            title=#1,
+            fonttitle=\bfseries,
+            detach title,
+        ]
+        \begin{minipage}[t]{0.1\textwidth}
+            \begin{flushleft}
+                \tcbtitle
+            \end{flushleft}
+        \end{minipage}
+        \begin{minipage}[t]{0.9\textwidth}
+            #2
+        \end{minipage}
+    \end{tcolorbox}
+}
+
+% \setbeamertemplate{background} {
+%     \begin{tikzpicture} [remember picture, overlay]
+%         \draw [opacity = 0.15, black]
+%         (current page.south east) ++(-3.5, 1)
+%         node (logo) [black, inner sep = 0pt, anchor = center] {
+%             \begin{minipage}{11cm}
+%                 \includesvg[width = 11cm]{icon_line.svg}
+%             \end{minipage}
+%         } ;
+%     \end{tikzpicture}
+% }
+
+\begin{document}
+
+\maketitle
+
+\begin{frame} {Introduction}
+    Say hai
+\end{frame}
+
+\begin{frame} {Say something else}
+    Say hai
+\end{frame}
+
+\end{document}
