@@ -25,3 +25,4 @@ mini_project_report/*.pdf
 *.stl
 misc
 *_standalone_*.tex
+*.ttf
