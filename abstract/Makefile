@@ -12,4 +12,7 @@ abstract.pdf: abstract.tex references.bib
 	bibtex abstract
 	pdflatex -halt-on-error abstract.tex
 
+build_pics:
+	lunatikz build tmp.tex
+
 .PHONY: view force

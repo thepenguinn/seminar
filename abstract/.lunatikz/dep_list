@@ -1,0 +1,11 @@
+return {
+    ["endDesignFlow"] = {
+        ["parent_dir"] = "tikzpics",
+    },
+    ["subDesignFlow"] = {
+        ["parent_dir"] = "tikzpics",
+    },
+    ["subFigBase"] = {
+        ["parent_dir"] = "tikzpics",
+    },
+}
