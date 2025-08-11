@@ -20,9 +20,13 @@
 \usepackage[style = ieee]{biblatex}
 \usepackage{blindtext}
 \usepackage{setspace}
+\usepackage{minted}
+\usepackage{nicematrix}
 
 \usetikzlibrary{calc}
 \usetikzlibrary{intersections,decorations.markings}
+
+\usemintedstyle{dracula}
 
 \makeatletter
 \tikzset{
@@ -94,6 +98,12 @@
 \definecolor{colorVeryLightRed} {HTML} {D1AE97}
 \definecolor{colorDarkRed} {HTML} {581319}
 \definecolor{colorDarkGreen} {HTML} {2E4330}
+\definecolor{colorLightGreen} {HTML} {C0D2A3}
+
+\definecolor{colorLightBrown} {HTML} {A8867B}
+\definecolor{colorDarkBrown} {HTML} {9EC2AD}
+
+\definecolor{colorBrown} {HTML} {9F774E}
 
 \definecolor{colorTest} {HTML} {133330}
 
@@ -152,10 +162,23 @@
   bg=colorMaroon
 }
 
-\newcommand\tikzframetitle[2] {
+\newcommand\tikzframetitleleft[2] {
     \draw (current page.north west) ++(0.75cm, -0.75cm) coordinate (frametitle) ;
     \node [anchor = north west] (frametitle) at (frametitle) {
         \begin{minipage} {8cm}
+            \setstretch{0.75}
+            \huge
+            {\Large #1} \\ #2
+        \end{minipage}
+    }
+    ;
+}
+
+\newcommand\tikzframetitleright[2] {
+    \draw (current page.north east) ++(-0.75cm, -0.75cm) coordinate (frametitle) ;
+    \node [anchor = north east] (frametitle) at (frametitle) {
+        \begin{minipage} {8cm}
+            \raggedleft
             \setstretch{0.75}
             \huge
             {\Large #1} \\ #2
@@ -287,7 +310,7 @@
             \end{scope}
         \end{scope}
 
-        \tikzframetitle{Making} {Sense of Data}
+        \tikzframetitleleft{Making} {Sense of Data}
 
         \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
         \node [anchor = north west]  (content) at (content) {
@@ -356,7 +379,7 @@
             remember picture,
             overlay,
         ]
-        \tikzframetitle{Asking}{The Right Questions}
+        \tikzframetitleleft{Asking}{The Right Questions}
 
         \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
         \node [anchor = north west]  (content) at (content) {
@@ -453,6 +476,168 @@
 
     \end{tikzpicture}
 
+\end{frame}
+
+%% Ways of Asking Questions
+\begin{frame}[fragile] {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay
+        ]
+        \tikzframetitleright {Ways of} {Asking Questions}
+
+        \begin{scope} [transform canvas = {xshift = 0.2cm}]
+            \begin{scope}
+                \draw
+                (current page.north) ++(-0.75, -0.75) coordinate (ifelseMarkCenter)
+                ;
+                \path [name path = ifelseHandle, rounded corners = \markCornerRadius]
+                (ifelseMarkCenter) ++(-45:\markMainOuterRadius) coordinate (ifelseMarkFirst)
+                (ifelseMarkCenter) ++(-45:(2.85cm + \markMainOuterRadius) coordinate (ifelseMarkSecond)
+                (ifelseMarkSecond) ++(1.4, 0) coordinate (ifelseMarkThird)
+                (ifelseMarkFirst) -- (ifelseMarkSecond) -- (ifelseMarkThird)
+                ;
+                \draw [use path = ifelseHandle, very thick] ;
+                \filldraw [
+                    colorLightGreen,
+                    rounded corners = 0.7cm,
+                ]
+                (current page.north west) ++(0, 0.1cm) ++(0,2) coordinate (tmpStart)
+                (current page.center) ++(0, 0.1cm) coordinate (tmpEnd)
+                (tmpStart) rectangle (tmpEnd)
+                ;
+                \filldraw [fgcol]
+                (ifelseMarkThird) circle (\markSubRadius)
+                ;
+                \draw [fgcol]
+                (ifelseMarkThird) node (ifelse) [right = 6pt] {
+                    Using If-Else Statements
+                }
+                ;
+                \clip [
+                    rounded corners = 0.7cm,
+                ]
+                (current page.north west) ++(0, 0.1cm) ++(0,2) coordinate (tmpStart)
+                (current page.center) ++(0, 0.1cm) coordinate (tmpEnd)
+                (tmpStart) rectangle (tmpEnd)
+                ;
+                \begin{scope}
+                    \filldraw [white!90!fgcol]
+                    (ifelseMarkCenter) circle (\markMainInnerRadius)
+                    ;
+                    \draw [white!90!fgcol, very thick]
+                    (ifelseMarkCenter) circle (\markMainOuterRadius)
+                    ;
+                    \draw [white!90!fgcol, use path = ifelseHandle, very thick] ;
+                \end{scope}
+            \end{scope}
+
+            % \draw [thin, step = 0.1, white, opacity = 0.40]
+            % (current page.north west) ++(-2,2) grid (current page.center)
+            % ;
+
+            \begin{scope}
+                \draw
+                (current page.south) ++(-0.75, 1.0) coordinate (matrixMarkCenter)
+                ;
+                \path [name path = matrixHandle, rounded corners = \markCornerRadius]
+                (matrixMarkCenter) ++(45:\markMainOuterRadius) coordinate (matrixMarkFirst)
+                (matrixMarkCenter) ++(45:(2.0cm + \markMainOuterRadius) coordinate (matrixMarkSecond)
+                (matrixMarkSecond) ++(1.35, 0) coordinate (matrixMarkThird)
+                (matrixMarkFirst) -- (matrixMarkSecond) -- (matrixMarkThird)
+                ;
+                \draw [use path = matrixHandle, very thick] ;
+                \filldraw [
+                    colorDarkBrown,
+                    rounded corners = 0.7cm,
+                ]
+                (current page.south west) ++(0, -0.1cm) ++(0,-2) coordinate (tmpStart)
+                (current page.center) ++(0, -0.1cm) coordinate (tmpEnd)
+                (tmpStart) rectangle (tmpEnd)
+                ;
+                \filldraw [fgcol]
+                (matrixMarkThird) circle (\markSubRadius)
+                ;
+                \draw [fgcol]
+                (matrixMarkThird) node (matrix) [right = 6pt] {
+                    Using Matrix Transformation
+                }
+                ;
+                \clip [
+                    rounded corners = 0.7cm,
+                ]
+                (current page.south west) ++(0, -0.1cm) ++(0,-2) coordinate (tmpStart)
+                (current page.center) ++(0, -0.1cm) coordinate (tmpEnd)
+                (tmpStart) rectangle (tmpEnd)
+                ;
+                \begin{scope}
+                    \filldraw [white!90!fgcol]
+                    (matrixMarkCenter) circle (\markMainInnerRadius)
+                    ;
+                    \draw [white!90!fgcol, very thick]
+                    (matrixMarkCenter) circle (\markMainOuterRadius)
+                    ;
+                    \draw [white!90!fgcol, use path = matrixHandle, very thick] ;
+                \end{scope}
+            \end{scope}
+
+            % \draw [thin, step = 0.1, white, opacity = 0.40]
+            % (current page.south west) ++(-2,-2) grid (current page.center)
+            % ;
+
+            \draw (current page.north west) ++(0.5cm, -0.5cm) coordinate (content) ;
+            \node [anchor = north west]  (content) at (content) {
+                \begin{minipage} {0.55\paperwidth}
+                    \begin{minted}[breaklines, autogobble, mathescape] {text}
+                        if this_pixel == this_color:
+                            if this_pixel is at_edge:
+                                # more and more if statements
+                        elif this_pixel == that_color:
+                            if this_pixel is in_the_middle:
+                                # many more
+                    \end{minted}
+                \end{minipage}
+            }
+            ;
+
+            \draw (current page.south west) ++(0.5cm, 0.5cm) coordinate (content) ;
+            \node [anchor = south west]  (content) at (content) {
+                \begin{minipage} {0.425\paperwidth}
+                    \centering
+                    $\begin{pNiceMatrix}
+                        c_{11} & c_{12} & c_{13} & c_{14} & \cdots & c_{1n} \\
+                        c_{21} & c_{22} & c_{23} & c_{24} & \cdots & c_{2n} \\
+                        c_{31} & c_{32} & c_{33} & c_{34} & \cdots & c_{3n} \\
+                        c_{41} & c_{42} & c_{43} & c_{44} & \cdots & c_{4n} \\
+                        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+                        c_{m1} & c_{m2} & c_{m3} & c_{m4} & \cdots & c_{mn} \\
+                    \end{pNiceMatrix}$
+                \end{minipage}
+            }
+            ;
+
+        \end{scope}
+
+        \draw (ifelse.south east) ++(0.2cm, -0.5cm) coordinate (content) ;
+        \node [anchor = north east]  (content) at (content) {
+            \begin{minipage} {6.5cm}
+                There are several ways to ask the same question. One might be able to
+                to write an Algorithm for parsing the pixel data just by using \alert{If-Else}
+                statements.
+            \end{minipage}
+        }
+        ;
+
+        \draw (matrix.south east) ++(0.2cm, -0.5cm) coordinate (content) ;
+        \node [anchor = north east]  (content) at (content) {
+            \begin{minipage} {6.5cm}
+                Or one can directly transform input into output using a \alert{Matrix Tranformation}.
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
 
 \end{frame}
 
