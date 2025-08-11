@@ -777,6 +777,73 @@
 
 \end{frame}
 
+%% Learning to Ask Questions
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay
+        ]
+
+        \tikzframetitleleft{Learning to} {Ask Questions}
+
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.north east) coordinate (edge)
+        ;
+
+        \begin{scope} [
+                transform canvas = {
+                    yshift = -0.5cm,
+                    xshift = -1.25cm,
+                }
+            ]
+            \begin{scope}
+                \clip [rotate = -45, rounded corners = 0.7cm]
+                (edge) ++(7, 6) rectangle ++(-12, -12)
+                ;
+                \draw
+                (edge) ++(-2, 0.625) coordinate (tmp)
+                ;
+                \node [anchor = north] (img) at (tmp) {
+                    \includegraphics[height = \paperheight]{pic/snetwork_hald-clut.jpg}
+                }
+                ;
+            \end{scope}
+
+        \end{scope}
+
+        \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+        \node [anchor = north west]  (content) at (content) {
+            \begin{minipage} {6.8cm}
+                We haven't addressed how we are going to know the right questions to ask about
+                a data yet.
+            \end{minipage}
+        }
+        ;
+
+        \draw (content.south west) ++(0, -0.3cm) coordinate (content) ;
+        \node [anchor = north west]  (content) at (content) {
+            \begin{minipage} {8.1cm}
+                The \alert{coefficients / weights} in our question matrix decides the output
+                we get.
+            \end{minipage}
+        }
+        ;
+
+        \draw (content.south west) ++(0, -0.3cm) coordinate (content) ;
+        \node [anchor = north west]  (content) at (content) {
+            \begin{minipage} {9.3cm}
+                And the game of finding these coefficients / weights is famously known under
+                the umbrella term \alert{Machine Learning}.
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
 % \begin{frame} {Weight of the Ever Growing Data}
 % \end{frame}
 %
