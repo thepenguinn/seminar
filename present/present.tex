@@ -4,7 +4,8 @@
 
 % \usepackage{minted}
 
-\usepackage[size=custom,width=16,height=9,scale=0.35]{beamerposter}
+\usepackage[size=custom,width=16,height=9,scale=0.4]{beamerposter}
+% \usepackage[size=custom, width=12.8, height=9.6, scale=0.4]{beamerposter}
 
 \usepackage[T1]{fontenc}
 \usepackage{tcolorbox}
@@ -13,13 +14,32 @@
 \usepackage{tabularx}
 \usepackage{tikz}
 \usepackage{blindtext}
-\usepackage{tcolorbox}
 \usepackage{svg}
 \usepackage{fontspec}
 \usepackage{booktabs}
 \usepackage[style = ieee]{biblatex}
+\usepackage{blindtext}
+\usepackage{setspace}
 
 \usetikzlibrary{calc}
+\usetikzlibrary{intersections,decorations.markings}
+
+\makeatletter
+\tikzset{
+  use path for main/.code={%
+    \tikz@addmode{%
+      \expandafter\pgfsyssoftpath@setcurrentpath\csname tikz@intersect@path@name@#1\endcsname
+    }%
+  },
+  use path for actions/.code={%
+    \expandafter\def\expandafter\tikz@preactions\expandafter{\tikz@preactions\expandafter\let\expandafter\tikz@actions@path\csname tikz@intersect@path@name@#1\endcsname}%
+  },
+  use path/.style={%
+    use path for main=#1,
+    use path for actions=#1,
+  }
+}
+\setsansfont{Garamond.ttf}
 
 % \usefonttheme{serif}
 % \usepackage{beamercolorthemedracula}
@@ -56,6 +76,22 @@
 \def\leafColorSecondaryHex{\#CCE099}
 \definecolor{leafColorSecondary} {RGB} {\leafColorSecondaryRGB}
 
+\definecolor{colorBlue}   {HTML} {33539E}
+\definecolor{colorSky}    {HTML} {7FACD6}
+\definecolor{colorViolet} {HTML} {BFB8DA}
+\definecolor{colorPink}   {HTML} {E8B7D4}
+\definecolor{colorMaroon} {HTML} {A5678E}
+
+\definecolor{colorRampart} {HTML} {BDB7B7}
+\definecolor{colorCaramel} {HTML} {B89B93}
+\definecolor{colorCortex} {HTML} {A59691}
+\definecolor{colorDove} {HTML} {B6AFA5}
+\definecolor{colorCathedral} {HTML} {ABA7A6}
+\definecolor{colorWind} {HTML} {CAC4C4}
+
+\definecolor{colorRed} {HTML} {E44E54}
+\definecolor{colorDarkGreen} {HTML} {2E4330}
+
 \newcommand\tableBox[2] {
     \begin{tcolorbox}[
             coltitle = leafColorPrimary,
@@ -79,26 +115,244 @@
 
 % \setbeamertemplate{background} {
 %     \begin{tikzpicture} [remember picture, overlay]
-%         \draw [opacity = 0.15, black]
-%         (current page.south east) ++(-3.5, 1)
-%         node (logo) [black, inner sep = 0pt, anchor = center] {
-%             \begin{minipage}{11cm}
-%                 \includesvg[width = 11cm]{icon_line.svg}
-%             \end{minipage}
-%         } ;
+%         \filldraw [
+%             colorWind,
+%         ]
+%         (current page.north west) rectangle (current page.south east)
+%         ;
 %     \end{tikzpicture}
 % }
+
+% \setbeamertemplate{frametitle}{
+%     \begin{tikzpicture} [remember picture, overlay]
+%         \node (title) at (current page.north west) [
+%             black, anchor = north west
+%         ] {\strut\insertframetitle\strut};
+%         \draw[
+%             black,
+%             very thick,
+%             line cap = round,
+%         ]
+%         (title.east) -- (title.east -| current page.east)
+%         ;
+%     \end{tikzpicture}%
+% }
+
+\setbeamercolor{frametitle}{%
+  fg=white,
+  bg=colorMaroon
+}
+
+\newcommand\tikzframetitle[2] {
+    \draw (current page.north west) ++(0.75cm, -0.75cm) coordinate (frametitle) ;
+    \node [anchor = north west] (frametitle) at (frametitle) {
+        \begin{minipage} {8cm}
+            \setstretch{0.75}
+            \huge
+            {\Large #1} \\ #2
+        \end{minipage}
+    }
+    ;
+}
+
+\colorlet{fgcol}{colorDarkGreen}
+
+\def\markMainInnerRadius{0.175cm}
+\def\markMainOuterRadius{0.3cm}
+\def\markSubRadius{0.075cm}
+\def\markCornerRadius{0.1cm}
 
 \begin{document}
 
 \maketitle
 
-\begin{frame} {Introduction}
-    Say hai
+% \begin{frame} {Introduction}
+%     \begin{tikzpicture}
+%
+%         \draw (0, 0) coordinate (tmp);
+%         \foreach \x in {
+%             colorDarkGreen,
+%             colorRed,
+%             colorBlue,
+%             colorSky,
+%             colorViolet,
+%             colorPink,
+%             colorMaroon,
+%             %%
+%             colorRampart,
+%             colorCaramel,
+%             colorCortex,
+%             colorDove,
+%             colorCathedral%
+%         } {
+%             \filldraw [ \x ] (tmp) circle (1cm) (tmp) ++(1.5, 0) coordinate (tmp);
+%         }
+%
+%     \end{tikzpicture}
+% \end{frame}
+
+%% Making Sense of Data
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.east) ++(1, 0) coordinate (edge)
+        ;
+
+        \begin{scope}
+            %% Humidity
+            \draw []
+            (current page.south) ++(1.0cm, 2.5cm) coordinate (humidityMarkCenter)
+            ;
+            \path [name path = markHumeHandle, rounded corners = \markCornerRadius]
+            (humidityMarkCenter) ++(135:\markMainOuterRadius) coordinate (humidityMarkFirst)
+            (humidityMarkCenter) ++(135:(0.75cm + \markMainOuterRadius) coordinate (humidityMarkSecond)
+            (humidityMarkSecond) ++(-1, 0) coordinate (humidityMarkThird)
+            (humidityMarkFirst) -- (humidityMarkSecond) -- (humidityMarkThird)
+            ;
+            \draw [use path = markHumeHandle, very thick] ;
+            ;
+            \filldraw [fgcol]
+            (humidityMarkThird) circle (\markSubRadius)
+            ;
+            \draw [fgcol]
+            (humidityMarkThird) node [left = 6pt] {
+                Humidity Data
+            }
+            ;
+
+            %% Temperature
+            \draw []
+            (current page.south) ++(5.0cm, 6.55cm) coordinate (temperatureMarkCenter)
+            ;
+            \path [name path = markTempHandle, rounded corners = \markCornerRadius]
+            (temperatureMarkCenter) ++(135:\markMainOuterRadius) coordinate (temperatureMarkFirst)
+            (temperatureMarkCenter) ++(135:(0.75cm + \markMainOuterRadius) coordinate (temperatureMarkSecond)
+            (temperatureMarkSecond) ++(-1, 0) coordinate (temperatureMarkThird)
+            (temperatureMarkFirst) -- (temperatureMarkSecond) -- (temperatureMarkThird)
+            ;
+            \draw [use path = markTempHandle, very thick] ;
+            ;
+            \filldraw [fgcol]
+            (temperatureMarkThird) circle (\markSubRadius)
+            ;
+            \draw [fgcol]
+            (temperatureMarkThird) node [left = 6pt] {
+                Temperature Data
+            }
+            ;
+
+            \clip [rotate = 45, rounded corners = 0.7cm]
+            (edge) ++(-10, -15) rectangle ++(20, 20)
+            ;
+
+            \begin{scope}
+                \node [anchor = east] (img) at (edge) {
+                    \includegraphics[height = \paperheight]{low.jpg}
+                }
+                ;
+
+                %% Humidity
+                \filldraw [white!90!fgcol]
+                (humidityMarkCenter) circle (\markMainInnerRadius)
+                ;
+                \draw [white!90!fgcol, very thick]
+                (humidityMarkCenter) circle (\markMainOuterRadius)
+                ;
+                \draw [use path = markHumeHandle, white!90!fgcol, very thick] ;
+
+                %% Temperature
+                \filldraw [white!90!fgcol]
+                (temperatureMarkCenter) circle (\markMainInnerRadius)
+                ;
+                \draw [white!90!fgcol, very thick]
+                (temperatureMarkCenter) circle (\markMainOuterRadius)
+                ;
+                \draw [use path = markTempHandle, white!90!fgcol, very thick] ;
+
+            \end{scope}
+        \end{scope}
+
+        \tikzframetitle{Making} {Sense of Data}
+
+        \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
+        \node [anchor = north west]  (content) at (content) {
+            \begin{minipage} {6cm}
+                \begin{itemize}[]
+                    \item Say something.
+                    \item Interesting.
+                \end{itemize}
+            \end{minipage}
+        }
+        ;
+
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.west) coordinate (edge)
+        ;
+        \begin{scope} [transform canvas = {yshift = -2.2cm, xshift = 0.5cm}]
+            \draw []
+            (edge) ++(2cm, -0.5cm) coordinate (pixelMarkCenter)
+            ;
+            \path [name path = markHandle, rounded corners = \markCornerRadius]
+            (pixelMarkCenter) ++(-45:\markMainOuterRadius) coordinate (pixelMarkFirst)
+            (pixelMarkCenter) ++(-45:(1cm + \markMainOuterRadius) coordinate (pixelMarkSecond)
+            (pixelMarkSecond) ++(1, 0) coordinate (pixelMarkThird)
+            (pixelMarkFirst) -- (pixelMarkSecond) -- (pixelMarkThird)
+            ;
+            \draw [use path = markHandle, very thick] ;
+            \filldraw [fgcol]
+            (pixelMarkThird) circle (\markSubRadius)
+            ;
+            \draw [fgcol]
+            (pixelMarkThird) node [right = 6pt] {
+                Pixel Data
+            }
+            ;
+            \clip [rotate = -45, rounded corners = 0.7cm]
+            (edge) rectangle ++(2.5, 2.5)
+            ;
+            \begin{scope}
+                \node [anchor = west] (pixel) at (edge) {
+                    \includegraphics[height = \paperheight]{low.jpg}
+                }
+                ;
+                \draw [thin, step = 0.1, white, opacity = 0.40]
+                (edge) ++(-1, -2) grid ++(5, 5)
+                ;
+                \filldraw [white!90!fgcol]
+                (pixelMarkCenter) circle (\markMainInnerRadius)
+                ;
+
+                \draw [white!90!fgcol, very thick]
+                (pixelMarkCenter) circle (\markMainOuterRadius)
+                ;
+                \draw [use path = markHandle, white!90!fgcol, very thick] ;
+            \end{scope}
+        \end{scope}
+
+    \end{tikzpicture}
+
 \end{frame}
 
-\begin{frame} {Say something else}
-    Say hai
-\end{frame}
+% \begin{frame} {Learning to Ask the Right Questions}
+% \end{frame}
+%
+% \begin{frame} {Matrices are just Consdened If-Elses}
+% \end{frame}
+%
+% \begin{frame} {Guess Who's Good at Crunching Matrices?}
+% \end{frame}
+%
+% \begin{frame} {Weight of the Ever Growing Data}
+% \end{frame}
+%
+% \begin{frame} {TinyML: Introduction}
+% \end{frame}
 
 \end{document}
