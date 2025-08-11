@@ -844,9 +844,81 @@
 
 \end{frame}
 
-% \begin{frame} {Weight of the Ever Growing Data}
-% \end{frame}
-%
+%% Weight of the Ever Growing Data
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay
+        ]
+\tikzframetitleleft{Weight of} {The Ever Growing Data}
+
+        \begin{scope} [
+                rotate = 45,
+                transform canvas = {
+                    yshift = -1.1cm,
+                },
+            ]
+            \draw ($(current page.center)!0.3!(current page.east)$) coordinate (power);
+
+            \begin{scope}
+                \path [name path = mountainHandle, rounded corners = 0.7cm]
+                (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+                ;
+                \clip[use path = mountainHandle] ;
+                \begin{scope}
+                    \node [anchor = center] (pixel) at (power) {
+                        \includegraphics[height = 0.75\paperheight]{pic/mountain_hald-clut.jpg}
+                    }
+                    ;
+                \end{scope}
+            \end{scope}
+
+            \draw (power) ++(5.5, 0) coordinate (power);
+
+            \filldraw [colorLightGreen, rounded corners = 0.7cm]
+            (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+            ;
+
+            \draw (power) ++(-5.5, -5.5) coordinate (power);
+
+            \filldraw [rounded corners = 0.7cm]
+            (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+            ;
+
+            % \draw (power) ++(5.5, 0) coordinate (power);
+            %
+            % \filldraw [rounded corners = 0.7cm]
+            % (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+            % ;
+
+        \end{scope}
+
+        \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+        \node [anchor = north west]  (content) at (content) {
+            \begin{minipage} {6.5cm}
+                Day by day ML Models are getting more and more capabilities.
+                So as the need for more and more powerful hardware to run these models.
+
+                This can lead to several concerns:
+
+                \begin{itemize}
+                    \item Increased Carbon Footprint.
+                    \item Reliance of Cloud Computing.
+                    \item Latency related with Cloud Computing.
+                    \item Need for powerful Hardware.
+                \end{itemize}
+
+                \alert{TinyML} is a subset of ML that is trying to address these issues.
+
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
 % \begin{frame} {TinyML: Introduction}
 % \end{frame}
 
