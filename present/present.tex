@@ -641,12 +641,142 @@
 
 \end{frame}
 
-% \begin{frame} {Matrices are just Consdened If-Elses}
-% \end{frame}
-%
-% \begin{frame} {Guess Who's Good at Crunching Matrices?}
-% \end{frame}
-%
+%% Guess Who's Good at Crunching Matrices?
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay
+        ]
+
+        \tikzframetitleright{Guess Who's} {Good at Crunching Matrices?}
+
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.south west) coordinate (edge)
+        ;
+
+        \begin{scope} [
+                transform canvas = {
+                    yshift = -13,
+                    xshift = -13,
+                }
+            ]
+            \begin{scope} [
+                    transform canvas = {
+                        yshift = 0.1cm,
+                        xshift = 0.1cm,
+                    }
+                ]
+                \draw
+                (current page.north) ++(-2.0, -1.6) coordinate (cpuMarkCenter)
+                ;
+                \path [name path = cpuHandle, rounded corners = \markCornerRadius]
+                (cpuMarkCenter) ++(0:\markMainOuterRadius) coordinate (cpuMarkFirst)
+                (cpuMarkCenter) ++(0:(1.5cm + \markMainOuterRadius) coordinate (cpuMarkSecond)
+                (cpuMarkSecond) ++(-45:2.1cm) coordinate (cpuMarkThird)
+                (cpuMarkThird) ++(5, 0) coordinate (cpuMarkFourth)
+                (cpuMarkFirst) -- (cpuMarkSecond) -- (cpuMarkThird) -- (cpuMarkFourth)
+                ;
+                \draw [use path = cpuHandle, very thick] ;
+                \filldraw [fgcol]
+                (cpuMarkFourth) circle (\markSubRadius)
+                ;
+                \draw [fgcol]
+                (cpuMarkFourth) node (cpu) [right = 6pt] {
+                    CPUs
+                }
+                ;
+                \begin{scope}
+                    \clip [rotate = 45, rounded corners = 0.7cm]
+                    (edge) ++(0.25, 0.25) rectangle ++(10, 10)
+                    ;
+                    \draw
+                    (edge) ++(3.00, 0.35) coordinate (tmp)
+                    ;
+                    \node [anchor = south] (img) at (tmp) {
+                        \includegraphics[height = \paperheight]{pic/cpu_hald-clut.jpg}
+                    }
+                    ;
+                    \filldraw [white!90!fgcol]
+                    (cpuMarkCenter) circle (\markMainInnerRadius)
+                    ;
+                    \draw [white!90!fgcol, very thick]
+                    (cpuMarkCenter) circle (\markMainOuterRadius)
+                    ;
+                    \draw [white!90!fgcol, use path = cpuHandle, very thick] ;
+                \end{scope}
+
+                \draw (cpu.south east) ++(0, -0.3cm) coordinate (content) ;
+                \node [anchor = north east]  (content) at (content) {
+                    \begin{minipage} {6.0cm}
+                        \raggedleft
+                        \alert{CPUs} are much more capable at processing matrices that anyone of us, humans.
+                        % \alert{Computers}, especially \alert{GPUs} can crunch through matrices.
+                    \end{minipage}
+                }
+                ;
+            \end{scope}
+
+            \begin{scope} [
+                    transform canvas = {
+                        yshift = -0.5cm,
+                        xshift = -0.5cm,
+                    }
+                ]
+                \draw
+                (current page.south) ++(1.75, 3.25) coordinate (gpuMarkCenter)
+                ;
+                \path [name path = gpuHandle, rounded corners = \markCornerRadius]
+                (gpuMarkCenter) ++(45:\markMainOuterRadius) coordinate (gpuMarkFirst)
+                (gpuMarkCenter) ++(45:(1.0cm + \markMainOuterRadius) coordinate (gpuMarkSecond)
+                (gpuMarkSecond) ++(4.25, 0) coordinate (gpuMarkThird)
+                (gpuMarkFirst) -- (gpuMarkSecond) -- (gpuMarkThird)
+                ;
+                \draw [use path = gpuHandle, very thick] ;
+                \filldraw [fgcol]
+                (gpuMarkThird) circle (\markSubRadius)
+                ;
+                \draw [fgcol]
+                (gpuMarkThird) node (gpu) [right = 6pt] {
+                    GPUs
+                }
+                ;
+                \begin{scope}
+                    \clip [rotate = 45, rounded corners = 0.7cm]
+                    (edge) ++(0.25, -0.25) rectangle ++(10, -10)
+                    ;
+                    \draw
+                    (edge) ++(0, -0.5) coordinate (tmp)
+                    ;
+                    \node [anchor = south west] (img) at (tmp) {
+                        \includegraphics[height = 0.9\paperheight]{pic/gpu_hald-clut.jpg}
+                    }
+                    ;
+                    \filldraw [white!90!fgcol]
+                    (gpuMarkCenter) circle (\markMainInnerRadius)
+                    ;
+                    \draw [white!90!fgcol, very thick]
+                    (gpuMarkCenter) circle (\markMainOuterRadius)
+                    ;
+                    \draw [white!90!fgcol, use path = gpuHandle, very thick] ;
+                \end{scope}
+                \draw (gpu.south east) ++(0, -0.3cm) coordinate (content) ;
+                \node [anchor = north east]  (content) at (content) {
+                    \begin{minipage} {4.0cm}
+                        \raggedleft \alert{GPUs} can exploit parallelizable nature of matrix operations.
+                        % \alert{Computers}, especially \alert{GPUs} can crunch through matrices.
+                    \end{minipage}
+                }
+                ;
+            \end{scope}
+        \end{scope}
+
+    \end{tikzpicture}
+
+
+\end{frame}
+
 % \begin{frame} {Weight of the Ever Growing Data}
 % \end{frame}
 %
