@@ -1,10 +1,10 @@
 %%
-%% This is file `beamerinnerthememetropolis.sty',
+%% This is file `beamerinnerthemeanothernight.sty',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% beamerinnerthememetropolis.dtx  (with options: `package')
+%% beamerinnerthemeanothernight.dtx  (with options: `package')
 %% ---------------------------------------------------------------------------
 %% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
 %% contributors can be found at
@@ -17,32 +17,32 @@
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerinnerthememetropolis}[2017/01/23 Metropolis inner theme]
+\ProvidesPackage{beamerinnerthemeanothernight}[2017/01/23 Metropolis inner theme]
 \RequirePackage{etoolbox}
 \RequirePackage{keyval}
 \RequirePackage{calc}
 \RequirePackage{pgfopts}
 \RequirePackage{tikz}
 \pgfkeys{
-  /metropolis/inner/sectionpage/.cd,
+  /anothernight/inner/sectionpage/.cd,
     .is choice,
-    none/.code=\metropolis@disablesectionpage,
-    simple/.code={\metropolis@enablesectionpage
+    none/.code=\anothernight@disablesectionpage,
+    simple/.code={\anothernight@enablesectionpage
                   \setbeamertemplate{section page}[simple]},
-    progressbar/.code={\metropolis@enablesectionpage
+    progressbar/.code={\anothernight@enablesectionpage
                        \setbeamertemplate{section page}[progressbar]},
 }
 \pgfkeys{
-  /metropolis/inner/subsectionpage/.cd,
+  /anothernight/inner/subsectionpage/.cd,
     .is choice,
-    none/.code=\metropolis@disablesubsectionpage,
-    simple/.code={\metropolis@enablesubsectionpage
+    none/.code=\anothernight@disablesubsectionpage,
+    simple/.code={\anothernight@enablesubsectionpage
                   \setbeamertemplate{section page}[simple]},
-    progressbar/.code={\metropolis@enablesubsectionpage
+    progressbar/.code={\anothernight@enablesubsectionpage
                        \setbeamertemplate{section page}[progressbar]},
 }
-\newcommand{\metropolis@inner@setdefaults}{
-  \pgfkeys{/metropolis/inner/.cd,
+\newcommand{\anothernight@inner@setdefaults}{
+  \pgfkeys{/anothernight/inner/.cd,
     sectionpage=progressbar,
     subsectionpage=none
   }
@@ -91,11 +91,11 @@
   \par%
   \vspace*{0.5em}
 }
-\newlength{\metropolis@titleseparator@linewidth}
-\setlength{\metropolis@titleseparator@linewidth}{0.4pt}
+\newlength{\anothernight@titleseparator@linewidth}
+\setlength{\anothernight@titleseparator@linewidth}{0.4pt}
 \setbeamertemplate{title separator}{
   \begin{tikzpicture}
-    \fill[fg] (0,0) rectangle (\textwidth, \metropolis@titleseparator@linewidth);
+    \fill[fg] (0,0) rectangle (\textwidth, \anothernight@titleseparator@linewidth);
   \end{tikzpicture}%
   \par%
 }
@@ -144,12 +144,12 @@
   \par
   \vspace{\baselineskip}
 }
-\newcommand{\metropolis@disablesectionpage}{
+\newcommand{\anothernight@disablesectionpage}{
   \AtBeginSection{
     % intentionally empty
   }
 }
-\newcommand{\metropolis@enablesectionpage}{
+\newcommand{\anothernight@enablesectionpage}{
   \AtBeginSection{
     \ifbeamer@inframe
       \sectionpage
@@ -161,12 +161,12 @@
 \setbeamertemplate{subsection page}{%
   \usebeamertemplate*{section page}
 }
-\newcommand{\metropolis@disablesubsectionpage}{
+\newcommand{\anothernight@disablesubsectionpage}{
   \AtBeginSubsection{
     % intentionally empty
   }
 }
-\newcommand{\metropolis@enablesubsectionpage}{
+\newcommand{\anothernight@enablesubsectionpage}{
   \AtBeginSubsection{
     \ifbeamer@inframe
       \subsectionpage
@@ -175,27 +175,27 @@
     \fi
   }
 }
-\newlength{\metropolis@progressonsectionpage}
-\newlength{\metropolis@progressonsectionpage@linewidth}
-\setlength{\metropolis@progressonsectionpage@linewidth}{0.4pt}
+\newlength{\anothernight@progressonsectionpage}
+\newlength{\anothernight@progressonsectionpage@linewidth}
+\setlength{\anothernight@progressonsectionpage@linewidth}{0.4pt}
 \setbeamertemplate{progress bar in section page}{
-  \setlength{\metropolis@progressonsectionpage}{%
+  \setlength{\anothernight@progressonsectionpage}{%
     \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
   }%
   \begin{tikzpicture}
-    \fill[bg] (0,0) rectangle (\textwidth, \metropolis@progressonsectionpage@linewidth);
-    \fill[fg] (0,0) rectangle (\metropolis@progressonsectionpage, \metropolis@progressonsectionpage@linewidth);
+    \fill[bg] (0,0) rectangle (\textwidth, \anothernight@progressonsectionpage@linewidth);
+    \fill[fg] (0,0) rectangle (\anothernight@progressonsectionpage, \anothernight@progressonsectionpage@linewidth);
   \end{tikzpicture}%
 }
 \def\inserttotalframenumber{100}
-\newlength{\metropolis@blocksep}
-\newlength{\metropolis@blockadjust}
-\setlength{\metropolis@blocksep}{0.75ex}
-\setlength{\metropolis@blockadjust}{0.25ex}
-\providecommand{\metropolis@strut}{%
+\newlength{\anothernight@blocksep}
+\newlength{\anothernight@blockadjust}
+\setlength{\anothernight@blocksep}{0.75ex}
+\setlength{\anothernight@blockadjust}{0.25ex}
+\providecommand{\anothernight@strut}{%
   \vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz()}%
 }
-\newcommand{\metropolis@block}[1]{
+\newcommand{\anothernight@block}[1]{
   \par\vskip\medskipamount%
   \setlength{\parskip}{0pt}
   \ifbeamercolorempty[bg]{block title#1}{%
@@ -205,15 +205,15 @@
   }%
   {%
     \begin{beamercolorbox}[
-      sep=\dimexpr\metropolis@blocksep-\metropolis@blockadjust\relax,
-      leftskip=\metropolis@blockadjust,
-      rightskip=\dimexpr\metropolis@blockadjust plus 4em\relax
+      sep=\dimexpr\anothernight@blocksep-\anothernight@blockadjust\relax,
+      leftskip=\anothernight@blockadjust,
+      rightskip=\dimexpr\anothernight@blockadjust plus 4em\relax
     ]{block title#1}%
   }}%
       \usebeamerfont*{block title#1}%
-      \metropolis@strut%
+      \anothernight@strut%
       \insertblocktitle%
-      \metropolis@strut%
+      \anothernight@strut%
   \end{beamercolorbox}%
   \nointerlineskip%
   \ifbeamercolorempty[bg]{block body#1}{%
@@ -221,15 +221,15 @@
   \ifbeamercolorempty[bg]{block body}{%
     \begin{beamercolorbox}[vmode]{block body#1}%
   }{%
-    \begin{beamercolorbox}[sep=\metropolis@blocksep, vmode]{block body#1}%
-    \vspace{-\metropolis@parskip}
+    \begin{beamercolorbox}[sep=\anothernight@blocksep, vmode]{block body#1}%
+    \vspace{-\anothernight@parskip}
   }}%
       \usebeamerfont{block body#1}%
-      \setlength{\parskip}{\metropolis@parskip}%
+      \setlength{\parskip}{\anothernight@parskip}%
 }
-\setbeamertemplate{block begin}{\metropolis@block{}}
-\setbeamertemplate{block alerted begin}{\metropolis@block{ alerted}}
-\setbeamertemplate{block example begin}{\metropolis@block{ example}}
+\setbeamertemplate{block begin}{\anothernight@block{}}
+\setbeamertemplate{block alerted begin}{\anothernight@block{ alerted}}
+\setbeamertemplate{block example begin}{\anothernight@block{ example}}
 \setbeamertemplate{block end}{\end{beamercolorbox}\vspace*{0.2ex}}
 \setbeamertemplate{block alerted end}{\end{beamercolorbox}\vspace*{0.2ex}}
 \setbeamertemplate{block example end}{\end{beamercolorbox}\vspace*{0.2ex}}
@@ -241,9 +241,9 @@
   \raggedright
   \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
 }
-\newlength{\metropolis@parskip}
-\setlength{\metropolis@parskip}{0.5em}
-\setlength{\parskip}{\metropolis@parskip}
+\newlength{\anothernight@parskip}
+\setlength{\anothernight@parskip}{0.5em}
+\setlength{\parskip}{\anothernight@parskip}
 \linespread{1.15}
 \define@key{beamerframe}{c}[true]{% centered
   \beamer@frametopskip=0pt plus 1fill\relax%
@@ -252,9 +252,9 @@
   \beamer@framebottomskipautobreak=0pt plus .6\paperheight\relax%
   \def\beamer@initfirstlineunskip{}%
 }
-\providebool{metropolis@standout}
+\providebool{anothernight@standout}
 \define@key{beamerframe}{standout}[true]{%
-  \booltrue{metropolis@standout}
+  \booltrue{anothernight@standout}
   \begingroup
     \setkeys{beamerframe}{c}
     \setkeys{beamerframe}{noframenumbering}
@@ -274,13 +274,13 @@
   \usebeamerfont{standout}
 }
   \apptocmd{\beamer@reseteecodes}{%
-    \ifbool{metropolis@standout}{
+    \ifbool{anothernight@standout}{
       \endgroup
-      \boolfalse{metropolis@standout}
+      \boolfalse{anothernight@standout}
     }{}
   }{}{}
-\metropolis@inner@setdefaults
-\ProcessPgfPackageOptions{/metropolis/inner}
+\anothernight@inner@setdefaults
+\ProcessPgfPackageOptions{/anothernight/inner}
 \endinput
 %%
-%% End of file `beamerinnerthememetropolis.sty'.
+%% End of file `beamerinnerthemeanothernight.sty'.

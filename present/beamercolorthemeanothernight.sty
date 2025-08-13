@@ -1,10 +1,10 @@
 %%
-%% This is file `beamercolorthememetropolis.sty',
+%% This is file `beamercolorthemeanothernight.sty',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% beamercolorthememetropolis.dtx  (with options: `package')
+%% beamercolorthemeanothernight.dtx  (with options: `package')
 %% ---------------------------------------------------------------------------
 %% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
 %% contributors can be found at
@@ -17,40 +17,47 @@
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamercolorthememetropolis}[2017/01/23 Metropolis color theme]
+\ProvidesPackage{beamercolorthemeanothernight}[2017/01/23 Metropolis color theme]
 \RequirePackage{pgfopts}
 \pgfkeys{
-  /metropolis/color/block/.cd,
+  /anothernight/color/block/.cd,
     .is choice,
-    transparent/.code=\metropolis@block@transparent,
-    fill/.code=\metropolis@block@fill,
+    transparent/.code=\anothernight@block@transparent,
+    fill/.code=\anothernight@block@fill,
 }
 \pgfkeys{
-  /metropolis/color/background/.cd,
+  /anothernight/color/background/.cd,
     .is choice,
-    dark/.code=\metropolis@colors@dark,
-    light/.code=\metropolis@colors@light,
+    dark/.code=\anothernight@colors@dark,
+    light/.code=\anothernight@colors@light,
 }
-\newcommand{\metropolis@color@setdefaults}{
-  \pgfkeys{/metropolis/color/.cd,
+\newcommand{\anothernight@color@setdefaults}{
+  \pgfkeys{/anothernight/color/.cd,
     background=light,
     block=transparent,
   }
 }
 \definecolor{mDarkBrown}{HTML}{604c38}
-\definecolor{mDarkTeal}{HTML}{23373b}
+\definecolor{mDarkTeal}{HTML}{A5678E}
 \definecolor{mLightBrown}{HTML}{EB811B}
 \definecolor{mLightGreen}{HTML}{14B03D}
-\newcommand{\metropolis@colors@dark}{
+
+\definecolor{colorBlue}   {HTML} {33539E}
+\definecolor{colorSky}    {HTML} {7FACD6}
+\definecolor{colorViolet} {HTML} {BFB8DA}
+\definecolor{colorPink}   {HTML} {E8B7D4}
+\definecolor{colorMaroon} {HTML} {A5678E}
+
+\newcommand{\anothernight@colors@dark}{
   \setbeamercolor{normal text}{%
     fg=black!2,
-    bg=mDarkTeal
+    bg=colorMaroon
   }
   \usebeamercolor[fg]{normal text}
 }
-\newcommand{\metropolis@colors@light}{
+\newcommand{\anothernight@colors@light}{
   \setbeamercolor{normal text}{%
-    fg=mDarkTeal,
+    fg=colorMaroon,
     bg=black!2
   }
 }
@@ -91,7 +98,7 @@
   use=progress bar,
   parent=progress bar
 }
-\newcommand{\metropolis@block@transparent}{
+\newcommand{\anothernight@block@transparent}{
   \setbeamercolor{block title}{%
     use=normal text,
     fg=normal text.fg,
@@ -101,7 +108,7 @@
     bg=
   }
 }
-\newcommand{\metropolis@block@fill}{
+\newcommand{\anothernight@block@fill}{
   \setbeamercolor{block title}{%
     use=normal text,
     fg=normal text.fg,
@@ -126,9 +133,9 @@
 \setbeamercolor{block body example}{use=block body, parent=block body}
 \setbeamercolor{footnote}{fg=normal text.fg!90}
 \setbeamercolor{footnote mark}{fg=.}
-\metropolis@color@setdefaults
-\ProcessPgfPackageOptions{/metropolis/color}
+\anothernight@color@setdefaults
+\ProcessPgfPackageOptions{/anothernight/color}
 \mode<all>
 \endinput
 %%
-%% End of file `beamercolorthememetropolis.sty'.
+%% End of file `beamercolorthemeanothernight.sty'.
