@@ -43,7 +43,9 @@
     use path for actions=#1,
   }
 }
+
 \setsansfont{Garamond.ttf}
+% \setsansfont{Georgia.ttf}
 
 % \usefonttheme{serif}
 % \usepackage{beamercolorthemedracula}
@@ -285,7 +287,7 @@
 
             \begin{scope}
                 \node [anchor = east] (img) at (edge) {
-                    \includegraphics[height = \paperheight]{low.jpg}
+                    \includegraphics[height = \paperheight]{pics/red_forest.png}
                 }
                 ;
 
@@ -354,7 +356,7 @@
             ;
             \begin{scope}
                 \node [anchor = west] (pixel) at (edge) {
-                    \includegraphics[height = \paperheight]{low.jpg}
+                    \includegraphics[height = \paperheight]{pics/red_forest.png}
                 }
                 ;
                 \draw [thin, step = 0.1, white, opacity = 0.40]
@@ -698,7 +700,7 @@
                     (edge) ++(3.00, 0.35) coordinate (tmp)
                     ;
                     \node [anchor = south] (img) at (tmp) {
-                        \includegraphics[height = \paperheight]{pic/cpu_hald-clut.jpg}
+                        \includegraphics[height = \paperheight]{pics/cpu.png}
                     }
                     ;
                     \filldraw [white!90!fgcol]
@@ -753,7 +755,7 @@
                     (edge) ++(0, -0.5) coordinate (tmp)
                     ;
                     \node [anchor = south west] (img) at (tmp) {
-                        \includegraphics[height = 0.9\paperheight]{pic/gpu_hald-clut.jpg}
+                        \includegraphics[height = 0.9\paperheight]{pics/gpu.png}
                     }
                     ;
                     \filldraw [white!90!fgcol]
@@ -809,7 +811,7 @@
                 (edge) ++(-2, 0.625) coordinate (tmp)
                 ;
                 \node [anchor = north] (img) at (tmp) {
-                    \includegraphics[height = \paperheight]{pic/snetwork_hald-clut.jpg}
+                    \includegraphics[height = \paperheight]{pics/snetwork.png}
                 }
                 ;
             \end{scope}
@@ -871,7 +873,7 @@
                 \clip[use path = mountainHandle] ;
                 \begin{scope}
                     \node [anchor = center] (pixel) at (power) {
-                        \includegraphics[height = 0.75\paperheight]{pic/mountain_hald-clut.jpg}
+                        \includegraphics[height = 0.75\paperheight]{pics/mountain.png}
                     }
                     ;
                 \end{scope}
@@ -879,15 +881,33 @@
 
             \draw (power) ++(5.5, 0) coordinate (power);
 
-            \filldraw [colorLightGreen, rounded corners = 0.7cm]
-            (power) ++(-2.5, -2.5) rectangle ++(5, 5)
-            ;
+            \begin{scope}
+                \path [name path = powerHandle, rounded corners = 0.7cm]
+                (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+                ;
+                \clip[use path = powerHandle] ;
+                \begin{scope}
+                    \node [anchor = center] (pixel) at (power) {
+                        \includegraphics[height = 0.75\paperheight]{pics/power.png}
+                    }
+                    ;
+                \end{scope}
+            \end{scope}
 
             \draw (power) ++(-5.5, -5.5) coordinate (power);
 
-            \filldraw [rounded corners = 0.7cm]
-            (power) ++(-2.5, -2.5) rectangle ++(5, 5)
-            ;
+            \begin{scope}
+                \path [name path = cloudHandle, rounded corners = 0.7cm]
+                (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+                ;
+                \clip[use path = cloudHandle] ;
+                \begin{scope}
+                    \node [anchor = center] (pixel) at (power) {
+                        \includegraphics[height = 0.75\paperheight]{pics/cloud.png}
+                    }
+                    ;
+                \end{scope}
+            \end{scope}
 
             % \draw (power) ++(5.5, 0) coordinate (power);
             %
