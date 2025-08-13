@@ -109,3 +109,91 @@ Model Compression
 - Knowledge Distillation
 
 Model Deployment: Using Hardware Distillation
+
+# Power Consumption
+
+[Will Energy-Hungry AI Create a Baseload Power Demand Boom?](https://ieeexplore.ieee.org/abstract/document/10630483)
+
+# More Papers
+
+[Quantization-Guided Training for Compact TinyML Models](https://arxiv.org/abs/2103.06231)
+
+[TinyML-Enabled Frugal Smart Objects: Challenges and Opportunities](https://ieeexplore.ieee.org/abstract/document/9166461)
+
+[Comparison of Machine Learning Algorithms for Performance Evaluation of Photovoltaic Energy Forecasting and Management in the TinyML Framework](https://ieeexplore.ieee.org/abstract/document/9954033)
+
+[Towards Understanding Knowledge Distillation](https://proceedings.mlr.press/v97/phuong19a.html)
+
+# Presentation
+
+## Objectives
+
+### No Memes
+
+### Content
+
+#### Give an overview of TinyML: 3 minutes
+#### Explore current trends and developments of TinyML based systems in Agriculture: 7 minutes
+
+#### 10 slides for the overview of TinyML
+#### 25 slides for the overview of TinyML
+
+### Format
+#### Aesthetically pleasing: IMP
+#### Pick a good color schemes
+
+## Structure
+
+### 01 Making Sense of Data: DRAFTED
+
+### 02 Asking The Right Questions: DRAFTED
+
+### 03 Learning to Ask the Right Questions: DRAFTED
+
+### 04 Ways of Asking Questions: DRAFTED
+
+### 05 Guess Who's Good at Crunching Matrices?: DRAFTED
+
+### 06 Weight of the Ever Growing Data: DRAFTED
+
+---
+
+### 07 An Introduction to Tiny Machine Learning
+
+### 08 Why Even Run ML on Microcontrollers?
+
+### 09 Low Power Consumption:
+
+### 10 Privacy:
+
+### 11 Improved Latency:
+
+### 12 Economically Viable:
+
+### 13 The 14kb "Ok Google" Model
+
+### 14 Comparing Modern Day Microcontrollers
+
+### 15 With Great Power Comes Great Responsibility
+
+### 16 The Magic Sauce of TinyML
+
+### 17 Quantization:
+
+### 18 Pruning:
+
+### 19 Knowledge Distillation:
+
+### 20 Software for Development
+
+### 21 Applications: General
+
+### 22 Applications: In Agriculture
+
+### 23 Plant Disease Detection
+
+### 24 Micro Climate Management
+
+### 25 Fruit Detection In Plants
+
+### 26 Key Take Aways
