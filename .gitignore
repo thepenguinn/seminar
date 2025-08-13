@@ -25,4 +25,9 @@ mini_project_report/*.pdf
 *.stl
 misc
 *_standalone_*.tex
-*.ttf
+*.nav
+*.vrb
+*.snm
+_minted/
+present/otherpics/*
+present/fonts/*
