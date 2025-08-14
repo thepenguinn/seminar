@@ -856,7 +856,7 @@
             remember picture,
             overlay
         ]
-\tikzframetitleleft{Weight of} {The Ever Growing Data}
+        \tikzframetitleleft{Weight of} {The Ever Growing Data}
 
         \begin{scope} [
                 rotate = 45,
@@ -942,7 +942,7 @@
 
 \end{frame}
 
-%% An Introduction to TinyML
+%% An Introduction to Tiny Machine Learning
 \begin{frame} {}
 
     \begin{tikzpicture} [
@@ -951,6 +951,107 @@
         ]
 
         \tikzframetitleright{An Introduction to} {Tiny Machine Learning}
+
+        \draw (frametitle.south east) ++(0, -0.3cm) coordinate (content) ;
+        \node [anchor = north east]  (content) at (content) {
+            \begin{minipage} {0.5\textwidth}
+
+                TinyML is a subset of machine learning (ML) that focuses on developing and deploying
+                ML models on resource-constrained devices such as:
+
+                \begin{itemize}
+                    \item Microcontrollers (MCUs)
+                    \item System-on-Chip (SoCs)
+                    \item FPGAs
+                \end{itemize}
+
+            \end{minipage}
+        }
+        ;
+
+        \def\picWidth{7}
+        \def\picGap{0.6cm}
+
+        \draw [
+            rounded corners = 0.7cm,
+        ]
+
+        ($(current page.center)!0.5!(current page.west)$) coordinate (picCenter)
+
+        % (picCenter) ++(-\picWidth / 2, -\picWidth / 2) rectangle ++(\picWidth, \picWidth)
+
+        (picCenter) ++(-\picWidth / 2, -\picWidth / 2)
+        coordinate (picCenterLeft)
+
+        (picCenter) ++(\picWidth / 2, \picWidth / 2)
+        coordinate (picCenterRight)
+
+        (current page.north -| picCenterLeft) ++(0, 1) coordinate (picTopLeft)
+        (current page.north -| picCenterRight) ++(0, 1) coordinate (picTopRight)
+
+        (current page.south -| picCenterLeft) ++(0, -1) coordinate (picBotLeft)
+        (current page.south -| picCenterRight) ++(0, -1) coordinate (picBotRight)
+
+        ;
+
+        \path [
+            name path = topPic,
+            rounded corners = 0.7cm,
+        ]
+        (picCenterLeft) -- (picTopLeft) -- (picTopRight) -- (picCenterRight) -- cycle
+        ;
+
+        \path [
+            name path = botPic,
+            rounded corners = 0.7cm,
+        ]
+        (picCenterLeft) -- (picBotLeft) -- (picBotRight) -- (picCenterRight) -- cycle
+        ;
+
+        \begin{scope} [
+                transform canvas = {
+                    xshift = -0.2cm,
+                    yshift = -0.2cm,
+                },
+            ]
+            \begin{scope} [
+                    transform canvas = {
+                        yshift = \picGap/2,
+                    },
+                ]
+
+                \clip [use path = topPic] ;
+
+                \draw
+                (current page.north west)
+                ++(-0.25, 0)
+                node [anchor = north west] (img) {
+                    \includegraphics[height = 0.85\paperheight]{pics/brain.png}
+                }
+                ;
+
+            \end{scope}
+
+
+            \begin{scope} [
+                    transform canvas = {
+                        yshift = -\picGap/2,
+                    },
+                ]
+
+                \clip [use path = botPic] ;
+
+                \draw
+                (current page.south west)
+                node [anchor = south west] (img) {
+                    \includegraphics[height = 0.85\paperheight]{pics/chip.png}
+                }
+                ;
+
+            \end{scope}
+
+        \end{scope}
+
 
     \end{tikzpicture}
 \end{frame}
