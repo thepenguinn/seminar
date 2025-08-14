@@ -26,6 +26,8 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{intersections,decorations.markings}
 
+\usepackage{subtikzpicture}
+
 \usemintedstyle{dracula}
 
 \makeatletter
@@ -103,7 +105,7 @@
 \definecolor{colorLightGreen} {HTML} {C0D2A3}
 
 \definecolor{colorLightBrown} {HTML} {A8867B}
-\definecolor{colorDarkBrown} {HTML} {9EC2AD}
+\definecolor{colorLightSageGreen} {HTML} {9EC2AD}
 
 \definecolor{colorBrown} {HTML} {9F774E}
 
@@ -167,7 +169,7 @@
 \newcommand\tikzframetitleleft[2] {
     \draw (current page.north west) ++(0.75cm, -0.75cm) coordinate (frametitle) ;
     \node [anchor = north west] (frametitle) at (frametitle) {
-        \begin{minipage} {8cm}
+        \begin{minipage} {9cm}
             \setstretch{0.75}
             \huge
             {\Large #1} \\ #2
@@ -179,7 +181,7 @@
 \newcommand\tikzframetitleright[2] {
     \draw (current page.north east) ++(-0.75cm, -0.75cm) coordinate (frametitle) ;
     \node [anchor = north east] (frametitle) at (frametitle) {
-        \begin{minipage} {8cm}
+        \begin{minipage} {9cm}
             \raggedleft
             \setstretch{0.75}
             \huge
@@ -195,6 +197,49 @@
 \def\markMainOuterRadius{0.3cm}
 \def\markSubRadius{0.075cm}
 \def\markCornerRadius{0.1cm}
+
+\def\squareSide{3.5cm}
+\def\squareGap{0.3cm}
+
+\subtikzpicturedef{subSquare} {
+    rightCorner,
+    leftCorner,
+    botCorner,
+    topCorner,
+    padRightCorner,
+    padLeftCorner,
+    padBotCorner,
+    padTopCorner,
+    center,
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+    \draw
+    (#1-origin) coordinate (#1-botCorner)
+    %%
+    (#1-botCorner) ++(45:\squareSide) coordinate (#1-rightCorner)
+    (#1-botCorner) ++(135:\squareSide) coordinate (#1-leftCorner)
+    ($(#1-leftCorner)!0.5!(#1-rightCorner)$) coordinate (#1-center)
+    %%
+    (#1-rightCorner) ++(135:\squareSide) coordinate (#1-topCorner)
+    %%
+    (#1-rightCorner) ++(\squareGap, 0)  coordinate (#1-padRightCorner)
+    (#1-leftCorner) ++(-\squareGap, 0)   coordinate (#1-padLeftCorner)
+    (#1-botCorner) ++(0, -\squareGap)    coordinate (#1-padBotCorner)
+    (#1-topCorner) ++(0, \squareGap)    coordinate (#1-padTopCorner)
+    ;
+}
+
+\subtikzpictureactivate{subSquare}
+
+\newcommand\drawSubSquare[2] {
+    \filldraw [
+        #1%
+        rounded corners = 0.7cm,
+    ]
+    (#2-botCorner) -- (#2-rightCorner) -- (#2-topCorner) -- (#2-leftCorner) -- cycle
+    ;
+}
 
 \begin{document}
 
@@ -225,835 +270,918 @@
 %     \end{tikzpicture}
 % \end{frame}
 
-%% Making Sense of Data
-\begin{frame} {}
+% %% Making Sense of Data
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \draw (0, 0)
+%         coordinate (origin)
+%         (current page.east) ++(1, 0) coordinate (edge)
+%         ;
+%
+%         \begin{scope}
+%             %% Humidity
+%             \draw []
+%             (current page.south) ++(1.0cm, 2.5cm) coordinate (humidityMarkCenter)
+%             ;
+%             \path [name path = markHumeHandle, rounded corners = \markCornerRadius]
+%             (humidityMarkCenter) ++(135:\markMainOuterRadius) coordinate (humidityMarkFirst)
+%             (humidityMarkCenter) ++(135:(0.75cm + \markMainOuterRadius) coordinate (humidityMarkSecond)
+%             (humidityMarkSecond) ++(-1, 0) coordinate (humidityMarkThird)
+%             (humidityMarkFirst) -- (humidityMarkSecond) -- (humidityMarkThird)
+%             ;
+%             \draw [use path = markHumeHandle, very thick] ;
+%             ;
+%             \filldraw [fgcol]
+%             (humidityMarkThird) circle (\markSubRadius)
+%             ;
+%             \draw [fgcol]
+%             (humidityMarkThird) node [left = 6pt] {
+%                 Humidity Data
+%             }
+%             ;
+%
+%             %% Temperature
+%             \draw []
+%             (current page.south) ++(5.0cm, 6.55cm) coordinate (temperatureMarkCenter)
+%             ;
+%             \path [name path = markTempHandle, rounded corners = \markCornerRadius]
+%             (temperatureMarkCenter) ++(135:\markMainOuterRadius) coordinate (temperatureMarkFirst)
+%             (temperatureMarkCenter) ++(135:(0.75cm + \markMainOuterRadius) coordinate (temperatureMarkSecond)
+%             (temperatureMarkSecond) ++(-1, 0) coordinate (temperatureMarkThird)
+%             (temperatureMarkFirst) -- (temperatureMarkSecond) -- (temperatureMarkThird)
+%             ;
+%             \draw [use path = markTempHandle, very thick] ;
+%             ;
+%             \filldraw [fgcol]
+%             (temperatureMarkThird) circle (\markSubRadius)
+%             ;
+%             \draw [fgcol]
+%             (temperatureMarkThird) node [left = 6pt] {
+%                 Temperature Data
+%             }
+%             ;
+%
+%             \clip [rotate = 45, rounded corners = 0.7cm]
+%             (edge) ++(-10, -15) rectangle ++(20, 20)
+%             ;
+%
+%             \begin{scope}
+%                 \node [anchor = east] (img) at (edge) {
+%                     \includegraphics[height = \paperheight]{pics/red_forest.png}
+%                 }
+%                 ;
+%
+%                 %% Humidity
+%                 \filldraw [white!90!fgcol]
+%                 (humidityMarkCenter) circle (\markMainInnerRadius)
+%                 ;
+%                 \draw [white!90!fgcol, very thick]
+%                 (humidityMarkCenter) circle (\markMainOuterRadius)
+%                 ;
+%                 \draw [use path = markHumeHandle, white!90!fgcol, very thick] ;
+%
+%                 %% Temperature
+%                 \filldraw [white!90!fgcol]
+%                 (temperatureMarkCenter) circle (\markMainInnerRadius)
+%                 ;
+%                 \draw [white!90!fgcol, very thick]
+%                 (temperatureMarkCenter) circle (\markMainOuterRadius)
+%                 ;
+%                 \draw [use path = markTempHandle, white!90!fgcol, very thick] ;
+%
+%             \end{scope}
+%         \end{scope}
+%
+%         \tikzframetitleleft{Making} {Sense of Data}
+%
+%         \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {8.75cm}
+%
+%                 Every system is in some sense a \alert{Data Processing System}.
+%                 They \alert{Convert / Extract / Manipulate} Data in different ways.
+%                 There are several kinds of data, such as \alert{Visual}, \alert{Auditory},
+%                 \alert{Sensory}, etc. Goal of almost any system is to make the most use of
+%                 the data available to it.
+%
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \draw (0, 0)
+%         coordinate (origin)
+%         (current page.west) coordinate (edge)
+%         ;
+%         \begin{scope} [transform canvas = {yshift = -2.2cm, xshift = 0.5cm}]
+%             \draw []
+%             (edge) ++(2cm, -0.5cm) coordinate (pixelMarkCenter)
+%             ;
+%             \path [name path = markHandle, rounded corners = \markCornerRadius]
+%             (pixelMarkCenter) ++(-45:\markMainOuterRadius) coordinate (pixelMarkFirst)
+%             (pixelMarkCenter) ++(-45:(1cm + \markMainOuterRadius) coordinate (pixelMarkSecond)
+%             (pixelMarkSecond) ++(1, 0) coordinate (pixelMarkThird)
+%             (pixelMarkFirst) -- (pixelMarkSecond) -- (pixelMarkThird)
+%             ;
+%             \draw [use path = markHandle, very thick] ;
+%             \filldraw [fgcol]
+%             (pixelMarkThird) circle (\markSubRadius)
+%             ;
+%             \draw [fgcol]
+%             (pixelMarkThird) node [right = 6pt] {
+%                 Pixel Data
+%             }
+%             ;
+%             \clip [rotate = -45, rounded corners = 0.7cm]
+%             (edge) rectangle ++(2.5, 2.5)
+%             ;
+%             \begin{scope}
+%                 \node [anchor = west] (pixel) at (edge) {
+%                     \includegraphics[height = \paperheight]{pics/red_forest.png}
+%                 }
+%                 ;
+%                 \draw [thin, step = 0.1, white, opacity = 0.40]
+%                 (edge) ++(-1, -2) grid ++(5, 5)
+%                 ;
+%                 \filldraw [white!90!fgcol]
+%                 (pixelMarkCenter) circle (\markMainInnerRadius)
+%                 ;
+%
+%                 \draw [white!90!fgcol, very thick]
+%                 (pixelMarkCenter) circle (\markMainOuterRadius)
+%                 ;
+%                 \draw [use path = markHandle, white!90!fgcol, very thick] ;
+%             \end{scope}
+%         \end{scope}
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Learning to Ask the Right Questions
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%         \tikzframetitleleft{Asking}{The Right Questions}
+%
+%         \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {0.45\paperwidth}
+%                 In order to make sense of the data, we need to ask the right questions about the data.
+%                 The sequence of these questions is known as an \alert{Algorithm}.
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \filldraw [colorTest]
+%         (current page.north east) ++(-7,0) coordinate (workFlowTop)
+%         (workFlowTop) rectangle (current page.south east)
+%         ;
+%
+%         \draw (workFlowTop) ++(0, -0.2) coordinate (tmp);
+%         \foreach \x in {1, 2, 3, 4} {
+%             \draw [very thick, white, rounded corners = 0.2cm, line cap = round]
+%             (tmp) ++(0, -1) -- ++(3.5, -0.8) -- ++(3.5, 0.8)
+%             (tmp) ++(0, -0.25\paperheight) coordinate (tmp)
+%             ;
+%         }
+%
+%         \draw ($(workFlowTop)!0.5!(current page.north east)$) ++(0, -0.8) coordinate (tmp);
+%         \foreach \x in {
+%             Finding a Problem,
+%             Selecting an Algorithm,
+%             Implementing the Algorithm,
+%             Solving the Problem%
+%         } {
+%             \draw [ultra thick, white, rounded corners = 0.2cm]
+%             (tmp)
+%             node [anchor = center] {
+%                 \begin{minipage} {7cm}
+%                     \centering
+%                     \x
+%                 \end{minipage}
+%             }
+%             % (tmp) ++(0, -1) -- ++(3.5, -1.25) -- ++(3.5, 1.25)
+%             (tmp) ++(0, -0.25\paperheight) coordinate (tmp)
+%             ;
+%         }
+%
+%         %% Methodology
+%
+%         \begin{scope}
+%             \draw
+%             (current page.center) ++(1.75cm, 0) coordinate (workFlowMarkCenter)
+%             % (current page.center) ++(1.6cm, 0.2cm) coordinate (workFlowMarkCenter)
+%             ;
+%             \path [name path = markWorkHandle, rounded corners = \markCornerRadius]
+%             (workFlowMarkCenter) ++(-180:\markMainOuterRadius) coordinate (workFlowMarkFirst)
+%             (workFlowMarkFirst) ++(-1, 0) coordinate (workFlowMarkSecond)
+%             (workFlowMarkSecond) ++(-135:0.75cm) coordinate (workFlowMarkThird)
+%             (workFlowMarkFirst) -- (workFlowMarkSecond) -- (workFlowMarkThird)
+%             ;
+%             \draw [use path = markWorkHandle, very thick] ;
+%             \filldraw [fgcol]
+%             (workFlowMarkThird) circle (\markSubRadius)
+%             ;
+%             \draw [fgcol]
+%             (workFlowMarkThird) node (workFlowMark) [left = 6pt] {
+%                 Typical Way of Solving a Problem
+%             }
+%             ;
+%             \clip (workFlowTop) rectangle (current page.south east);
+%             \begin{scope}
+%                 \filldraw [white!90!fgcol]
+%                 (workFlowMarkCenter) circle (\markMainInnerRadius)
+%                 ;
+%                 \draw [white!90!fgcol, very thick]
+%                 (workFlowMarkCenter) circle (\markMainOuterRadius)
+%                 ;
+%                 \draw [white!90!fgcol, use path = markWorkHandle, very thick] ;
+%             \end{scope}
+%         \end{scope}
+%
+%         \draw (content.south west |- workFlowMark.south west) ++(0, -0.5cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {0.45\paperwidth}
+%                 But what if the sheer number of questions one must ask to get to the right answer gets
+%                 so overwhelming?
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \draw (content.south west) ++(0, -0.5cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {0.45\paperwidth}
+%                 But before that...
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Ways of Asking Questions
+% \begin{frame}[fragile] {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay
+%         ]
+%         \tikzframetitleright {Ways of} {Asking Questions}
+%
+%         \begin{scope} [transform canvas = {xshift = 0.2cm}]
+%             \begin{scope}
+%                 \draw
+%                 (current page.north) ++(-0.75, -0.75) coordinate (ifelseMarkCenter)
+%                 ;
+%                 \path [name path = ifelseHandle, rounded corners = \markCornerRadius]
+%                 (ifelseMarkCenter) ++(-45:\markMainOuterRadius) coordinate (ifelseMarkFirst)
+%                 (ifelseMarkCenter) ++(-45:(2.85cm + \markMainOuterRadius) coordinate (ifelseMarkSecond)
+%                 (ifelseMarkSecond) ++(1.4, 0) coordinate (ifelseMarkThird)
+%                 (ifelseMarkFirst) -- (ifelseMarkSecond) -- (ifelseMarkThird)
+%                 ;
+%                 \draw [use path = ifelseHandle, very thick] ;
+%                 \filldraw [
+%                     colorLightGreen,
+%                     rounded corners = 0.7cm,
+%                 ]
+%                 (current page.north west) ++(0, 0.1cm) ++(0,2) coordinate (tmpStart)
+%                 (current page.center) ++(0, 0.1cm) coordinate (tmpEnd)
+%                 (tmpStart) rectangle (tmpEnd)
+%                 ;
+%                 \filldraw [fgcol]
+%                 (ifelseMarkThird) circle (\markSubRadius)
+%                 ;
+%                 \draw [fgcol]
+%                 (ifelseMarkThird) node (ifelse) [right = 6pt] {
+%                     Using If-Else Statements
+%                 }
+%                 ;
+%                 \clip [
+%                     rounded corners = 0.7cm,
+%                 ]
+%                 (current page.north west) ++(0, 0.1cm) ++(0,2) coordinate (tmpStart)
+%                 (current page.center) ++(0, 0.1cm) coordinate (tmpEnd)
+%                 (tmpStart) rectangle (tmpEnd)
+%                 ;
+%                 \begin{scope}
+%                     \filldraw [white!90!fgcol]
+%                     (ifelseMarkCenter) circle (\markMainInnerRadius)
+%                     ;
+%                     \draw [white!90!fgcol, very thick]
+%                     (ifelseMarkCenter) circle (\markMainOuterRadius)
+%                     ;
+%                     \draw [white!90!fgcol, use path = ifelseHandle, very thick] ;
+%                 \end{scope}
+%             \end{scope}
+%
+%             % \draw [thin, step = 0.1, white, opacity = 0.40]
+%             % (current page.north west) ++(-2,2) grid (current page.center)
+%             % ;
+%
+%             \begin{scope}
+%                 \draw
+%                 (current page.south) ++(-0.75, 1.0) coordinate (matrixMarkCenter)
+%                 ;
+%                 \path [name path = matrixHandle, rounded corners = \markCornerRadius]
+%                 (matrixMarkCenter) ++(45:\markMainOuterRadius) coordinate (matrixMarkFirst)
+%                 (matrixMarkCenter) ++(45:(2.0cm + \markMainOuterRadius) coordinate (matrixMarkSecond)
+%                 (matrixMarkSecond) ++(1.35, 0) coordinate (matrixMarkThird)
+%                 (matrixMarkFirst) -- (matrixMarkSecond) -- (matrixMarkThird)
+%                 ;
+%                 \draw [use path = matrixHandle, very thick] ;
+%                 \filldraw [
+%                     colorLightSageGreen,
+%                     rounded corners = 0.7cm,
+%                 ]
+%                 (current page.south west) ++(0, -0.1cm) ++(0,-2) coordinate (tmpStart)
+%                 (current page.center) ++(0, -0.1cm) coordinate (tmpEnd)
+%                 (tmpStart) rectangle (tmpEnd)
+%                 ;
+%                 \filldraw [fgcol]
+%                 (matrixMarkThird) circle (\markSubRadius)
+%                 ;
+%                 \draw [fgcol]
+%                 (matrixMarkThird) node (matrix) [right = 6pt] {
+%                     Using Matrix Transformation
+%                 }
+%                 ;
+%                 \clip [
+%                     rounded corners = 0.7cm,
+%                 ]
+%                 (current page.south west) ++(0, -0.1cm) ++(0,-2) coordinate (tmpStart)
+%                 (current page.center) ++(0, -0.1cm) coordinate (tmpEnd)
+%                 (tmpStart) rectangle (tmpEnd)
+%                 ;
+%                 \begin{scope}
+%                     \filldraw [white!90!fgcol]
+%                     (matrixMarkCenter) circle (\markMainInnerRadius)
+%                     ;
+%                     \draw [white!90!fgcol, very thick]
+%                     (matrixMarkCenter) circle (\markMainOuterRadius)
+%                     ;
+%                     \draw [white!90!fgcol, use path = matrixHandle, very thick] ;
+%                 \end{scope}
+%             \end{scope}
+%
+%             % \draw [thin, step = 0.1, white, opacity = 0.40]
+%             % (current page.south west) ++(-2,-2) grid (current page.center)
+%             % ;
+%
+%             \draw (current page.north west) ++(0.5cm, -0.5cm) coordinate (content) ;
+%             \node [anchor = north west]  (content) at (content) {
+%                 \begin{minipage} {0.55\paperwidth}
+%                     \begin{minted}[breaklines, autogobble, mathescape] {text}
+%                         if this_pixel == this_color:
+%                             if this_pixel is at_edge:
+%                                 # more and more if statements
+%                         elif this_pixel == that_color:
+%                             if this_pixel is in_the_middle:
+%                                 # many more
+%                     \end{minted}
+%                 \end{minipage}
+%             }
+%             ;
+%
+%             \draw (current page.south west) ++(0.5cm, 0.5cm) coordinate (content) ;
+%             \node [anchor = south west]  (content) at (content) {
+%                 \begin{minipage} {0.425\paperwidth}
+%                     \centering
+%                     $\begin{pNiceMatrix}
+%                         c_{11} & c_{12} & c_{13} & c_{14} & \cdots & c_{1n} \\
+%                         c_{21} & c_{22} & c_{23} & c_{24} & \cdots & c_{2n} \\
+%                         c_{31} & c_{32} & c_{33} & c_{34} & \cdots & c_{3n} \\
+%                         c_{41} & c_{42} & c_{43} & c_{44} & \cdots & c_{4n} \\
+%                         \vdots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+%                         c_{m1} & c_{m2} & c_{m3} & c_{m4} & \cdots & c_{mn} \\
+%                     \end{pNiceMatrix}$
+%                 \end{minipage}
+%             }
+%             ;
+%
+%         \end{scope}
+%
+%         \draw (ifelse.south east) ++(0.2cm, -0.5cm) coordinate (content) ;
+%         \node [anchor = north east]  (content) at (content) {
+%             \begin{minipage} {6.5cm}
+%                 There are several ways to ask the same question. One might be able to
+%                 to write an Algorithm for parsing the pixel data just by using \alert{If-Else}
+%                 statements.
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \draw (matrix.south east) ++(0.2cm, -0.5cm) coordinate (content) ;
+%         \node [anchor = north east]  (content) at (content) {
+%             \begin{minipage} {6.5cm}
+%                 Or one can directly transform input into output using a \alert{Matrix Tranformation}.
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Guess Who's Good at Crunching Matrices?
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay
+%         ]
+%
+%         \tikzframetitleright{Guess Who's} {Good at Crunching Matrices?}
+%
+%         \draw (0, 0)
+%         coordinate (origin)
+%         (current page.south west) coordinate (edge)
+%         ;
+%
+%         \begin{scope} [
+%                 transform canvas = {
+%                     yshift = -13,
+%                     xshift = -13,
+%                 }
+%             ]
+%             \begin{scope} [
+%                     transform canvas = {
+%                         yshift = 0.1cm,
+%                         xshift = 0.1cm,
+%                     }
+%                 ]
+%                 \draw
+%                 (current page.north) ++(-2.0, -1.6) coordinate (cpuMarkCenter)
+%                 ;
+%                 \path [name path = cpuHandle, rounded corners = \markCornerRadius]
+%                 (cpuMarkCenter) ++(0:\markMainOuterRadius) coordinate (cpuMarkFirst)
+%                 (cpuMarkCenter) ++(0:(1.5cm + \markMainOuterRadius) coordinate (cpuMarkSecond)
+%                 (cpuMarkSecond) ++(-45:2.1cm) coordinate (cpuMarkThird)
+%                 (cpuMarkThird) ++(5, 0) coordinate (cpuMarkFourth)
+%                 (cpuMarkFirst) -- (cpuMarkSecond) -- (cpuMarkThird) -- (cpuMarkFourth)
+%                 ;
+%                 \draw [use path = cpuHandle, very thick] ;
+%                 \filldraw [fgcol]
+%                 (cpuMarkFourth) circle (\markSubRadius)
+%                 ;
+%                 \draw [fgcol]
+%                 (cpuMarkFourth) node (cpu) [right = 6pt] {
+%                     CPUs
+%                 }
+%                 ;
+%                 \begin{scope}
+%                     \clip [rotate = 45, rounded corners = 0.7cm]
+%                     (edge) ++(0.25, 0.25) rectangle ++(10, 10)
+%                     ;
+%                     \draw
+%                     (edge) ++(3.00, 0.35) coordinate (tmp)
+%                     ;
+%                     \node [anchor = south] (img) at (tmp) {
+%                         \includegraphics[height = \paperheight]{pics/cpu.png}
+%                     }
+%                     ;
+%                     \filldraw [white!90!fgcol]
+%                     (cpuMarkCenter) circle (\markMainInnerRadius)
+%                     ;
+%                     \draw [white!90!fgcol, very thick]
+%                     (cpuMarkCenter) circle (\markMainOuterRadius)
+%                     ;
+%                     \draw [white!90!fgcol, use path = cpuHandle, very thick] ;
+%                 \end{scope}
+%
+%                 \draw (cpu.south east) ++(0, -0.3cm) coordinate (content) ;
+%                 \node [anchor = north east]  (content) at (content) {
+%                     \begin{minipage} {6.0cm}
+%                         \raggedleft
+%                         \alert{CPUs} are much more capable at processing matrices that anyone of us, humans.
+%                         % \alert{Computers}, especially \alert{GPUs} can crunch through matrices.
+%                     \end{minipage}
+%                 }
+%                 ;
+%             \end{scope}
+%
+%             \begin{scope} [
+%                     transform canvas = {
+%                         yshift = -0.5cm,
+%                         xshift = -0.5cm,
+%                     }
+%                 ]
+%                 \draw
+%                 (current page.south) ++(1.75, 3.25) coordinate (gpuMarkCenter)
+%                 ;
+%                 \path [name path = gpuHandle, rounded corners = \markCornerRadius]
+%                 (gpuMarkCenter) ++(45:\markMainOuterRadius) coordinate (gpuMarkFirst)
+%                 (gpuMarkCenter) ++(45:(1.0cm + \markMainOuterRadius) coordinate (gpuMarkSecond)
+%                 (gpuMarkSecond) ++(4.25, 0) coordinate (gpuMarkThird)
+%                 (gpuMarkFirst) -- (gpuMarkSecond) -- (gpuMarkThird)
+%                 ;
+%                 \draw [use path = gpuHandle, very thick] ;
+%                 \filldraw [fgcol]
+%                 (gpuMarkThird) circle (\markSubRadius)
+%                 ;
+%                 \draw [fgcol]
+%                 (gpuMarkThird) node (gpu) [right = 6pt] {
+%                     GPUs
+%                 }
+%                 ;
+%                 \begin{scope}
+%                     \clip [rotate = 45, rounded corners = 0.7cm]
+%                     (edge) ++(0.25, -0.25) rectangle ++(10, -10)
+%                     ;
+%                     \draw
+%                     (edge) ++(0, -0.5) coordinate (tmp)
+%                     ;
+%                     \node [anchor = south west] (img) at (tmp) {
+%                         \includegraphics[height = 0.9\paperheight]{pics/gpu.png}
+%                     }
+%                     ;
+%                     \filldraw [white!90!fgcol]
+%                     (gpuMarkCenter) circle (\markMainInnerRadius)
+%                     ;
+%                     \draw [white!90!fgcol, very thick]
+%                     (gpuMarkCenter) circle (\markMainOuterRadius)
+%                     ;
+%                     \draw [white!90!fgcol, use path = gpuHandle, very thick] ;
+%                 \end{scope}
+%                 \draw (gpu.south east) ++(0, -0.3cm) coordinate (content) ;
+%                 \node [anchor = north east]  (content) at (content) {
+%                     \begin{minipage} {4.0cm}
+%                         \raggedleft \alert{GPUs} can exploit parallelizable nature of matrix operations.
+%                         % \alert{Computers}, especially \alert{GPUs} can crunch through matrices.
+%                     \end{minipage}
+%                 }
+%                 ;
+%             \end{scope}
+%         \end{scope}
+%
+%     \end{tikzpicture}
+%
+%
+% \end{frame}
+%
+% %% Learning to Ask Questions
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay
+%         ]
+%
+%         \tikzframetitleleft{Learning to} {Ask Questions}
+%
+%         \draw (0, 0)
+%         coordinate (origin)
+%         (current page.north east) coordinate (edge)
+%         ;
+%
+%         \begin{scope} [
+%                 transform canvas = {
+%                     yshift = -0.5cm,
+%                     xshift = -1.25cm,
+%                 }
+%             ]
+%             \begin{scope}
+%                 \clip [rotate = -45, rounded corners = 0.7cm]
+%                 (edge) ++(7, 6) rectangle ++(-12, -12)
+%                 ;
+%                 \draw
+%                 (edge) ++(-2, 0.625) coordinate (tmp)
+%                 ;
+%                 \node [anchor = north] (img) at (tmp) {
+%                     \includegraphics[height = \paperheight]{pics/snetwork.png}
+%                 }
+%                 ;
+%             \end{scope}
+%
+%         \end{scope}
+%
+%         \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {6.8cm}
+%                 We haven't addressed how we are going to know the right questions to ask about
+%                 a data yet.
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \draw (content.south west) ++(0, -0.3cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {8.1cm}
+%                 The \alert{coefficients / weights} in our question matrix decides the output
+%                 we get.
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \draw (content.south west) ++(0, -0.3cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {9.3cm}
+%                 And the game of finding these coefficients / weights is famously known under
+%                 the umbrella term \alert{Machine Learning}.
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Weight of the Ever Growing Data
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay
+%         ]
+%         \tikzframetitleleft{Weight of} {The Ever Growing Data}
+%
+%         \begin{scope} [
+%                 rotate = 45,
+%                 transform canvas = {
+%                     yshift = -1.1cm,
+%                 },
+%             ]
+%             \draw ($(current page.center)!0.3!(current page.east)$) coordinate (power);
+%
+%             \begin{scope}
+%                 \path [name path = mountainHandle, rounded corners = 0.7cm]
+%                 (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+%                 ;
+%                 \clip[use path = mountainHandle] ;
+%                 \begin{scope}
+%                     \node [anchor = center] (pixel) at (power) {
+%                         \includegraphics[height = 0.75\paperheight]{pics/mountain.png}
+%                     }
+%                     ;
+%                 \end{scope}
+%             \end{scope}
+%
+%             \draw (power) ++(5.5, 0) coordinate (power);
+%
+%             \begin{scope}
+%                 \path [name path = powerHandle, rounded corners = 0.7cm]
+%                 (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+%                 ;
+%                 \clip[use path = powerHandle] ;
+%                 \begin{scope}
+%                     \node [anchor = center] (pixel) at (power) {
+%                         \includegraphics[height = 0.75\paperheight]{pics/power.png}
+%                     }
+%                     ;
+%                 \end{scope}
+%             \end{scope}
+%
+%             \draw (power) ++(-5.5, -5.5) coordinate (power);
+%
+%             \begin{scope}
+%                 \path [name path = cloudHandle, rounded corners = 0.7cm]
+%                 (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+%                 ;
+%                 \clip[use path = cloudHandle] ;
+%                 \begin{scope}
+%                     \node [anchor = center] (pixel) at (power) {
+%                         \includegraphics[height = 0.75\paperheight]{pics/cloud.png}
+%                     }
+%                     ;
+%                 \end{scope}
+%             \end{scope}
+%
+%             % \draw (power) ++(5.5, 0) coordinate (power);
+%             %
+%             % \filldraw [rounded corners = 0.7cm]
+%             % (power) ++(-2.5, -2.5) rectangle ++(5, 5)
+%             % ;
+%
+%         \end{scope}
+%
+%         \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {6.5cm}
+%                 Day by day ML Models are getting more and more capabilities.
+%                 So as the need for more and more powerful hardware to run these models.
+%
+%                 This can lead to several concerns:
+%
+%                 \begin{itemize}
+%                     \item Increased Carbon Footprint.
+%                     \item Reliance of Cloud Computing.
+%                     \item Latency related with Cloud Computing.
+%                     \item Need for powerful Hardware.
+%                 \end{itemize}
+%
+%                 \alert{TinyML} is a subset of ML that is trying to address these issues.
+%
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% An Introduction to Tiny Machine Learning
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay
+%         ]
+%
+%         \tikzframetitleright{An Introduction to} {Tiny Machine Learning}
+%
+%         \draw (frametitle.south east) ++(0, -0.3cm) coordinate (content) ;
+%         \node [anchor = north east]  (content) at (content) {
+%             \begin{minipage} {0.5\textwidth}
+%
+%                 TinyML is a subset of machine learning (ML) that focuses on developing and deploying
+%                 ML models on resource-constrained devices such as:
+%
+%                 \begin{itemize}
+%                     \item Microcontrollers (MCUs)
+%                     \item System-on-Chip (SoCs)
+%                     \item FPGAs
+%                 \end{itemize}
+%
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \def\picWidth{7}
+%         \def\picGap{0.6cm}
+%
+%         \draw [
+%             rounded corners = 0.7cm,
+%         ]
+%
+%         ($(current page.center)!0.5!(current page.west)$) coordinate (picCenter)
+%
+%         % (picCenter) ++(-\picWidth / 2, -\picWidth / 2) rectangle ++(\picWidth, \picWidth)
+%
+%         (picCenter) ++(-\picWidth / 2, -\picWidth / 2)
+%         coordinate (picCenterLeft)
+%
+%         (picCenter) ++(\picWidth / 2, \picWidth / 2)
+%         coordinate (picCenterRight)
+%
+%         (current page.north -| picCenterLeft) ++(0, 1) coordinate (picTopLeft)
+%         (current page.north -| picCenterRight) ++(0, 1) coordinate (picTopRight)
+%
+%         (current page.south -| picCenterLeft) ++(0, -1) coordinate (picBotLeft)
+%         (current page.south -| picCenterRight) ++(0, -1) coordinate (picBotRight)
+%
+%         ;
+%
+%         \path [
+%             name path = topPic,
+%             rounded corners = 0.7cm,
+%         ]
+%         (picCenterLeft) -- (picTopLeft) -- (picTopRight) -- (picCenterRight) -- cycle
+%         ;
+%
+%         \path [
+%             name path = botPic,
+%             rounded corners = 0.7cm,
+%         ]
+%         (picCenterLeft) -- (picBotLeft) -- (picBotRight) -- (picCenterRight) -- cycle
+%         ;
+%
+%         \begin{scope} [
+%                 transform canvas = {
+%                     xshift = -0.2cm,
+%                     yshift = -0.2cm,
+%                 },
+%             ]
+%             \begin{scope} [
+%                     transform canvas = {
+%                         yshift = \picGap/2,
+%                     },
+%                 ]
+%
+%                 \clip [use path = topPic] ;
+%
+%                 \draw
+%                 (current page.north west)
+%                 ++(-0.25, 0)
+%                 node [anchor = north west] (img) {
+%                     \includegraphics[height = 0.85\paperheight]{pics/brain.png}
+%                 }
+%                 ;
+%
+%             \end{scope}
+%
+%
+%             \begin{scope} [
+%                     transform canvas = {
+%                         yshift = -\picGap/2,
+%                     },
+%                 ]
+%
+%                 \clip [use path = botPic] ;
+%
+%                 \draw
+%                 (current page.south west)
+%                 node [anchor = south west] (img) {
+%                     \includegraphics[height = 0.85\paperheight]{pics/chip.png}
+%                 }
+%                 ;
+%
+%             \end{scope}
+%
+%         \end{scope}
+%
+%
+%     \end{tikzpicture}
+% \end{frame}
+
+%% Why Even Run Machine Learning Models on Microcontrollers?
+\begin{frame}
 
     \begin{tikzpicture} [
             remember picture,
             overlay,
         ]
 
-        \draw (0, 0)
-        coordinate (origin)
-        (current page.east) ++(1, 0) coordinate (edge)
+        \tikzframetitleright{Why Even Run} {Machine Learning Models on Microcontrollers?}
+
+        \filldraw
+        ($(current page.center)!0.5!(current page.west)$) ++(3.25cm, -3.5cm) coordinate (center)
         ;
 
-        \begin{scope}
-            %% Humidity
-            \draw []
-            (current page.south) ++(1.0cm, 2.5cm) coordinate (humidityMarkCenter)
-            ;
-            \path [name path = markHumeHandle, rounded corners = \markCornerRadius]
-            (humidityMarkCenter) ++(135:\markMainOuterRadius) coordinate (humidityMarkFirst)
-            (humidityMarkCenter) ++(135:(0.75cm + \markMainOuterRadius) coordinate (humidityMarkSecond)
-            (humidityMarkSecond) ++(-1, 0) coordinate (humidityMarkThird)
-            (humidityMarkFirst) -- (humidityMarkSecond) -- (humidityMarkThird)
-            ;
-            \draw [use path = markHumeHandle, very thick] ;
-            ;
-            \filldraw [fgcol]
-            (humidityMarkThird) circle (\markSubRadius)
-            ;
-            \draw [fgcol]
-            (humidityMarkThird) node [left = 6pt] {
-                Humidity Data
-            }
-            ;
+        \subSquare{s1}{center}{padBotCorner} % second
+        \subSquare{s2}{center}{padLeftCorner} % third
+        \subSquare{s3}{center}{padRightCorner} % first
+        \subSquare{s4}{s2-padRightCorner}{padBotCorner} % fourth
 
-            %% Temperature
-            \draw []
-            (current page.south) ++(5.0cm, 6.55cm) coordinate (temperatureMarkCenter)
-            ;
-            \path [name path = markTempHandle, rounded corners = \markCornerRadius]
-            (temperatureMarkCenter) ++(135:\markMainOuterRadius) coordinate (temperatureMarkFirst)
-            (temperatureMarkCenter) ++(135:(0.75cm + \markMainOuterRadius) coordinate (temperatureMarkSecond)
-            (temperatureMarkSecond) ++(-1, 0) coordinate (temperatureMarkThird)
-            (temperatureMarkFirst) -- (temperatureMarkSecond) -- (temperatureMarkThird)
-            ;
-            \draw [use path = markTempHandle, very thick] ;
-            ;
-            \filldraw [fgcol]
-            (temperatureMarkThird) circle (\markSubRadius)
-            ;
-            \draw [fgcol]
-            (temperatureMarkThird) node [left = 6pt] {
-                Temperature Data
-            }
-            ;
+        \drawSubSquare{colorLightGreen,}{s1}
+        \drawSubSquare{colorLightSageGreen,}{s2}
+        \drawSubSquare{colorLightSageGreen,}{s3}
+        \drawSubSquare{colorLightGreen,}{s4}
 
-            \clip [rotate = 45, rounded corners = 0.7cm]
-            (edge) ++(-10, -15) rectangle ++(20, 20)
-            ;
-
-            \begin{scope}
-                \node [anchor = east] (img) at (edge) {
-                    \includegraphics[height = \paperheight]{pics/red_forest.png}
-                }
-                ;
-
-                %% Humidity
-                \filldraw [white!90!fgcol]
-                (humidityMarkCenter) circle (\markMainInnerRadius)
-                ;
-                \draw [white!90!fgcol, very thick]
-                (humidityMarkCenter) circle (\markMainOuterRadius)
-                ;
-                \draw [use path = markHumeHandle, white!90!fgcol, very thick] ;
-
-                %% Temperature
-                \filldraw [white!90!fgcol]
-                (temperatureMarkCenter) circle (\markMainInnerRadius)
-                ;
-                \draw [white!90!fgcol, very thick]
-                (temperatureMarkCenter) circle (\markMainOuterRadius)
-                ;
-                \draw [use path = markTempHandle, white!90!fgcol, very thick] ;
-
-            \end{scope}
-        \end{scope}
-
-        \tikzframetitleleft{Making} {Sense of Data}
-
-        \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {8.75cm}
-
-                Every system is in some sense a \alert{Data Processing System}.
-                They \alert{Convert / Extract / Manipulate} Data in different ways.
-                There are several kinds of data, such as \alert{Visual}, \alert{Auditory},
-                \alert{Sensory}, etc. Goal of almost any system is to make the most use of
-                the data available to it.
-
+        \node [anchor = center] at (s1-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Privacy and Security
+            \end{minipage}
+        }
+        ;
+        \node [anchor = center] at (s3-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Low Power \\ Consumption
+            \end{minipage}
+        }
+        ;
+        \node [anchor = center] at (s2-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Improved \\ Latency
+            \end{minipage}
+        }
+        ;
+        \node [anchor = center] at (s4-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Economically \\ Viable
             \end{minipage}
         }
         ;
 
-        \draw (0, 0)
-        coordinate (origin)
-        (current page.west) coordinate (edge)
-        ;
-        \begin{scope} [transform canvas = {yshift = -2.2cm, xshift = 0.5cm}]
-            \draw []
-            (edge) ++(2cm, -0.5cm) coordinate (pixelMarkCenter)
+        \def\picSide{8}
+
+        \begin{scope} [
+                transform canvas = {
+                    yshift = -0.25cm,
+                    xshift = -2.75cm,
+                },
+                rotate = -45,
+            ]
+            \clip [
+                rounded corners = 0.7cm,
+            ]
+            (current page.north west)
+            ++(0, \picSide/2)
+            rectangle ++(\picSide, -\picSide)
             ;
-            \path [name path = markHandle, rounded corners = \markCornerRadius]
-            (pixelMarkCenter) ++(-45:\markMainOuterRadius) coordinate (pixelMarkFirst)
-            (pixelMarkCenter) ++(-45:(1cm + \markMainOuterRadius) coordinate (pixelMarkSecond)
-            (pixelMarkSecond) ++(1, 0) coordinate (pixelMarkThird)
-            (pixelMarkFirst) -- (pixelMarkSecond) -- (pixelMarkThird)
-            ;
-            \draw [use path = markHandle, very thick] ;
-            \filldraw [fgcol]
-            (pixelMarkThird) circle (\markSubRadius)
-            ;
-            \draw [fgcol]
-            (pixelMarkThird) node [right = 6pt] {
-                Pixel Data
-            }
-            ;
-            \clip [rotate = -45, rounded corners = 0.7cm]
-            (edge) rectangle ++(2.5, 2.5)
-            ;
-            \begin{scope}
-                \node [anchor = west] (pixel) at (edge) {
-                    \includegraphics[height = \paperheight]{pics/red_forest.png}
-                }
-                ;
-                \draw [thin, step = 0.1, white, opacity = 0.40]
-                (edge) ++(-1, -2) grid ++(5, 5)
-                ;
-                \filldraw [white!90!fgcol]
-                (pixelMarkCenter) circle (\markMainInnerRadius)
-                ;
 
-                \draw [white!90!fgcol, very thick]
-                (pixelMarkCenter) circle (\markMainOuterRadius)
-                ;
-                \draw [use path = markHandle, white!90!fgcol, very thick] ;
-            \end{scope}
-        \end{scope}
-
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Learning to Ask the Right Questions
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-        \tikzframetitleleft{Asking}{The Right Questions}
-
-        \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {0.45\paperwidth}
-                In order to make sense of the data, we need to ask the right questions about the data.
-                The sequence of these questions is known as an \alert{Algorithm}.
-            \end{minipage}
-        }
-        ;
-
-        \filldraw [colorTest]
-        (current page.north east) ++(-7,0) coordinate (workFlowTop)
-        (workFlowTop) rectangle (current page.south east)
-        ;
-
-        \draw (workFlowTop) ++(0, -0.2) coordinate (tmp);
-        \foreach \x in {1, 2, 3, 4} {
-            \draw [very thick, white, rounded corners = 0.2cm, line cap = round]
-            (tmp) ++(0, -1) -- ++(3.5, -0.8) -- ++(3.5, 0.8)
-            (tmp) ++(0, -0.25\paperheight) coordinate (tmp)
-            ;
-        }
-
-        \draw ($(workFlowTop)!0.5!(current page.north east)$) ++(0, -0.8) coordinate (tmp);
-        \foreach \x in {
-            Finding a Problem,
-            Selecting an Algorithm,
-            Implementing the Algorithm,
-            Solving the Problem%
-        } {
-            \draw [ultra thick, white, rounded corners = 0.2cm]
-            (tmp)
-            node [anchor = center] {
-                \begin{minipage} {7cm}
-                    \centering
-                    \x
-                \end{minipage}
-            }
-            % (tmp) ++(0, -1) -- ++(3.5, -1.25) -- ++(3.5, 1.25)
-            (tmp) ++(0, -0.25\paperheight) coordinate (tmp)
-            ;
-        }
-
-        %% Methodology
-
-        \begin{scope}
             \draw
-            (current page.center) ++(1.75cm, 0) coordinate (workFlowMarkCenter)
-            % (current page.center) ++(1.6cm, 0.2cm) coordinate (workFlowMarkCenter)
-            ;
-            \path [name path = markWorkHandle, rounded corners = \markCornerRadius]
-            (workFlowMarkCenter) ++(-180:\markMainOuterRadius) coordinate (workFlowMarkFirst)
-            (workFlowMarkFirst) ++(-1, 0) coordinate (workFlowMarkSecond)
-            (workFlowMarkSecond) ++(-135:0.75cm) coordinate (workFlowMarkThird)
-            (workFlowMarkFirst) -- (workFlowMarkSecond) -- (workFlowMarkThird)
-            ;
-            \draw [use path = markWorkHandle, very thick] ;
-            \filldraw [fgcol]
-            (workFlowMarkThird) circle (\markSubRadius)
-            ;
-            \draw [fgcol]
-            (workFlowMarkThird) node (workFlowMark) [left = 6pt] {
-                Typical Way of Solving a Problem
-            }
-            ;
-            \clip (workFlowTop) rectangle (current page.south east);
-            \begin{scope}
-                \filldraw [white!90!fgcol]
-                (workFlowMarkCenter) circle (\markMainInnerRadius)
-                ;
-                \draw [white!90!fgcol, very thick]
-                (workFlowMarkCenter) circle (\markMainOuterRadius)
-                ;
-                \draw [white!90!fgcol, use path = markWorkHandle, very thick] ;
-            \end{scope}
-        \end{scope}
-
-        \draw (content.south west |- workFlowMark.south west) ++(0, -0.5cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {0.45\paperwidth}
-                But what if the sheer number of questions one must ask to get to the right answer gets
-                so overwhelming?
-            \end{minipage}
-        }
-        ;
-
-        \draw (content.south west) ++(0, -0.5cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {0.45\paperwidth}
-                But before that...
-            \end{minipage}
-        }
-        ;
-
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Ways of Asking Questions
-\begin{frame}[fragile] {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay
-        ]
-        \tikzframetitleright {Ways of} {Asking Questions}
-
-        \begin{scope} [transform canvas = {xshift = 0.2cm}]
-            \begin{scope}
-                \draw
-                (current page.north) ++(-0.75, -0.75) coordinate (ifelseMarkCenter)
-                ;
-                \path [name path = ifelseHandle, rounded corners = \markCornerRadius]
-                (ifelseMarkCenter) ++(-45:\markMainOuterRadius) coordinate (ifelseMarkFirst)
-                (ifelseMarkCenter) ++(-45:(2.85cm + \markMainOuterRadius) coordinate (ifelseMarkSecond)
-                (ifelseMarkSecond) ++(1.4, 0) coordinate (ifelseMarkThird)
-                (ifelseMarkFirst) -- (ifelseMarkSecond) -- (ifelseMarkThird)
-                ;
-                \draw [use path = ifelseHandle, very thick] ;
-                \filldraw [
-                    colorLightGreen,
-                    rounded corners = 0.7cm,
-                ]
-                (current page.north west) ++(0, 0.1cm) ++(0,2) coordinate (tmpStart)
-                (current page.center) ++(0, 0.1cm) coordinate (tmpEnd)
-                (tmpStart) rectangle (tmpEnd)
-                ;
-                \filldraw [fgcol]
-                (ifelseMarkThird) circle (\markSubRadius)
-                ;
-                \draw [fgcol]
-                (ifelseMarkThird) node (ifelse) [right = 6pt] {
-                    Using If-Else Statements
-                }
-                ;
-                \clip [
-                    rounded corners = 0.7cm,
-                ]
-                (current page.north west) ++(0, 0.1cm) ++(0,2) coordinate (tmpStart)
-                (current page.center) ++(0, 0.1cm) coordinate (tmpEnd)
-                (tmpStart) rectangle (tmpEnd)
-                ;
-                \begin{scope}
-                    \filldraw [white!90!fgcol]
-                    (ifelseMarkCenter) circle (\markMainInnerRadius)
-                    ;
-                    \draw [white!90!fgcol, very thick]
-                    (ifelseMarkCenter) circle (\markMainOuterRadius)
-                    ;
-                    \draw [white!90!fgcol, use path = ifelseHandle, very thick] ;
-                \end{scope}
-            \end{scope}
-
-            % \draw [thin, step = 0.1, white, opacity = 0.40]
-            % (current page.north west) ++(-2,2) grid (current page.center)
-            % ;
-
-            \begin{scope}
-                \draw
-                (current page.south) ++(-0.75, 1.0) coordinate (matrixMarkCenter)
-                ;
-                \path [name path = matrixHandle, rounded corners = \markCornerRadius]
-                (matrixMarkCenter) ++(45:\markMainOuterRadius) coordinate (matrixMarkFirst)
-                (matrixMarkCenter) ++(45:(2.0cm + \markMainOuterRadius) coordinate (matrixMarkSecond)
-                (matrixMarkSecond) ++(1.35, 0) coordinate (matrixMarkThird)
-                (matrixMarkFirst) -- (matrixMarkSecond) -- (matrixMarkThird)
-                ;
-                \draw [use path = matrixHandle, very thick] ;
-                \filldraw [
-                    colorDarkBrown,
-                    rounded corners = 0.7cm,
-                ]
-                (current page.south west) ++(0, -0.1cm) ++(0,-2) coordinate (tmpStart)
-                (current page.center) ++(0, -0.1cm) coordinate (tmpEnd)
-                (tmpStart) rectangle (tmpEnd)
-                ;
-                \filldraw [fgcol]
-                (matrixMarkThird) circle (\markSubRadius)
-                ;
-                \draw [fgcol]
-                (matrixMarkThird) node (matrix) [right = 6pt] {
-                    Using Matrix Transformation
-                }
-                ;
-                \clip [
-                    rounded corners = 0.7cm,
-                ]
-                (current page.south west) ++(0, -0.1cm) ++(0,-2) coordinate (tmpStart)
-                (current page.center) ++(0, -0.1cm) coordinate (tmpEnd)
-                (tmpStart) rectangle (tmpEnd)
-                ;
-                \begin{scope}
-                    \filldraw [white!90!fgcol]
-                    (matrixMarkCenter) circle (\markMainInnerRadius)
-                    ;
-                    \draw [white!90!fgcol, very thick]
-                    (matrixMarkCenter) circle (\markMainOuterRadius)
-                    ;
-                    \draw [white!90!fgcol, use path = matrixHandle, very thick] ;
-                \end{scope}
-            \end{scope}
-
-            % \draw [thin, step = 0.1, white, opacity = 0.40]
-            % (current page.south west) ++(-2,-2) grid (current page.center)
-            % ;
-
-            \draw (current page.north west) ++(0.5cm, -0.5cm) coordinate (content) ;
-            \node [anchor = north west]  (content) at (content) {
-                \begin{minipage} {0.55\paperwidth}
-                    \begin{minted}[breaklines, autogobble, mathescape] {text}
-                        if this_pixel == this_color:
-                            if this_pixel is at_edge:
-                                # more and more if statements
-                        elif this_pixel == that_color:
-                            if this_pixel is in_the_middle:
-                                # many more
-                    \end{minted}
-                \end{minipage}
-            }
-            ;
-
-            \draw (current page.south west) ++(0.5cm, 0.5cm) coordinate (content) ;
-            \node [anchor = south west]  (content) at (content) {
-                \begin{minipage} {0.425\paperwidth}
-                    \centering
-                    $\begin{pNiceMatrix}
-                        c_{11} & c_{12} & c_{13} & c_{14} & \cdots & c_{1n} \\
-                        c_{21} & c_{22} & c_{23} & c_{24} & \cdots & c_{2n} \\
-                        c_{31} & c_{32} & c_{33} & c_{34} & \cdots & c_{3n} \\
-                        c_{41} & c_{42} & c_{43} & c_{44} & \cdots & c_{4n} \\
-                        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots\\
-                        c_{m1} & c_{m2} & c_{m3} & c_{m4} & \cdots & c_{mn} \\
-                    \end{pNiceMatrix}$
-                \end{minipage}
+            (current page.north west) ++(-5cm, 0)
+            node (img) [anchor = north west, inner sep = 0pt] {
+                \includegraphics[height = \paperwidth] {pics/bnet.png}
             }
             ;
 
         \end{scope}
 
-        \draw (ifelse.south east) ++(0.2cm, -0.5cm) coordinate (content) ;
-        \node [anchor = north east]  (content) at (content) {
-            \begin{minipage} {6.5cm}
-                There are several ways to ask the same question. One might be able to
-                to write an Algorithm for parsing the pixel data just by using \alert{If-Else}
-                statements.
-            \end{minipage}
-        }
-        ;
-
-        \draw (matrix.south east) ++(0.2cm, -0.5cm) coordinate (content) ;
-        \node [anchor = north east]  (content) at (content) {
-            \begin{minipage} {6.5cm}
-                Or one can directly transform input into output using a \alert{Matrix Tranformation}.
-            \end{minipage}
-        }
-        ;
-
     \end{tikzpicture}
 
-\end{frame}
-
-%% Guess Who's Good at Crunching Matrices?
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay
-        ]
-
-        \tikzframetitleright{Guess Who's} {Good at Crunching Matrices?}
-
-        \draw (0, 0)
-        coordinate (origin)
-        (current page.south west) coordinate (edge)
-        ;
-
-        \begin{scope} [
-                transform canvas = {
-                    yshift = -13,
-                    xshift = -13,
-                }
-            ]
-            \begin{scope} [
-                    transform canvas = {
-                        yshift = 0.1cm,
-                        xshift = 0.1cm,
-                    }
-                ]
-                \draw
-                (current page.north) ++(-2.0, -1.6) coordinate (cpuMarkCenter)
-                ;
-                \path [name path = cpuHandle, rounded corners = \markCornerRadius]
-                (cpuMarkCenter) ++(0:\markMainOuterRadius) coordinate (cpuMarkFirst)
-                (cpuMarkCenter) ++(0:(1.5cm + \markMainOuterRadius) coordinate (cpuMarkSecond)
-                (cpuMarkSecond) ++(-45:2.1cm) coordinate (cpuMarkThird)
-                (cpuMarkThird) ++(5, 0) coordinate (cpuMarkFourth)
-                (cpuMarkFirst) -- (cpuMarkSecond) -- (cpuMarkThird) -- (cpuMarkFourth)
-                ;
-                \draw [use path = cpuHandle, very thick] ;
-                \filldraw [fgcol]
-                (cpuMarkFourth) circle (\markSubRadius)
-                ;
-                \draw [fgcol]
-                (cpuMarkFourth) node (cpu) [right = 6pt] {
-                    CPUs
-                }
-                ;
-                \begin{scope}
-                    \clip [rotate = 45, rounded corners = 0.7cm]
-                    (edge) ++(0.25, 0.25) rectangle ++(10, 10)
-                    ;
-                    \draw
-                    (edge) ++(3.00, 0.35) coordinate (tmp)
-                    ;
-                    \node [anchor = south] (img) at (tmp) {
-                        \includegraphics[height = \paperheight]{pics/cpu.png}
-                    }
-                    ;
-                    \filldraw [white!90!fgcol]
-                    (cpuMarkCenter) circle (\markMainInnerRadius)
-                    ;
-                    \draw [white!90!fgcol, very thick]
-                    (cpuMarkCenter) circle (\markMainOuterRadius)
-                    ;
-                    \draw [white!90!fgcol, use path = cpuHandle, very thick] ;
-                \end{scope}
-
-                \draw (cpu.south east) ++(0, -0.3cm) coordinate (content) ;
-                \node [anchor = north east]  (content) at (content) {
-                    \begin{minipage} {6.0cm}
-                        \raggedleft
-                        \alert{CPUs} are much more capable at processing matrices that anyone of us, humans.
-                        % \alert{Computers}, especially \alert{GPUs} can crunch through matrices.
-                    \end{minipage}
-                }
-                ;
-            \end{scope}
-
-            \begin{scope} [
-                    transform canvas = {
-                        yshift = -0.5cm,
-                        xshift = -0.5cm,
-                    }
-                ]
-                \draw
-                (current page.south) ++(1.75, 3.25) coordinate (gpuMarkCenter)
-                ;
-                \path [name path = gpuHandle, rounded corners = \markCornerRadius]
-                (gpuMarkCenter) ++(45:\markMainOuterRadius) coordinate (gpuMarkFirst)
-                (gpuMarkCenter) ++(45:(1.0cm + \markMainOuterRadius) coordinate (gpuMarkSecond)
-                (gpuMarkSecond) ++(4.25, 0) coordinate (gpuMarkThird)
-                (gpuMarkFirst) -- (gpuMarkSecond) -- (gpuMarkThird)
-                ;
-                \draw [use path = gpuHandle, very thick] ;
-                \filldraw [fgcol]
-                (gpuMarkThird) circle (\markSubRadius)
-                ;
-                \draw [fgcol]
-                (gpuMarkThird) node (gpu) [right = 6pt] {
-                    GPUs
-                }
-                ;
-                \begin{scope}
-                    \clip [rotate = 45, rounded corners = 0.7cm]
-                    (edge) ++(0.25, -0.25) rectangle ++(10, -10)
-                    ;
-                    \draw
-                    (edge) ++(0, -0.5) coordinate (tmp)
-                    ;
-                    \node [anchor = south west] (img) at (tmp) {
-                        \includegraphics[height = 0.9\paperheight]{pics/gpu.png}
-                    }
-                    ;
-                    \filldraw [white!90!fgcol]
-                    (gpuMarkCenter) circle (\markMainInnerRadius)
-                    ;
-                    \draw [white!90!fgcol, very thick]
-                    (gpuMarkCenter) circle (\markMainOuterRadius)
-                    ;
-                    \draw [white!90!fgcol, use path = gpuHandle, very thick] ;
-                \end{scope}
-                \draw (gpu.south east) ++(0, -0.3cm) coordinate (content) ;
-                \node [anchor = north east]  (content) at (content) {
-                    \begin{minipage} {4.0cm}
-                        \raggedleft \alert{GPUs} can exploit parallelizable nature of matrix operations.
-                        % \alert{Computers}, especially \alert{GPUs} can crunch through matrices.
-                    \end{minipage}
-                }
-                ;
-            \end{scope}
-        \end{scope}
-
-    \end{tikzpicture}
-
-
-\end{frame}
-
-%% Learning to Ask Questions
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay
-        ]
-
-        \tikzframetitleleft{Learning to} {Ask Questions}
-
-        \draw (0, 0)
-        coordinate (origin)
-        (current page.north east) coordinate (edge)
-        ;
-
-        \begin{scope} [
-                transform canvas = {
-                    yshift = -0.5cm,
-                    xshift = -1.25cm,
-                }
-            ]
-            \begin{scope}
-                \clip [rotate = -45, rounded corners = 0.7cm]
-                (edge) ++(7, 6) rectangle ++(-12, -12)
-                ;
-                \draw
-                (edge) ++(-2, 0.625) coordinate (tmp)
-                ;
-                \node [anchor = north] (img) at (tmp) {
-                    \includegraphics[height = \paperheight]{pics/snetwork.png}
-                }
-                ;
-            \end{scope}
-
-        \end{scope}
-
-        \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {6.8cm}
-                We haven't addressed how we are going to know the right questions to ask about
-                a data yet.
-            \end{minipage}
-        }
-        ;
-
-        \draw (content.south west) ++(0, -0.3cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {8.1cm}
-                The \alert{coefficients / weights} in our question matrix decides the output
-                we get.
-            \end{minipage}
-        }
-        ;
-
-        \draw (content.south west) ++(0, -0.3cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {9.3cm}
-                And the game of finding these coefficients / weights is famously known under
-                the umbrella term \alert{Machine Learning}.
-            \end{minipage}
-        }
-        ;
-
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Weight of the Ever Growing Data
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay
-        ]
-        \tikzframetitleleft{Weight of} {The Ever Growing Data}
-
-        \begin{scope} [
-                rotate = 45,
-                transform canvas = {
-                    yshift = -1.1cm,
-                },
-            ]
-            \draw ($(current page.center)!0.3!(current page.east)$) coordinate (power);
-
-            \begin{scope}
-                \path [name path = mountainHandle, rounded corners = 0.7cm]
-                (power) ++(-2.5, -2.5) rectangle ++(5, 5)
-                ;
-                \clip[use path = mountainHandle] ;
-                \begin{scope}
-                    \node [anchor = center] (pixel) at (power) {
-                        \includegraphics[height = 0.75\paperheight]{pics/mountain.png}
-                    }
-                    ;
-                \end{scope}
-            \end{scope}
-
-            \draw (power) ++(5.5, 0) coordinate (power);
-
-            \begin{scope}
-                \path [name path = powerHandle, rounded corners = 0.7cm]
-                (power) ++(-2.5, -2.5) rectangle ++(5, 5)
-                ;
-                \clip[use path = powerHandle] ;
-                \begin{scope}
-                    \node [anchor = center] (pixel) at (power) {
-                        \includegraphics[height = 0.75\paperheight]{pics/power.png}
-                    }
-                    ;
-                \end{scope}
-            \end{scope}
-
-            \draw (power) ++(-5.5, -5.5) coordinate (power);
-
-            \begin{scope}
-                \path [name path = cloudHandle, rounded corners = 0.7cm]
-                (power) ++(-2.5, -2.5) rectangle ++(5, 5)
-                ;
-                \clip[use path = cloudHandle] ;
-                \begin{scope}
-                    \node [anchor = center] (pixel) at (power) {
-                        \includegraphics[height = 0.75\paperheight]{pics/cloud.png}
-                    }
-                    ;
-                \end{scope}
-            \end{scope}
-
-            % \draw (power) ++(5.5, 0) coordinate (power);
-            %
-            % \filldraw [rounded corners = 0.7cm]
-            % (power) ++(-2.5, -2.5) rectangle ++(5, 5)
-            % ;
-
-        \end{scope}
-
-        \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
-        \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {6.5cm}
-                Day by day ML Models are getting more and more capabilities.
-                So as the need for more and more powerful hardware to run these models.
-
-                This can lead to several concerns:
-
-                \begin{itemize}
-                    \item Increased Carbon Footprint.
-                    \item Reliance of Cloud Computing.
-                    \item Latency related with Cloud Computing.
-                    \item Need for powerful Hardware.
-                \end{itemize}
-
-                \alert{TinyML} is a subset of ML that is trying to address these issues.
-
-            \end{minipage}
-        }
-        ;
-
-    \end{tikzpicture}
-
-\end{frame}
-
-%% An Introduction to Tiny Machine Learning
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay
-        ]
-
-        \tikzframetitleright{An Introduction to} {Tiny Machine Learning}
-
-        \draw (frametitle.south east) ++(0, -0.3cm) coordinate (content) ;
-        \node [anchor = north east]  (content) at (content) {
-            \begin{minipage} {0.5\textwidth}
-
-                TinyML is a subset of machine learning (ML) that focuses on developing and deploying
-                ML models on resource-constrained devices such as:
-
-                \begin{itemize}
-                    \item Microcontrollers (MCUs)
-                    \item System-on-Chip (SoCs)
-                    \item FPGAs
-                \end{itemize}
-
-            \end{minipage}
-        }
-        ;
-
-        \def\picWidth{7}
-        \def\picGap{0.6cm}
-
-        \draw [
-            rounded corners = 0.7cm,
-        ]
-
-        ($(current page.center)!0.5!(current page.west)$) coordinate (picCenter)
-
-        % (picCenter) ++(-\picWidth / 2, -\picWidth / 2) rectangle ++(\picWidth, \picWidth)
-
-        (picCenter) ++(-\picWidth / 2, -\picWidth / 2)
-        coordinate (picCenterLeft)
-
-        (picCenter) ++(\picWidth / 2, \picWidth / 2)
-        coordinate (picCenterRight)
-
-        (current page.north -| picCenterLeft) ++(0, 1) coordinate (picTopLeft)
-        (current page.north -| picCenterRight) ++(0, 1) coordinate (picTopRight)
-
-        (current page.south -| picCenterLeft) ++(0, -1) coordinate (picBotLeft)
-        (current page.south -| picCenterRight) ++(0, -1) coordinate (picBotRight)
-
-        ;
-
-        \path [
-            name path = topPic,
-            rounded corners = 0.7cm,
-        ]
-        (picCenterLeft) -- (picTopLeft) -- (picTopRight) -- (picCenterRight) -- cycle
-        ;
-
-        \path [
-            name path = botPic,
-            rounded corners = 0.7cm,
-        ]
-        (picCenterLeft) -- (picBotLeft) -- (picBotRight) -- (picCenterRight) -- cycle
-        ;
-
-        \begin{scope} [
-                transform canvas = {
-                    xshift = -0.2cm,
-                    yshift = -0.2cm,
-                },
-            ]
-            \begin{scope} [
-                    transform canvas = {
-                        yshift = \picGap/2,
-                    },
-                ]
-
-                \clip [use path = topPic] ;
-
-                \draw
-                (current page.north west)
-                ++(-0.25, 0)
-                node [anchor = north west] (img) {
-                    \includegraphics[height = 0.85\paperheight]{pics/brain.png}
-                }
-                ;
-
-            \end{scope}
-
-
-            \begin{scope} [
-                    transform canvas = {
-                        yshift = -\picGap/2,
-                    },
-                ]
-
-                \clip [use path = botPic] ;
-
-                \draw
-                (current page.south west)
-                node [anchor = south west] (img) {
-                    \includegraphics[height = 0.85\paperheight]{pics/chip.png}
-                }
-                ;
-
-            \end{scope}
-
-        \end{scope}
-
-
-    \end{tikzpicture}
 \end{frame}
 
 \end{document}
