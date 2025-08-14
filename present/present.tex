@@ -1248,16 +1248,48 @@
 
 \end{frame}
 
-% %% Economically Viable
+%% Economically Viable
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleleft{Economically} {Viable}
+
+        \def\picSide{7cm}
+
+        \clip[
+            rounded corners = 0.7cm,
+        ]
+        ($(current page.center)!0.5!(current page.east)$)
+        ++(-0.75, 0)
+        coordinate (center)
+
+        (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+
+        ;
+        \draw
+        (center)
+        node [anchor = center, inner sep = 0pt] {
+            \includegraphics[height = 0.8\paperheight]{pics/renew.png}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
+% %% Low Power Consumption
 % \begin{frame} {}
-%
 %
 %     \begin{tikzpicture} [
 %             remember picture,
 %             overlay,
 %         ]
 %
-%         \tikzframetitleleft{Economically} {Viable}
+%         \tikzframetitleleft{Low} {Power Consumption}
 %
 %         \def\picSide{7cm}
 %
@@ -1271,11 +1303,10 @@
 %         (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
 %
 %         ;
-%
 %         \draw
 %         (center)
 %         node [anchor = center, inner sep = 0pt] {
-%             \includegraphics[height = 0.8\paperheight]{pics/solar_hald-clut.jpg}
+%             \includegraphics[height = 0.8\paperheight]{pics/renew.png}
 %         }
 %         ;
 %
