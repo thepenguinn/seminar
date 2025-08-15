@@ -1115,355 +1115,438 @@
 %
 %     \end{tikzpicture}
 % \end{frame}
+%
+% %% Why Even Run Machine Learning Models on Microcontrollers?
+% \begin{frame}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleright{Why Even Run} {Machine Learning Models on Microcontrollers?}
+%
+%         \filldraw
+%         ($(current page.center)!0.5!(current page.west)$) ++(3.25cm, -3.5cm) coordinate (center)
+%         ;
+%
+%         \subSquare{s1}{center}{padBotCorner} % second
+%         \subSquare{s2}{center}{padLeftCorner} % third
+%         \subSquare{s3}{center}{padRightCorner} % first
+%         \subSquare{s4}{s2-padRightCorner}{padBotCorner} % fourth
+%
+%         \drawSubSquare{colorLightGreen,}{s1}
+%         \drawSubSquare{colorLightSageGreen,}{s2}
+%         \drawSubSquare{colorLightSageGreen,}{s3}
+%         \drawSubSquare{colorLightGreen,}{s4}
+%
+%         \node [anchor = center] at (s1-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Privacy and Security
+%             \end{minipage}
+%         }
+%         ;
+%         \node [anchor = center] at (s3-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Low Power \\ Consumption
+%             \end{minipage}
+%         }
+%         ;
+%         \node [anchor = center] at (s2-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Improved \\ Latency
+%             \end{minipage}
+%         }
+%         ;
+%         \node [anchor = center] at (s4-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Economically \\ Viable
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \def\picSide{8}
+%
+%         \begin{scope} [
+%                 transform canvas = {
+%                     yshift = -0.25cm,
+%                     xshift = -2.75cm,
+%                 },
+%                 rotate = -45,
+%             ]
+%             \clip [
+%                 rounded corners = 0.7cm,
+%             ]
+%             (current page.north west)
+%             ++(0, \picSide/2)
+%             rectangle ++(\picSide, -\picSide)
+%             ;
+%
+%             \draw
+%             (current page.north west) ++(-5cm, 0)
+%             node (img) [anchor = north west, inner sep = 0pt] {
+%                 \includegraphics[height = \paperwidth] {pics/bnet.png}
+%             }
+%             ;
+%
+%         \end{scope}
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Privacy and Security
+% \begin{frame} {}
+%
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleleft{Privacy} {And Security}
+%
+%         \def\picSide{7cm}
+%
+%         \begin{scope}
+%             \clip[
+%                 rounded corners = 0.7cm,
+%             ]
+%             ($(current page.center)!0.5!(current page.east)$)
+%             ++(-0.75, 0)
+%             coordinate (center)
+%
+%             (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+%
+%             ;
+%
+%             \draw
+%             (center) ++(-0.75, 0)
+%             node [anchor = center, inner sep = 0pt] {
+%                 \includegraphics[height = 0.8\paperheight]{pics/military_base.png}
+%             }
+%             ;
+%         \end{scope}
+%
+%
+%         \draw
+%         ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
+%         coordinate (contentCenter)
+%         (frametitle.west |- contentCenter)
+%         node [anchor = west] {
+%             \begin{minipage} {0.425\textwidth}
+%
+%                 \begin{center}
+%                     ``The most secure connection is no connection at all."
+%                 \end{center}
+%
+%                 \begin{itemize}
+%                     \item That is the beauty of \alert{Edge Computing}, everything stays
+%                         locally on the device itself.
+%
+%                     \item Since the ML Model is running on
+%                         the device itself, there is no need sent anything over the wire
+%                         or air.
+%
+%                     \item This provides the most security and privacy.
+%                 \end{itemize}
+%
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Economically Viable
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleleft{Economically} {Viable}
+%
+%         \def\picSide{7cm}
+%
+%         \begin{scope}
+%             \clip[
+%                 rounded corners = 0.7cm,
+%             ]
+%             ($(current page.center)!0.5!(current page.east)$)
+%             ++(-0.75, 0)
+%             coordinate (center)
+%
+%             (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+%
+%             ;
+%             \draw
+%             (center)
+%             node [anchor = center, inner sep = 0pt] {
+%                 \includegraphics[height = 0.8\paperheight]{pics/renew.png}
+%             }
+%             ;
+%         \end{scope}
+%
+%         \draw
+%         ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
+%         coordinate (contentCenter)
+%         (frametitle.west |- contentCenter)
+%         ++(0, 0.5)
+%         node [anchor = west] {
+%             \begin{minipage} {0.425\textwidth}
+%
+%                 \begin{itemize}
+%                     \item Modern day Microcontrollers are \alert{extremely cheap}.
+%                     \item And they are literally used everywhere.
+%                     % \item So it is highly economical to use these tiny devices than
+%                     %     to use other \alert{expensive devices}.
+%                 \end{itemize}
+%
+%                 \begin{center}
+%                     \begin{tabularx} {\textwidth} {
+%                             >{\centering \arraybackslash}m{0.6\textwidth}
+%                             >{\centering \arraybackslash}X
+%                         }
+%                         \toprule
+%
+%                         Microcontroller & Price \\ \midrule
+%
+%                         ESP32 & 550 \\
+%
+%                         Arduino UNO &  570 \\
+%
+%                         Raspberry Pi Pico & 450 \\
+%
+%                         \bottomrule
+%
+%                     \end{tabularx}
+%                 \end{center}
+%
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Low Power Consumption
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleright{Low Power} {Consumption}
+%
+%         \def\picSide{7cm}
+%
+%         \begin{scope}
+%             \clip[
+%                 rounded corners = 0.7cm,
+%             ]
+%             ($(current page.center)!0.5!(current page.west)$)
+%             ++(0.75, 0)
+%             coordinate (center)
+%
+%             (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+%
+%             ;
+%             \draw
+%             (center)
+%             ++(1.25, 0)
+%             node [anchor = center, inner sep = 0pt] {
+%                 \includegraphics[height = 0.8\paperheight]{pics/battery.png}
+%             }
+%             ;
+%         \end{scope}
+%
+%         \draw
+%         ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
+%         coordinate (contentCenter)
+%         (frametitle.east |- contentCenter)
+%         ++(0, 0.5)
+%         node [anchor = east] {
+%             \begin{minipage} {0.425\textwidth}
+%
+%                 \begin{itemize}
+%                     \item Modern day Microcontrollers are \alert{extremely power efficient}.
+%                     \item While a Raspberry Pi 4 can draw around 1.5A.
+%                     % \item So it is highly economical to use these tiny devices than
+%                     %     to use other \alert{expensive devices}.
+%                 \end{itemize}
+%
+%                 \begin{center}
+%                     \begin{tabularx} {\textwidth} {
+%                             >{\centering \arraybackslash}X
+%                             >{\centering \arraybackslash}m{0.4\textwidth}
+%                         }
+%                         \toprule
+%
+%                         Microcontroller & Current Consumption \\ \midrule
+%
+%                         ESP32 & 20-60 mA \\
+%
+%                         Arduino UNO & 45-80 mA \\
+%
+%                         Raspberry Pi Pico & 18-50 mA \\
+%
+%                         \bottomrule
+%
+%                     \end{tabularx}
+%                 \end{center}
+%
+%             \end{minipage}
+%         }
+%         ;
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Improved Latency
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleright{Improved} {Latency}
+%
+%         \def\picSide{7cm}
+%
+%         \begin{scope}
+%             \clip[
+%                 rounded corners = 0.7cm,
+%             ]
+%             ($(current page.center)!0.5!(current page.west)$)
+%             ++(0.75, 0)
+%             coordinate (center)
+%
+%             (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+%
+%             ;
+%             \draw
+%             (center)
+%             ++(-1.5, 0)
+%             node [anchor = center, inner sep = 0pt] {
+%                 \includegraphics[height = 0.8\paperheight]{pics/latency.png}
+%             }
+%             ;
+%         \end{scope}
+%
+%         \draw
+%         ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
+%         coordinate (contentCenter)
+%         (frametitle.east |- contentCenter)
+%         ++(0, 0.5)
+%         node [anchor = east] {
+%             \begin{minipage} {0.425\textwidth}
+%
+%                 \begin{itemize}
+%                     \item No need for cloud processing.
+%
+%                     \item Everything is \alert{processed locally}.
+%
+%                     \item So zero network latency.
+%
+%                     \item Can be deployed to \alert{remote location}.
+%                 \end{itemize}
+%
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
 
-%% Why Even Run Machine Learning Models on Microcontrollers?
-\begin{frame}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-
-        \tikzframetitleright{Why Even Run} {Machine Learning Models on Microcontrollers?}
-
-        \filldraw
-        ($(current page.center)!0.5!(current page.west)$) ++(3.25cm, -3.5cm) coordinate (center)
-        ;
-
-        \subSquare{s1}{center}{padBotCorner} % second
-        \subSquare{s2}{center}{padLeftCorner} % third
-        \subSquare{s3}{center}{padRightCorner} % first
-        \subSquare{s4}{s2-padRightCorner}{padBotCorner} % fourth
-
-        \drawSubSquare{colorLightGreen,}{s1}
-        \drawSubSquare{colorLightSageGreen,}{s2}
-        \drawSubSquare{colorLightSageGreen,}{s3}
-        \drawSubSquare{colorLightGreen,}{s4}
-
-        \node [anchor = center] at (s1-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Privacy and Security
-            \end{minipage}
-        }
-        ;
-        \node [anchor = center] at (s3-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Low Power \\ Consumption
-            \end{minipage}
-        }
-        ;
-        \node [anchor = center] at (s2-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Improved \\ Latency
-            \end{minipage}
-        }
-        ;
-        \node [anchor = center] at (s4-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Economically \\ Viable
-            \end{minipage}
-        }
-        ;
-
-        \def\picSide{8}
-
-        \begin{scope} [
-                transform canvas = {
-                    yshift = -0.25cm,
-                    xshift = -2.75cm,
-                },
-                rotate = -45,
-            ]
-            \clip [
-                rounded corners = 0.7cm,
-            ]
-            (current page.north west)
-            ++(0, \picSide/2)
-            rectangle ++(\picSide, -\picSide)
-            ;
-
-            \draw
-            (current page.north west) ++(-5cm, 0)
-            node (img) [anchor = north west, inner sep = 0pt] {
-                \includegraphics[height = \paperwidth] {pics/bnet.png}
-            }
-            ;
-
-        \end{scope}
-
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Privacy and Security
+%% The 14 Kilo-Byte "Ok Google" ML Model
 \begin{frame} {}
 
-
     \begin{tikzpicture} [
             remember picture,
             overlay,
         ]
 
-        \tikzframetitleleft{Privacy} {And Security}
+        \tikzframetitleleft{The 14 Kilo-Byte} {``Ok Google" ML Model}
 
-        \def\picSide{7cm}
+        \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+        \node [anchor = north west]  (content) at (content) {
+            \begin{minipage} {8.0cm}
 
-        \begin{scope}
-            \clip[
-                rounded corners = 0.7cm,
-            ]
-            ($(current page.center)!0.5!(current page.east)$)
-            ++(-0.75, 0)
-            coordinate (center)
+                In 2014, Engineers at Google had to implement the ``Ok Google"
+                waking feature. But they couldn't use the main CPU for this, as
+                it was powered off to conserve battery. So they developed a
+                \alert{14 kilo-byte (KB)} neural network that ran on an embedded
+                DSPs that had only \alert{tens of kilo-bytes of memory}!
 
-            (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+                \vspace{0.5cm}
 
-            ;
+                \begin{minipage} {6.5cm}
 
-            \draw
-            (center) ++(-0.75, 0)
-            node [anchor = center, inner sep = 0pt] {
-                \includegraphics[height = 0.8\paperheight]{pics/military_base.png}
-            }
-            ;
-        \end{scope}
+                    These specialised DSPs
+                    only used \alert{few milliwatts (mW) of power}.
 
-
-        \draw
-        ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
-        coordinate (contentCenter)
-        (frametitle.west |- contentCenter)
-        node [anchor = west] {
-            \begin{minipage} {0.425\textwidth}
-
-                \begin{center}
-                    ``The most secure connection is no connection at all."
-                \end{center}
-
-                \begin{itemize}
-                    \item That is the beauty of \alert{Edge Computing}, everything stays
-                        locally on the device itself.
-
-                    \item Since the ML Model is running on
-                        the device itself, there is no need sent anything over the wire
-                        or air.
-
-                    \item This provides the most security and privacy.
-                \end{itemize}
-
+                \end{minipage}
             \end{minipage}
+
         }
         ;
 
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Economically Viable
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-
-        \tikzframetitleleft{Economically} {Viable}
-
-        \def\picSide{7cm}
-
-        \begin{scope}
-            \clip[
-                rounded corners = 0.7cm,
-            ]
-            ($(current page.center)!0.5!(current page.east)$)
-            ++(-0.75, 0)
-            coordinate (center)
-
-            (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
-
-            ;
-            \draw
-            (center)
-            node [anchor = center, inner sep = 0pt] {
-                \includegraphics[height = 0.8\paperheight]{pics/renew.png}
-            }
-            ;
-        \end{scope}
-
-        \draw
-        ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
-        coordinate (contentCenter)
-        (frametitle.west |- contentCenter)
-        ++(0, 0.5)
-        node [anchor = west] {
-            \begin{minipage} {0.425\textwidth}
-
-                \begin{itemize}
-                    \item Modern day Microcontrollers are \alert{extremely cheap}.
-                    \item And they are literally used everywhere.
-                    % \item So it is highly economical to use these tiny devices than
-                    %     to use other \alert{expensive devices}.
-                \end{itemize}
-
-                \begin{center}
-                    \begin{tabularx} {\textwidth} {
-                            >{\centering \arraybackslash}m{0.6\textwidth}
-                            >{\centering \arraybackslash}X
-                        }
-                        \toprule
-
-                        Microcontroller & Price \\ \midrule
-
-                        ESP32 & 550 \\
-
-                        Arduino UNO &  570 \\
-
-                        Raspberry Pi Pico & 450 \\
-
-                        \bottomrule
-
-                    \end{tabularx}
-                \end{center}
-
-            \end{minipage}
-        }
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.east) ++(1, 0) coordinate (edge)
         ;
 
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Low Power Consumption
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-
-        \tikzframetitleright{Low Power} {Consumption}
-
-        \def\picSide{7cm}
-
         \begin{scope}
-            \clip[
-                rounded corners = 0.7cm,
+
+            \draw [
+                name path = contentHandle,
             ]
-            ($(current page.center)!0.5!(current page.west)$)
-            ++(0.75, 0)
-            coordinate (center)
-
-            (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
-
+            (content.south) ++(-2.75, -0.3) coordinate (contentMarkEnd)
+            (contentMarkEnd) ++(-45:1) coordinate (contentMarkThird)
+            (contentMarkThird) ++(7.5, 0) coordinate (contentMarkSecond)
+            (contentMarkSecond) ++(45:1) coordinate (contentMarkFirst)
+            (contentMarkFirst) ++(45:\markMainOuterRadius) coordinate (contentMarkCenter)
+            (contentMarkFirst) -- (contentMarkSecond) -- (contentMarkThird) -- (contentMarkEnd)
             ;
-            \draw
-            (center)
-            ++(1.25, 0)
-            node [anchor = center, inner sep = 0pt] {
-                \includegraphics[height = 0.8\paperheight]{pics/battery.png}
-            }
+
+            \draw [use path = contentHandle, very thick] ;
             ;
+            \filldraw [fgcol]
+            (contentMarkEnd) circle (\markSubRadius)
+            ;
+
+            \clip [rotate = 45, rounded corners = 0.7cm]
+            (edge) ++(-10, -15) rectangle ++(20, 20)
+            ;
+
+            \begin{scope}
+                \draw
+                (edge) ++(5, 0)
+                node [anchor = east] (img) {
+                    \includegraphics[height = \paperheight]{pics/phone.png}
+                }
+                ;
+
+                \filldraw [white!90!fgcol]
+                (contentMarkCenter) circle (\markMainInnerRadius)
+                ;
+                \draw [white!90!fgcol, very thick]
+                (contentMarkCenter) circle (\markMainOuterRadius)
+                ;
+                \draw [use path = contentHandle, white!90!fgcol, very thick] ;
+            \end{scope}
         \end{scope}
-
-        \draw
-        ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
-        coordinate (contentCenter)
-        (frametitle.east |- contentCenter)
-        ++(0, 0.5)
-        node [anchor = east] {
-            \begin{minipage} {0.425\textwidth}
-
-                \begin{itemize}
-                    \item Modern day Microcontrollers are \alert{extremely power efficient}.
-                    \item While a Raspberry Pi 4 can draw around 1.5A.
-                    % \item So it is highly economical to use these tiny devices than
-                    %     to use other \alert{expensive devices}.
-                \end{itemize}
-
-                \begin{center}
-                    \begin{tabularx} {\textwidth} {
-                            >{\centering \arraybackslash}X
-                            >{\centering \arraybackslash}m{0.4\textwidth}
-                        }
-                        \toprule
-
-                        Microcontroller & Current Consumption \\ \midrule
-
-                        ESP32 & 20-60 mA \\
-
-                        Arduino UNO & 45-80 mA \\
-
-                        Raspberry Pi Pico & 18-50 mA \\
-
-                        \bottomrule
-
-                    \end{tabularx}
-                \end{center}
-
-            \end{minipage}
-        }
-        ;
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Improved Latency
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-
-        \tikzframetitleright{Improved} {Latency}
-
-        \def\picSide{7cm}
-
-        \begin{scope}
-            \clip[
-                rounded corners = 0.7cm,
-            ]
-            ($(current page.center)!0.5!(current page.west)$)
-            ++(0.75, 0)
-            coordinate (center)
-
-            (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
-
-            ;
-            \draw
-            (center)
-            ++(-1.5, 0)
-            node [anchor = center, inner sep = 0pt] {
-                \includegraphics[height = 0.8\paperheight]{pics/latency.png}
-            }
-            ;
-        \end{scope}
-
-        \draw
-        ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
-        coordinate (contentCenter)
-        (frametitle.east |- contentCenter)
-        ++(0, 0.5)
-        node [anchor = east] {
-            \begin{minipage} {0.425\textwidth}
-
-                \begin{itemize}
-                    \item No need for cloud processing.
-
-                    \item Everything is \alert{processed locally}.
-
-                    \item So zero network latency.
-
-                    \item Can be deployed to \alert{remote location}.
-                \end{itemize}
-
-            \end{minipage}
-        }
-        ;
 
     \end{tikzpicture}
 
