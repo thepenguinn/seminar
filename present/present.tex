@@ -23,6 +23,9 @@
 \usepackage{minted}
 \usepackage{nicematrix}
 \usepackage{framed}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{multicol}
 
 \usetikzlibrary{calc}
 \usetikzlibrary{intersections,decorations.markings}
@@ -30,6 +33,8 @@
 \usepackage{subtikzpicture}
 
 \usemintedstyle{dracula}
+
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
 
 \makeatletter
 \tikzset{
@@ -183,6 +188,19 @@
     \draw (current page.north west) ++(0.75cm, -0.75cm) coordinate (frametitle) ;
     \node [anchor = north west] (frametitle) at (frametitle) {
         \begin{minipage} {9cm}
+            \bfseries
+            \setstretch{0.75}
+            \huge
+            {\Large #1} \\ #2
+        \end{minipage}
+    }
+    ;
+}
+
+\newcommand\tikzframetitlelongleft[2] {
+    \draw (current page.north west) ++(0.75cm, -0.75cm) coordinate (frametitle) ;
+    \node [anchor = north west] (frametitle) at (frametitle) {
+        \begin{minipage} {10cm}
             \bfseries
             \setstretch{0.75}
             \huge
@@ -1468,8 +1486,91 @@
 %     \end{tikzpicture}
 %
 % \end{frame}
+%
+% %% The 14 Kilo-Byte "Ok Google" ML Model
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleleft{The 14 Kilo-Byte} {``Ok Google" ML Model}
+%
+%         \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+%         \node [anchor = north west]  (content) at (content) {
+%             \begin{minipage} {8.0cm}
+%
+%                 In 2014, Engineers at Google had to implement the ``Ok Google"
+%                 waking feature. But they couldn't use the main CPU for this, as
+%                 it was powered off to conserve battery. So they developed a
+%                 \alert{14 kilo-byte (KB)} neural network that ran on an embedded
+%                 DSPs that had only \alert{tens of kilo-bytes of memory}!
+%
+%                 \vspace{0.5cm}
+%
+%                 \begin{minipage} {6.5cm}
+%
+%                     These specialised DSPs
+%                     only used \alert{few milliwatts (mW) of power}.
+%
+%                 \end{minipage}
+%             \end{minipage}
+%
+%         }
+%         ;
+%
+%         \draw (0, 0)
+%         coordinate (origin)
+%         (current page.east) ++(1, 0) coordinate (edge)
+%         ;
+%
+%         \begin{scope}
+%
+%             \draw [
+%                 name path = contentHandle,
+%             ]
+%             (content.south) ++(-2.75, -0.3) coordinate (contentMarkEnd)
+%             (contentMarkEnd) ++(-45:1) coordinate (contentMarkThird)
+%             (contentMarkThird) ++(7.5, 0) coordinate (contentMarkSecond)
+%             (contentMarkSecond) ++(45:1) coordinate (contentMarkFirst)
+%             (contentMarkFirst) ++(45:\markMainOuterRadius) coordinate (contentMarkCenter)
+%             (contentMarkFirst) -- (contentMarkSecond) -- (contentMarkThird) -- (contentMarkEnd)
+%             ;
+%
+%             \draw [use path = contentHandle, very thick] ;
+%             ;
+%             \filldraw [fgcol]
+%             (contentMarkEnd) circle (\markSubRadius)
+%             ;
+%
+%             \clip [rotate = 45, rounded corners = 0.7cm]
+%             (edge) ++(-10, -15) rectangle ++(20, 20)
+%             ;
+%
+%             \begin{scope}
+%                 \draw
+%                 (edge) ++(5, 0)
+%                 node [anchor = east] (img) {
+%                     \includegraphics[height = \paperheight]{pics/phone.png}
+%                 }
+%                 ;
+%
+%                 \filldraw [white!90!fgcol]
+%                 (contentMarkCenter) circle (\markMainInnerRadius)
+%                 ;
+%                 \draw [white!90!fgcol, very thick]
+%                 (contentMarkCenter) circle (\markMainOuterRadius)
+%                 ;
+%                 \draw [use path = contentHandle, white!90!fgcol, very thick] ;
+%             \end{scope}
+%         \end{scope}
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
 
-%% The 14 Kilo-Byte "Ok Google" ML Model
+%% Comparing Modern Day Microcontrollers
 \begin{frame} {}
 
     \begin{tikzpicture} [
@@ -1477,76 +1578,47 @@
             overlay,
         ]
 
-        \tikzframetitleleft{The 14 Kilo-Byte} {``Ok Google" ML Model}
+        \tikzframetitlelongleft{Comparing}{Modern Day Microcontrollers}
 
-        \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+        \draw (frametitle.south west) ++(0, -0.1cm) coordinate (content) ;
         \node [anchor = north west]  (content) at (content) {
-            \begin{minipage} {8.0cm}
+            \begin{minipage} {\textwidth}
 
-                In 2014, Engineers at Google had to implement the ``Ok Google"
-                waking feature. But they couldn't use the main CPU for this, as
-                it was powered off to conserve battery. So they developed a
-                \alert{14 kilo-byte (KB)} neural network that ran on an embedded
-                DSPs that had only \alert{tens of kilo-bytes of memory}!
+                \centering
 
-                \vspace{0.5cm}
+                \begin{tabularx} {\textwidth} {
+                        >{\centering \arraybackslash}X
+                        >{\centering \arraybackslash}X
+                        >{\centering \arraybackslash}X
+                        >{\centering \arraybackslash}X
+                        >{\centering \arraybackslash}X
+                    }
 
-                \begin{minipage} {6.5cm}
+                    \toprule
 
-                    These specialised DSPs
-                    only used \alert{few milliwatts (mW) of power}.
+                    \multicolumn{2}{c}{Microcontroller} & Program / Flash Memory & CPU Clock Speed & RAM Available \\
+                    \midrule
 
-                \end{minipage}
+                    % \includegraphics[height = 2cm]{pics/esp.png} & \multirow{2}{*}{4 MB} & \multirow{2}{*}{240 MHz} & \multirow{2}{*}{520 KB} \\
+                    ESP32 & \includegraphics[height = 1.3cm]{pics/esp.png} & 4 MB & 240 MHz & 520 KB \\
+                    \midrule
+
+                    % \includegraphics[height = 2cm]{pics/arduino.png} & \multirow{2}{*}{32 KB} & \multirow{2}{*}{16 MHz} & \multirow{2}{*}{2 KB} \\
+                    Arduino UNO & \includegraphics[height = 1.3cm]{pics/arduino.png} & 32 KB & 16 MHz & 2 KB \\
+                    \midrule
+
+                    % \includegraphics[height = 2cm]{pics/pico.png} & \multirow{2}{*}{2 MB} & \multirow{2}{*}{125 MHz} & \multirow{2}{*}{264 KB} \\
+                    Raspberry Pi Pico & \includegraphics[height = 1.3cm]{pics/pico.png} & 2 MB & 125 MHz & 264 KB \\
+
+                    \bottomrule
+
+                \end{tabularx}
+
+
             \end{minipage}
 
         }
         ;
-
-        \draw (0, 0)
-        coordinate (origin)
-        (current page.east) ++(1, 0) coordinate (edge)
-        ;
-
-        \begin{scope}
-
-            \draw [
-                name path = contentHandle,
-            ]
-            (content.south) ++(-2.75, -0.3) coordinate (contentMarkEnd)
-            (contentMarkEnd) ++(-45:1) coordinate (contentMarkThird)
-            (contentMarkThird) ++(7.5, 0) coordinate (contentMarkSecond)
-            (contentMarkSecond) ++(45:1) coordinate (contentMarkFirst)
-            (contentMarkFirst) ++(45:\markMainOuterRadius) coordinate (contentMarkCenter)
-            (contentMarkFirst) -- (contentMarkSecond) -- (contentMarkThird) -- (contentMarkEnd)
-            ;
-
-            \draw [use path = contentHandle, very thick] ;
-            ;
-            \filldraw [fgcol]
-            (contentMarkEnd) circle (\markSubRadius)
-            ;
-
-            \clip [rotate = 45, rounded corners = 0.7cm]
-            (edge) ++(-10, -15) rectangle ++(20, 20)
-            ;
-
-            \begin{scope}
-                \draw
-                (edge) ++(5, 0)
-                node [anchor = east] (img) {
-                    \includegraphics[height = \paperheight]{pics/phone.png}
-                }
-                ;
-
-                \filldraw [white!90!fgcol]
-                (contentMarkCenter) circle (\markMainInnerRadius)
-                ;
-                \draw [white!90!fgcol, very thick]
-                (contentMarkCenter) circle (\markMainOuterRadius)
-                ;
-                \draw [use path = contentHandle, white!90!fgcol, very thick] ;
-            \end{scope}
-        \end{scope}
 
     \end{tikzpicture}
 
