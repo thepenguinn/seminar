@@ -30,6 +30,9 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{intersections,decorations.markings}
 
+\usetikzlibrary{positioning}
+\usetikzlibrary{ext.topaths.arcthrough}
+
 \usepackage{subtikzpicture}
 
 \usemintedstyle{dracula}
@@ -305,7 +308,6 @@
 
 %% Making Sense of Data
 \begin{frame} {}
-
     \begin{tikzpicture} [
             remember picture,
             overlay,
@@ -1633,6 +1635,111 @@
         ]
 
         \tikzframetitleright{With Great Power} {Comes Great Responsibility}
+
+        \draw
+        ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
+        coordinate (contentCenter)
+        (frametitle.east |- contentCenter)
+        ++(0, 0.5)
+        node [anchor = east] {
+            \begin{minipage} {0.575\textwidth}
+
+                Just as TinyML has its advantages, it has its disadvantages.
+
+                \begin{itemize}
+
+                    \item The ML model is \alert{compressed} using various techniques to fit into the
+                        \alert{constrains} of the microcontroller.
+
+                    \item The compressed ML model will be \alert{low fidelity} one.
+
+                    \item The low fidelity model \alert{may} or \alert{may not} be applicable for the
+                        given task.
+
+                    \item Sometimes we need \alert{cascade} different models having different fidelity.
+
+                \end{itemize}
+
+            \end{minipage}
+        }
+        ;
+
+        \draw
+        ($(current page.center)!0.5!(current page.west)$) ++(-0.25, -4.95cm) coordinate (center)
+        ;
+
+        \def\stageGap{0.2}
+        \def\stageHeight{2.30}
+        \def\baseLen{8}
+        \def\stageDec{0.5}
+
+        \foreach \x in {7,6,5} {
+            \def\baseLen{\x}
+            \filldraw [
+                rounded corners = 0.7cm,
+            ]
+            (center) ++(-\baseLen / 2, 0) coordinate (bl)
+            ++(\baseLen, 0) coordinate (br)
+            ++(-\stageDec, \stageHeight) coordinate (tr)
+            ++({(2 * \stageDec) - \baseLen}, 0) coordinate (tl)
+
+            (center) ++(0, \stageHeight / 2) coordinate (center-\x)
+            (bl) -- (br) -- (tr) -- (tl) -- cycle
+            ;
+            \draw
+            (center)
+            (center) ++(0, \stageHeight + \stageGap) coordinate (center)
+            ;
+
+        }
+
+        \node [white, anchor = center] at (center-7) {
+            \begin{minipage} {0.5\textwidth}
+                \centering
+                Low Fidelity ML Model \\
+                (Always running.)
+            \end{minipage}
+        }
+        ;
+
+        \node [white, anchor = center] at (center-6) {
+            \begin{minipage} {0.5\textwidth}
+                \centering
+                Higher Fidelity ML Model \\
+                (Triggered from below.)
+            \end{minipage}
+        }
+        ;
+
+        \node [white, anchor = center] at (center-5) {
+            \begin{minipage} {0.5\textwidth}
+                \centering
+                Main CPU \\
+                (Triggered from below.)
+            \end{minipage}
+        }
+        ;
+
+        \def\baseLen{4}
+        \def\stageDec{1.5}
+
+        \filldraw [
+            rounded corners = 0.7cm,
+        ]
+        (center) ++(-\baseLen / 2, 0) coordinate (bl)
+        ++(\baseLen, 0) coordinate (br)
+        ++(\stageDec, \stageHeight) coordinate (tr)
+        ++({-(2 * \stageDec) - \baseLen}, 0) coordinate (tl)
+
+        (center) ++(0, \stageHeight / 2) coordinate (center-title)
+        (bl) -- (br) -- (tr) -- (tl) -- cycle
+        ;
+
+        \draw [white]
+        (center-title) node [anchor = center] {
+            \large Cascading ML Models
+        }
+        ;
 
     \end{tikzpicture}
 
