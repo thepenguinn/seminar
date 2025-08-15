@@ -1349,24 +1349,64 @@
 
         \def\picSide{7cm}
 
-        \clip[
-            rounded corners = 0.7cm,
-        ]
-        ($(current page.center)!0.5!(current page.west)$)
-        ++(0.75, 0)
-        coordinate (center)
+        \begin{scope}
+            \clip[
+                rounded corners = 0.7cm,
+            ]
+            ($(current page.center)!0.5!(current page.west)$)
+            ++(0.75, 0)
+            coordinate (center)
 
-        (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+            (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
 
-        ;
+            ;
+            \draw
+            (center)
+            ++(1.25, 0)
+            node [anchor = center, inner sep = 0pt] {
+                \includegraphics[height = 0.8\paperheight]{pics/battery.png}
+            }
+            ;
+        \end{scope}
+
         \draw
-        (center)
-        ++(1.25, 0)
-        node [anchor = center, inner sep = 0pt] {
-            \includegraphics[height = 0.8\paperheight]{pics/battery.png}
+        ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
+        coordinate (contentCenter)
+        (frametitle.east |- contentCenter)
+        ++(0, 0.5)
+        node [anchor = east] {
+            \begin{minipage} {0.425\textwidth}
+
+                \begin{itemize}
+                    \item Modern day Microcontrollers are \alert{extremely power efficient}.
+                    \item While a Raspberry Pi 4 can draw around 1.5A.
+                    % \item So it is highly economical to use these tiny devices than
+                    %     to use other \alert{expensive devices}.
+                \end{itemize}
+
+                \begin{center}
+                    \begin{tabularx} {\textwidth} {
+                            >{\centering \arraybackslash}X
+                            >{\centering \arraybackslash}m{0.4\textwidth}
+                        }
+                        \toprule
+
+                        Microcontroller & Current Consumption \\ \midrule
+
+                        ESP32 & 20-60 mA \\
+
+                        Arduino UNO & 45-80 mA \\
+
+                        Raspberry Pi Pico & 18-50 mA \\
+
+                        \bottomrule
+
+                    \end{tabularx}
+                \end{center}
+
+            \end{minipage}
         }
         ;
-
     \end{tikzpicture}
 
 \end{frame}
