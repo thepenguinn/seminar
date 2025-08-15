@@ -1280,8 +1280,42 @@
 %     \end{tikzpicture}
 %
 % \end{frame}
+%
+% %% Low Power Consumption
+% \begin{frame} {}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleright{Low Power} {Consumption}
+%
+%         \def\picSide{7cm}
+%
+%         \clip[
+%             rounded corners = 0.7cm,
+%         ]
+%         ($(current page.center)!0.5!(current page.west)$)
+%         ++(0.75, 0)
+%         coordinate (center)
+%
+%         (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+%
+%         ;
+%         \draw
+%         (center)
+%         ++(1.25, 0)
+%         node [anchor = center, inner sep = 0pt] {
+%             \includegraphics[height = 0.8\paperheight]{pics/battery.png}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
 
-%% Low Power Consumption
+%% Improved Latency
 \begin{frame} {}
 
     \begin{tikzpicture} [
@@ -1289,7 +1323,7 @@
             overlay,
         ]
 
-        \tikzframetitleright{Low Power} {Consumption}
+        \tikzframetitleright{Improved} {Latency}
 
         \def\picSide{7cm}
 
@@ -1305,9 +1339,9 @@
         ;
         \draw
         (center)
-        ++(1.25, 0)
+        ++(-1.5, 0)
         node [anchor = center, inner sep = 0pt] {
-            \includegraphics[height = 0.8\paperheight]{pics/battery.png}
+            \includegraphics[height = 0.8\paperheight]{pics/latency.png}
         }
         ;
 
