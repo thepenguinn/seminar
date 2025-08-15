@@ -1100,188 +1100,155 @@
 %
 %     \end{tikzpicture}
 % \end{frame}
-
-%% Why Even Run Machine Learning Models on Microcontrollers?
-\begin{frame}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-
-        \tikzframetitleright{Why Even Run} {Machine Learning Models on Microcontrollers?}
-
-        \filldraw
-        ($(current page.center)!0.5!(current page.west)$) ++(3.25cm, -3.5cm) coordinate (center)
-        ;
-
-        \subSquare{s1}{center}{padBotCorner} % second
-        \subSquare{s2}{center}{padLeftCorner} % third
-        \subSquare{s3}{center}{padRightCorner} % first
-        \subSquare{s4}{s2-padRightCorner}{padBotCorner} % fourth
-
-        \drawSubSquare{colorLightGreen,}{s1}
-        \drawSubSquare{colorLightSageGreen,}{s2}
-        \drawSubSquare{colorLightSageGreen,}{s3}
-        \drawSubSquare{colorLightGreen,}{s4}
-
-        \node [anchor = center] at (s1-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Privacy and Security
-            \end{minipage}
-        }
-        ;
-        \node [anchor = center] at (s3-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Low Power \\ Consumption
-            \end{minipage}
-        }
-        ;
-        \node [anchor = center] at (s2-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Improved \\ Latency
-            \end{minipage}
-        }
-        ;
-        \node [anchor = center] at (s4-center) {
-            \begin{minipage} {\squareSide}
-                \centering
-                \large Economically \\ Viable
-            \end{minipage}
-        }
-        ;
-
-        \def\picSide{8}
-
-        \begin{scope} [
-                transform canvas = {
-                    yshift = -0.25cm,
-                    xshift = -2.75cm,
-                },
-                rotate = -45,
-            ]
-            \clip [
-                rounded corners = 0.7cm,
-            ]
-            (current page.north west)
-            ++(0, \picSide/2)
-            rectangle ++(\picSide, -\picSide)
-            ;
-
-            \draw
-            (current page.north west) ++(-5cm, 0)
-            node (img) [anchor = north west, inner sep = 0pt] {
-                \includegraphics[height = \paperwidth] {pics/bnet.png}
-            }
-            ;
-
-        \end{scope}
-
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Privacy and Security
-\begin{frame} {}
-
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-
-        \tikzframetitleleft{Privacy} {And Security}
-
-        \def\picSide{7cm}
-
-        \begin{scope}
-            \clip[
-                rounded corners = 0.7cm,
-            ]
-            ($(current page.center)!0.5!(current page.east)$)
-            ++(-0.75, 0)
-            coordinate (center)
-
-            (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
-
-            ;
-
-            \draw
-            (center) ++(-0.75, 0)
-            node [anchor = center, inner sep = 0pt] {
-                \includegraphics[height = 0.8\paperheight]{pics/military_base.png}
-            }
-            ;
-        \end{scope}
-
-
-        \draw
-        ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
-        coordinate (contentCenter)
-        (frametitle.west |- contentCenter)
-        node [anchor = west] {
-            \begin{minipage} {0.425\textwidth}
-
-                \begin{center}
-                    ``The most secure connection is no connection at all."
-                \end{center}
-
-                \begin{itemize}
-                    \item That is the beauty of \alert{Edge Computing}, everything stays
-                        locally on the device itself.
-
-                    \item Since the ML Model is running on
-                        the device itself, there is no need sent anything over the wire
-                        or air.
-
-                    \item This provides the most security and privacy.
-                \end{itemize}
-
-            \end{minipage}
-        }
-        ;
-
-    \end{tikzpicture}
-
-\end{frame}
-
-%% Economically Viable
-\begin{frame} {}
-
-    \begin{tikzpicture} [
-            remember picture,
-            overlay,
-        ]
-
-        \tikzframetitleleft{Economically} {Viable}
-
-        \def\picSide{7cm}
-
-        \clip[
-            rounded corners = 0.7cm,
-        ]
-        ($(current page.center)!0.5!(current page.east)$)
-        ++(-0.75, 0)
-        coordinate (center)
-
-        (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
-
-        ;
-        \draw
-        (center)
-        node [anchor = center, inner sep = 0pt] {
-            \includegraphics[height = 0.8\paperheight]{pics/renew.png}
-        }
-        ;
-
-    \end{tikzpicture}
-
-\end{frame}
-
-% %% Low Power Consumption
+%
+% %% Why Even Run Machine Learning Models on Microcontrollers?
+% \begin{frame}
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleright{Why Even Run} {Machine Learning Models on Microcontrollers?}
+%
+%         \filldraw
+%         ($(current page.center)!0.5!(current page.west)$) ++(3.25cm, -3.5cm) coordinate (center)
+%         ;
+%
+%         \subSquare{s1}{center}{padBotCorner} % second
+%         \subSquare{s2}{center}{padLeftCorner} % third
+%         \subSquare{s3}{center}{padRightCorner} % first
+%         \subSquare{s4}{s2-padRightCorner}{padBotCorner} % fourth
+%
+%         \drawSubSquare{colorLightGreen,}{s1}
+%         \drawSubSquare{colorLightSageGreen,}{s2}
+%         \drawSubSquare{colorLightSageGreen,}{s3}
+%         \drawSubSquare{colorLightGreen,}{s4}
+%
+%         \node [anchor = center] at (s1-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Privacy and Security
+%             \end{minipage}
+%         }
+%         ;
+%         \node [anchor = center] at (s3-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Low Power \\ Consumption
+%             \end{minipage}
+%         }
+%         ;
+%         \node [anchor = center] at (s2-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Improved \\ Latency
+%             \end{minipage}
+%         }
+%         ;
+%         \node [anchor = center] at (s4-center) {
+%             \begin{minipage} {\squareSide}
+%                 \centering
+%                 \large Economically \\ Viable
+%             \end{minipage}
+%         }
+%         ;
+%
+%         \def\picSide{8}
+%
+%         \begin{scope} [
+%                 transform canvas = {
+%                     yshift = -0.25cm,
+%                     xshift = -2.75cm,
+%                 },
+%                 rotate = -45,
+%             ]
+%             \clip [
+%                 rounded corners = 0.7cm,
+%             ]
+%             (current page.north west)
+%             ++(0, \picSide/2)
+%             rectangle ++(\picSide, -\picSide)
+%             ;
+%
+%             \draw
+%             (current page.north west) ++(-5cm, 0)
+%             node (img) [anchor = north west, inner sep = 0pt] {
+%                 \includegraphics[height = \paperwidth] {pics/bnet.png}
+%             }
+%             ;
+%
+%         \end{scope}
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Privacy and Security
+% \begin{frame} {}
+%
+%
+%     \begin{tikzpicture} [
+%             remember picture,
+%             overlay,
+%         ]
+%
+%         \tikzframetitleleft{Privacy} {And Security}
+%
+%         \def\picSide{7cm}
+%
+%         \begin{scope}
+%             \clip[
+%                 rounded corners = 0.7cm,
+%             ]
+%             ($(current page.center)!0.5!(current page.east)$)
+%             ++(-0.75, 0)
+%             coordinate (center)
+%
+%             (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+%
+%             ;
+%
+%             \draw
+%             (center) ++(-0.75, 0)
+%             node [anchor = center, inner sep = 0pt] {
+%                 \includegraphics[height = 0.8\paperheight]{pics/military_base.png}
+%             }
+%             ;
+%         \end{scope}
+%
+%
+%         \draw
+%         ($(current page.south)!0.5!(current page.south |- frametitle.south)$)
+%         coordinate (contentCenter)
+%         (frametitle.west |- contentCenter)
+%         node [anchor = west] {
+%             \begin{minipage} {0.425\textwidth}
+%
+%                 \begin{center}
+%                     ``The most secure connection is no connection at all."
+%                 \end{center}
+%
+%                 \begin{itemize}
+%                     \item That is the beauty of \alert{Edge Computing}, everything stays
+%                         locally on the device itself.
+%
+%                     \item Since the ML Model is running on
+%                         the device itself, there is no need sent anything over the wire
+%                         or air.
+%
+%                     \item This provides the most security and privacy.
+%                 \end{itemize}
+%
+%             \end{minipage}
+%         }
+%         ;
+%
+%     \end{tikzpicture}
+%
+% \end{frame}
+%
+% %% Economically Viable
 % \begin{frame} {}
 %
 %     \begin{tikzpicture} [
@@ -1289,7 +1256,7 @@
 %             overlay,
 %         ]
 %
-%         \tikzframetitleleft{Low} {Power Consumption}
+%         \tikzframetitleleft{Economically} {Viable}
 %
 %         \def\picSide{7cm}
 %
@@ -1313,5 +1280,39 @@
 %     \end{tikzpicture}
 %
 % \end{frame}
+
+%% Low Power Consumption
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleright{Low Power} {Consumption}
+
+        \def\picSide{7cm}
+
+        \clip[
+            rounded corners = 0.7cm,
+        ]
+        ($(current page.center)!0.5!(current page.west)$)
+        ++(0.75, 0)
+        coordinate (center)
+
+        (center) ++(-\picSide/2, -\picSide/2) rectangle ++(\picSide, \picSide)
+
+        ;
+        \draw
+        (center)
+        ++(1.25, 0)
+        node [anchor = center, inner sep = 0pt] {
+            \includegraphics[height = 0.8\paperheight]{pics/battery.png}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
 
 \end{document}
