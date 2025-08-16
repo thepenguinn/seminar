@@ -156,27 +156,27 @@ Model Deployment: Using Hardware Distillation
 
 ### 06 Weight of the Ever Growing Data: DRAFTED
 
+### 07 An Introduction to Tiny Machine Learning: DRAFTED
+
+### 08 Why Even Run ML on Microcontrollers?: DRAFTED
+
+### 09 Privacy and Security: DRAFTED
+
+### 10 Economically Viable: DRAFTED
+
+### 11 Low Power Consumption: DRAFTED
+
+### 12 Improved Latency: DRAFTED
+
+### 13 The 14kb "Ok Google" Model: DRAFTED
+
+### 14 Comparing Modern Day Microcontrollers: DRAFTED
+
+### 15 With Great Power Comes Great Responsibility: DRAFTED
+
+### 16 The Essence of Running ML on Microcontrollers: DRAFTED
+
 ---
-
-### 07 An Introduction to Tiny Machine Learning
-
-### 08 Why Even Run ML on Microcontrollers?
-
-### 09 Low Power Consumption:
-
-### 10 Privacy:
-
-### 11 Improved Latency:
-
-### 12 Economically Viable:
-
-### 13 The 14kb "Ok Google" Model
-
-### 14 Comparing Modern Day Microcontrollers
-
-### 15 With Great Power Comes Great Responsibility
-
-### 16 The Magic Sauce of TinyML
 
 ### 17 Quantization:
 
