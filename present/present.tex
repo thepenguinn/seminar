@@ -1,79 +1,11 @@
 \documentclass{beamer}
 
-% \input{../preamble.tex}
-
-% \usepackage{minted}
-
 \usepackage[size=custom,width=16,height=9,scale=0.4]{beamerposter}
 % \usepackage[size=custom, width=12.8, height=9.6, scale=0.4]{beamerposter}
 
-\usepackage[T1]{fontenc}
-\usepackage{tcolorbox}
-\usepackage{graphicx}
-\usepackage{lmodern}
-\usepackage{tabularx}
-\usepackage{tikz}
-\usepackage{blindtext}
-\usepackage{svg}
+\input{preamble.tex}
+
 \usepackage{fontspec}
-\usepackage{booktabs}
-\usepackage[style = ieee]{biblatex}
-\usepackage{blindtext}
-\usepackage{setspace}
-\usepackage{minted}
-\usepackage{nicematrix}
-\usepackage{framed}
-\usepackage{colortbl}
-\usepackage{multirow}
-\usepackage{multicol}
-
-\usetikzlibrary{calc}
-\usetikzlibrary{intersections,decorations.markings}
-
-\usetikzlibrary{positioning}
-\usetikzlibrary{ext.topaths.arcthrough}
-
-\usepackage{subtikzpicture}
-
-\usemintedstyle{dracula}
-
-\renewcommand{\tabularxcolumn}[1]{m{#1}}
-
-\makeatletter
-\tikzset{
-  use path for main/.code={%
-    \tikz@addmode{%
-      \expandafter\pgfsyssoftpath@setcurrentpath\csname tikz@intersect@path@name@#1\endcsname
-    }%
-  },
-  use path for actions/.code={%
-    \expandafter\def\expandafter\tikz@preactions\expandafter{\tikz@preactions\expandafter\let\expandafter\tikz@actions@path\csname tikz@intersect@path@name@#1\endcsname}%
-  },
-  use path/.style={%
-    use path for main=#1,
-    use path for actions=#1,
-  }
-}
-
-% \setsansfont[ItalicFont={Georgia.ttf}, BoldFont={Georgia.ttf}]{Garamond.ttf}%
-
-\setsansfont[
-    ItalicFont={Garamond Italic.ttf},%
-    BoldFont={Garamond Bold.ttf},%
-    BoldItalicFont={Garamond Bold Italic.ttf}%
-] {Garamond.ttf}%
-
-% \setsansfont{Garamond Bold.ttf}
-% \setsansfont{Georgia.ttf}
-
-% \usefonttheme{serif}
-% \usepackage{beamercolorthemedracula}
-
-% \addbibresource{abstract.bib} %Import the bibliography file
-
-\usetheme{metropolis}
-
-\definecolor{forestbg}      {RGB} {31, 30, 24}
 
 \title{TinyML in Agriculture Sector}
 
@@ -91,68 +23,11 @@
 
 \date{Guided by: \supervisor}
 
-\def\leafColorPrimaryName{Sage}
-\def\leafColorPrimaryRGB{138, 184, 114}
-\def\leafColorPrimaryHex{\#8AB872}
-\definecolor{leafColorPrimary} {RGB} {\leafColorPrimaryRGB}
-%%
-\def\leafColorSecondaryName{Cactus Spike}
-\def\leafColorSecondaryRGB{204, 224, 153}
-\def\leafColorSecondaryHex{\#CCE099}
-\definecolor{leafColorSecondary} {RGB} {\leafColorSecondaryRGB}
-
-\definecolor{colorBlue}   {HTML} {33539E}
-\definecolor{colorSky}    {HTML} {7FACD6}
-\definecolor{colorViolet} {HTML} {BFB8DA}
-\definecolor{colorPink}   {HTML} {E8B7D4}
-\definecolor{colorMaroon} {HTML} {A5678E}
-
-\definecolor{colorRampart} {HTML} {BDB7B7}
-\definecolor{colorCaramel} {HTML} {B89B93}
-\definecolor{colorCortex} {HTML} {A59691}
-\definecolor{colorDove} {HTML} {B6AFA5}
-\definecolor{colorCathedral} {HTML} {ABA7A6}
-\definecolor{colorWind} {HTML} {CAC4C4}
-
-\definecolor{colorRed} {HTML} {E44E54}
-\definecolor{colorLightRed} {HTML} {F46367}
-\definecolor{colorVeryLightRed} {HTML} {D1AE97}
-\definecolor{colorDarkRed} {HTML} {581319}
-\definecolor{colorDarkGreen} {HTML} {2E4330}
-\definecolor{colorLightGreen} {HTML} {C0D2A3}
-
-\definecolor{colorLightBrown} {HTML} {A8867B}
-\definecolor{colorLightSageGreen} {HTML} {9EC2AD}
-
-\definecolor{colorBrown} {HTML} {9F774E}
-
-\definecolor{colorTest} {HTML} {133330}
-
 \renewcommand\alert[1] {%
     {\color{colorRed}#1}%
 }
 
-\newcommand\tableBox[2] {
-    \begin{tcolorbox}[
-            coltitle = leafColorPrimary,
-            colbacktitle = leafColorSecondary,
-            colback = leafColorSecondary,
-            colframe = leafColorSecondary,
-            title=#1,
-            fonttitle=\bfseries,
-            detach title,
-        ]
-        \begin{minipage}[t]{0.1\textwidth}
-            \begin{flushleft}
-                \tcbtitle
-            \end{flushleft}
-        \end{minipage}
-        \begin{minipage}[t]{0.9\textwidth}
-            #2
-        \end{minipage}
-    \end{tcolorbox}
-}
-
+\usetheme{metropolis}
 
 % \renewcommand\arraystretch{1.75}
 % \renewcommand\midrule{{\color{colorRed} \vspace{-8pt}\rule{\textwidth}{0.75pt}\vspace{8pt}}}
@@ -187,65 +62,21 @@
   bg=colorMaroon
 }
 
-\newcommand\tikzframetitleleft[2] {
-    \draw (current page.north west) ++(0.75cm, -0.75cm) coordinate (frametitle) ;
-    \node [anchor = north west] (frametitle) at (frametitle) {
-        \begin{minipage} {9cm}
-            \bfseries
-            \setstretch{0.75}
-            \huge
-            {\Large #1} \\ #2
-        \end{minipage}
-    }
-    ;
-}
+% \setsansfont[ItalicFont={Georgia.ttf}, BoldFont={Georgia.ttf}]{Garamond.ttf}%
 
-\newcommand\tikzframetitlelongleft[2] {
-    \draw (current page.north west) ++(0.75cm, -0.75cm) coordinate (frametitle) ;
-    \node [anchor = north west] (frametitle) at (frametitle) {
-        \begin{minipage} {10cm}
-            \bfseries
-            \setstretch{0.75}
-            \huge
-            {\Large #1} \\ #2
-        \end{minipage}
-    }
-    ;
-}
+\setsansfont[
+    ItalicFont={Garamond Italic.ttf},%
+    BoldFont={Garamond Bold.ttf},%
+    BoldItalicFont={Garamond Bold Italic.ttf}%
+] {Garamond.ttf}%
 
-\newcommand\tikzframetitleright[2] {
-    \draw (current page.north east) ++(-0.75cm, -0.75cm) coordinate (frametitle) ;
-    \node [anchor = north east] (frametitle) at (frametitle) {
-        \begin{minipage} {9cm}
-            \bfseries
-            \raggedleft
-            \setstretch{0.75}
-            \huge
-            {\Large #1} \\ #2
-        \end{minipage}
-    }
-    ;
-}
+% \setsansfont{Garamond Bold.ttf}
+% \setsansfont{Georgia.ttf}
 
-\newcommand\tikzframetitlelongright[2] {
-    \draw (current page.north east) ++(-0.75cm, -0.75cm) coordinate (frametitle) ;
-    \node [anchor = north east] (frametitle) at (frametitle) {
-        \begin{minipage} {11cm}
-            \bfseries
-            \raggedleft
-            \setstretch{0.75}
-            \huge
-            {\Large #1} \\ #2
-        \end{minipage}
-    }
-    ;
-}
-\colorlet{fgcol}{colorDarkGreen}
+% \usefonttheme{serif}
+% \usepackage{beamercolorthemedracula}
 
-\def\markMainInnerRadius{0.175cm}
-\def\markMainOuterRadius{0.3cm}
-\def\markSubRadius{0.075cm}
-\def\markCornerRadius{0.1cm}
+% \addbibresource{abstract.bib} %Import the bibliography file
 
 \def\squareSide{3.5cm}
 \def\squareGap{0.3cm}
