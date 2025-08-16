@@ -227,6 +227,19 @@
     ;
 }
 
+\newcommand\tikzframetitlelongright[2] {
+    \draw (current page.north east) ++(-0.75cm, -0.75cm) coordinate (frametitle) ;
+    \node [anchor = north east] (frametitle) at (frametitle) {
+        \begin{minipage} {11cm}
+            \bfseries
+            \raggedleft
+            \setstretch{0.75}
+            \huge
+            {\Large #1} \\ #2
+        \end{minipage}
+    }
+    ;
+}
 \colorlet{fgcol}{colorDarkGreen}
 
 \def\markMainInnerRadius{0.175cm}
@@ -1744,5 +1757,25 @@
     \end{tikzpicture}
 
 \end{frame}
+
+%% The Essence of Tiny Machine Learning
+\begin{frame} {}
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitlelongright{The Essence of} {Running ML on Microcontrollers}
+
+        % \draw
+        % (current page.center |- frametitle.south)
+        % node [anchor = north, below = 8pt] {
+        %     \includegraphics[width = 0.95\paperwidth]{tikzpics/endDesignFlow.pdf}
+        % }
+        % ;
+
+    \end{tikzpicture}
+\end{frame}
+
 
 \end{document}
