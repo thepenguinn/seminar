@@ -10,9 +10,13 @@
     },
 
     absImpModule/.style = {
+        % font = \large,
+        % scale = 1.5,
         ultra thick,
         rectangle,
-        draw = fgcol,
+        colorDarkGreen,
+        fill = colorLightSageGreen,
+        draw = colorDarkGreen,
         rounded corners = 0.5cm,
         inner sep = 0.5cm,
         outer sep = 0.5cm,
@@ -22,12 +26,14 @@
     },
 
     absNotImpModule/.style = {
-        gray,
-        dashdotted,
+        colorDarkGreen,
+        % dashdotted,
         ultra thick,
         rectangle,
-        draw = gray,
+        fill = colorLightGreen,
+        draw = colorLightSageGreen,
         rounded corners = 0.5cm,
+        minimum height = 1cm,
         inner sep = 0.5cm,
         outer sep = 0.5cm,
         text width = 2.5cm,
@@ -186,10 +192,11 @@
 
     innerEnclosure/.style = {
         ultra thick,
+        opacity = 0.5,
+        % fill = colorLightGreen,
         % dashdotted,
         rectangle,
-        draw = black,
-        gray,
+        draw = colorDarkGreen,
         rounded corners = 1cm,
         inner sep = 0cm,
         outer sep = 1cm,
@@ -207,7 +214,7 @@
 
     innerConnect/.style = {
         rounded corners = 0.5cm,
-        gray,
+        colorDarkGreen,
         very thick,
         DUInterConnectFromOpenToOpen,
     },

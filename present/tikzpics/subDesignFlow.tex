@@ -71,6 +71,7 @@
     \innerEnclosureNode {#1-mc} {#1-mcTop} {#1-mcBot}
 
     \draw [
+        colorDarkGreen,
     ]
     (#1-mc.north) ++(0, -0.25) node [ultra thick] {\textsc{Model Compression}}
     ;
@@ -131,14 +132,14 @@
 
     ;
 
-    \draw [very thick, gray, fill = bgcol] (#1-arrowEnd) circle [radius = 6pt];
-    \draw [very thick, gray, fill = bgcol] (#1-arrowEnd) ++(12pt, 0) circle [radius = 3.5pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-arrowEnd) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-arrowEnd) ++(12pt, 0) circle [radius = 3.5pt];
 
     \draw
     (#1-arrowMid) ++(6pt, 0.5)
     node [
         ultra thick,
-        gray,
+        colorDarkGreen,
         anchor = south,
     ] {\textsc{Design Flow Direction}}
     ;
@@ -146,20 +147,23 @@
     \draw [
         ultra thick,
         rounded corners = 0.2cm,
+        fill = colorLightSageGreen,
+        draw = colorDarkGreen,
     ]
     (#1-uha.south) ++(0, -1.5) coordinate (#1-legend)
 
     (#1-legend) ++(-0.3, -0.3) rectangle ++(0.6, 0.6)
 
     (#1-legend) ++(0.5, 0)
-    node [anchor = west] {\textsc{Design Flow Unique to TinyML}}
+    node [anchor = west, colorDarkGreen] {\textsc{Design Flow Unique to TinyML}}
 
     ;
 
     \draw [
-        gray,
+        fill = colorLightGreen,
+        draw = colorLightSageGreen,
         ultra thick,
-        dashdotted,
+        % dashdotted,
         rounded corners = 0.2cm,
     ]
     (#1-legend) ++(0, -1.0) coordinate (#1-legend)
@@ -167,7 +171,7 @@
     (#1-legend) ++(-0.3, -0.3) rectangle ++(0.6, 0.6)
 
     (#1-legend) ++(0.5, 0)
-    node [anchor = west] {\textsc{Design Flow Common to ML}}
+    node [anchor = west, colorDarkGreen] {\textsc{Design Flow Common to ML}}
     ;
 
 
