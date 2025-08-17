@@ -1,0 +1,49 @@
+\def\romSmallSide{2.25cm}
+\def\romSmallGap{0.5cm}
+
+\subtikzpicturedef{subRomSmall} {
+    bottomCorner,
+    rightCorner,
+    leftCorner,
+    topCorner,
+    pBottomCorner,
+    pRightCorner,
+    pLeftCorner,
+    pTopCorner,
+    %%
+    pBottomRight,
+    pBottomLeft,
+    pTopRight,
+    pTopLeft,
+    center,
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+    \draw [
+        rounded corners = 0.4cm,
+        ultra thick,
+        fill = colorLightGreen,
+    ]
+    (#1-origin) coordinate (#1-bottomCorner)
+    ++(45:\romSmallSide) coordinate (#1-rightCorner)
+    ++(135:\romSmallSide) coordinate (#1-topCorner)
+    ++(-135:\romSmallSide) coordinate (#1-leftCorner)
+
+    ($(#1-leftCorner)!0.5!(#1-rightCorner)$) coordinate (#1-center)
+
+    (#1-bottomCorner) ++(0, -\romSmallGap) coordinate (#1-pBottomCorner)
+    (#1-rightCorner) ++(\romSmallGap, 0) coordinate (#1-pRightCorner)
+    (#1-leftCorner) ++(-\romSmallGap, 0) coordinate (#1-pLeftCorner)
+    (#1-topCorner) ++(0, \romSmallGap) coordinate (#1-pTopCorner)
+
+    ($(#1-pBottomCorner)!0.5!(#1-pRightCorner)$) coordinate (#1-pBottomRight)
+    ($(#1-pRightCorner)!0.5!(#1-pTopCorner)$) coordinate (#1-pTopRight)
+    ($(#1-pTopCorner)!0.5!(#1-pLeftCorner)$) coordinate (#1-pTopLeft)
+    ($(#1-pLeftCorner)!0.5!(#1-pBottomCorner)$) coordinate (#1-pBottomLeft)
+
+    (#1-bottomCorner) -- (#1-rightCorner) -- (#1-topCorner) -- (#1-leftCorner) -- cycle
+
+    ;
+}
+
+\subtikzpictureactivate{subRomSmall}

@@ -1,0 +1,222 @@
+\newcommand\ovrDrawRomLabel[2] {
+    \draw
+    (#1-center)
+    node [anchor = center] {
+        \begin{minipage} {4cm}
+            \centering
+            \textbf{#2}
+        \end{minipage}
+    }
+    ;
+}
+
+\subtikzpicturedef{subQuantization} {
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+
+    \subRomMid {#1-ptm} {#1-origin} {origin}
+
+    \draw
+    (#1-ptm-pRightCorner) ++(3cm, 1.25) coordinate (#1-cd)
+    ;
+
+    \subRomSmall {#1-cd} {#1-cd} {pBottomCorner}
+
+    \subRomLarge {#1-calib} {#1-cd-pRightCorner} {pLeftCorner}
+
+    \subRomSmall {#1-q1} {#1-calib-pRightCorner} {pTopCorner}
+
+    \draw
+    (#1-cd-pRightCorner) ++(0, -3cm) coordinate (#1-q2)
+    ;
+
+    \subRomSmall {#1-q2} {#1-q2} {pTopCorner}
+
+    \subRomSmall {#1-td} {#1-q2-pRightCorner} {pTopCorner}
+
+    \subRomLarge {#1-rt} {#1-td-pRightCorner} {pLeftCorner}
+
+    \draw
+    (#1-q1-pBottomCorner) ++(4cm, -1.25cm) coordinate (#1-qm)
+    ;
+
+    \subRomMid {#1-qm} {#1-qm} {pLeftCorner}
+
+
+    % \draw (#1-origin) -- ++(1, 1)
+    % ;
+
+    %% labelling
+    \ovrDrawRomLabel {#1-ptm} {Pre-Trained \\ Model}
+    \ovrDrawRomLabel {#1-cd} {Calibration \\ Data}
+    \ovrDrawRomLabel {#1-calib} {Calibration}
+    \ovrDrawRomLabel {#1-q1} {Quantization}
+    \ovrDrawRomLabel {#1-q2} {Quantization}
+    \ovrDrawRomLabel {#1-td} {Training \\ Data}
+    \ovrDrawRomLabel {#1-rt} {Re-Training \\ / \\ Fine-Tuning}
+    \ovrDrawRomLabel {#1-qm} {Quantized \\ Model}
+
+    %% connections
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-ptm-pTopRight) --
+    (intersection of
+        #1-ptm-pTopLeft--#1-ptm-pTopRight
+        and
+        #1-calib-pBottomLeft--#1-calib-pTopRight)
+    -- (#1-calib-pBottomLeft)
+    ;
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-cd-pTopRight) --
+    (intersection of
+        #1-cd-pBottomLeft--#1-cd-pTopRight
+        and
+        #1-calib-pTopLeft--#1-calib-pTopRight)
+    -- (#1-calib-pTopLeft)
+    ;
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-q1-pBottomRight) --
+    (intersection of
+        #1-q1-pBottomLeft--#1-q1-pBottomRight
+        and
+        #1-qm-pTopLeft--#1-qm-pBottomRight)
+    -- (#1-qm-pTopLeft)
+    ;
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-calib-pTopRight) ++(0.7cm, 0) coordinate (#1-tmp1)
+    ++(-45:0.1cm) coordinate (#1-tmp2)
+
+    (#1-calib-pTopRight) -- (#1-tmp1) --
+    (intersection of
+        #1-tmp1--#1-tmp2
+        and
+        #1-q1-pBottomRight--#1-q1-pTopRight)
+    -- (#1-q1-pTopRight)
+    ;
+
+    %%
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-ptm-pBottomRight) --
+    (intersection of
+        #1-ptm-pTopLeft--#1-ptm-pBottomRight
+        and
+        #1-q2-pBottomLeft--#1-q2-pBottomRight)
+    -- (#1-q2-pBottomLeft)
+    ;
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-q2-pTopRight) --
+    (intersection of
+        #1-q2-pTopLeft--#1-q2-pTopRight
+        and
+        #1-rt-pTopLeft--#1-rt-pBottomRight)
+    -- (#1-rt-pTopLeft)
+    ;
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-td-pBottomRight) --
+    (intersection of
+        #1-td-pTopLeft--#1-td-pBottomRight
+        and
+        #1-rt-pBottomLeft--#1-rt-pBottomRight)
+    -- (#1-rt-pBottomLeft)
+    ;
+
+    \draw [
+        very thick,
+        rounded corners = 0.3cm,
+    ]
+    (#1-rt-pBottomRight) --
+    (intersection of
+        #1-rt-pBottomLeft--#1-rt-pBottomRight
+        and
+        #1-qm-pBottomLeft--#1-qm-pTopRight)
+    -- (#1-qm-pBottomLeft)
+    ;
+
+    %% circle
+
+    \foreach \x in {
+        #1-calib-pTopLeft,
+        #1-calib-pTopRight,
+        #1-calib-pBottomLeft,
+        #1-q1-pTopRight,
+        #1-q1-pBottomRight,
+        #1-q2-pTopRight,
+        #1-q2-pBottomLeft,
+        #1-td-pBottomRight,
+        #1-rt-pTopLeft,
+        #1-rt-pBottomLeft,
+        #1-rt-pBottomRight,
+        #1-qm-pTopLeft,
+        #1-qm-pBottomLeft,
+        #1-cd-pTopRight,
+        #1-ptm-pTopRight,
+        #1-ptm-pBottomRight%
+    } {
+        \draw [
+            fill = white,
+            very thick,
+        ]
+        (\x) circle (3pt)
+        ;
+    }
+
+    %%
+
+    % Quantization Aware Training
+    % Post Training Quantization
+
+    \draw
+    (#1-td-pLeftCorner) ++(-0.75cm, 0)
+    node [left = 4pt] {
+        \begin{minipage} {8cm}
+            \centering
+            \Large
+            \bfseries
+            Quantization Aware Training
+        \end{minipage}
+    }
+    ;
+
+    \draw
+    (#1-calib-pRightCorner) ++(0.75cm, 0)
+    node [right = 4pt] {
+        \begin{minipage} {8cm}
+            \centering
+            \Large
+            \bfseries
+            Post Training Quantization
+        \end{minipage}
+    }
+    ;
+
+}
+
+\subtikzpictureactivate{subQuantization}
