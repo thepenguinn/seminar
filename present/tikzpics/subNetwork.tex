@@ -1,0 +1,39 @@
+\subtikzpicturedef{subNetwork} {
+    bottom,
+    netstart,
+    netend,
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+
+    \subFigBase {#1-sfb} {#1-origin} {origin}
+
+    \subNeuron {#1-l1n1} {#1-origin} {origin}
+    \subNeuron {#1-l1n2} {#1-l1n1-pBottomCorner} {pTopCorner}
+    \subNeuron {#1-l1n3} {#1-l1n2-pBottomCorner} {pTopCorner}
+
+    \draw
+    ($(#1-l1n1-center)!0.5!(#1-l1n2-center)$) ++(3, 0) coordinate (#1-l2n2)
+    ;
+
+    \subNeuron {#1-l2n2} {#1-l2n2} {pLeftCorner}
+    \subNeuron {#1-l2n3} {#1-l2n2-pBottomCorner} {pTopCorner}
+    \subNeuron {#1-l2n4} {#1-l2n3-pBottomCorner} {pTopCorner}
+
+    \subNeuron {#1-l2n1} {#1-l2n2-pTopCorner} {pBottomCorner}
+
+    \draw
+    (#1-l2n2-center) ++(3, 0) coordinate (#1-l3n1)
+    ;
+
+    \subNeuron {#1-l3n1} {#1-l3n1} {pLeftCorner}
+    \subNeuron {#1-l3n2} {#1-l3n1-pBottomCorner} {pTopCorner}
+
+    \draw
+    (#1-l1n2-pLeftCorner) coordinate (#1-netstart)
+    (#1-l1n2-pLeftCorner -| #1-l3n1-pRightCorner) coordinate (#1-netend)
+    (#1-l2n4-bottomCorner) coordinate (#1-bottom)
+    ;
+}
+
+\subtikzpictureactivate{subNetwork}

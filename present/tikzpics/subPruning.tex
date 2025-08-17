@@ -1,0 +1,119 @@
+\subtikzpicturedef{subPruning} {
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+
+    \subNetwork {#1-net1} {#1-origin} {origin}
+
+    \draw
+    (#1-net1-l1n2-center -| #1-net1-l3n1-pRightCorner) ++(3, 0) coordinate (#1-net2)
+    ;
+
+    \subNetwork {#1-net2} {#1-net2} {netstart}
+
+    \foreach \x in {1,2,3} {
+
+        \foreach \y in {1,2,3,4} {
+
+            \draw [
+                very thick,
+                colorDarkGreen,
+            ]
+            (#1-net1-l1n\x-pRightCorner) -- (#1-net1-l2n\y-pLeftCorner)
+            ;
+
+            \draw [colorDarkGreen, very thick, fill = white] (#1-net1-l2n\y-pLeftCorner) circle (4pt);
+        }
+        \draw [colorDarkGreen, very thick, fill = white] (#1-net1-l1n\x-pRightCorner) circle (4pt);
+
+    }
+
+    \foreach \x in {1,2,3,4} {
+
+        \foreach \y in {1,2} {
+
+            \draw [
+                very thick,
+                colorDarkGreen,
+            ]
+            (#1-net1-l2n\x-pRightCorner) -- (#1-net1-l3n\y-pLeftCorner)
+            ;
+
+            \draw [colorDarkGreen, very thick, fill = white] (#1-net1-l3n\y-pLeftCorner) circle (4pt);
+        }
+        \draw [colorDarkGreen, very thick, fill = white] (#1-net1-l2n\x-pRightCorner) circle (4pt);
+
+    }
+
+    %% pruned network
+
+    \foreach \x/\y in {
+        l2n1/l3n1,
+        l2n1/l3n2,
+        %%
+        l2n2/l3n1,
+        %%
+        l2n3/l3n1,
+        l2n3/l3n2,
+        %%
+        l2n4/l3n2,
+        %%
+        %%
+        l1n1/l2n1,
+        l1n1/l2n2,
+        l1n1/l2n4,
+        %%
+        l1n2/l2n1,
+        l1n2/l2n2,
+        %%
+        l1n3/l2n1,
+        l1n3/l2n3,
+        l1n3/l2n4%
+    } {
+
+        \draw [
+            very thick,
+            colorDarkGreen,
+        ]
+        (#1-net2-\x-pRightCorner) -- (#1-net2-\y-pLeftCorner)
+        ;
+
+        \draw [colorDarkGreen, very thick, fill = white] (#1-net2-\y-pLeftCorner) circle (4pt);
+        \draw [colorDarkGreen, very thick, fill = white] (#1-net2-\x-pRightCorner) circle (4pt);
+    }
+
+    \draw
+    (#1-net1-bottom)
+    node [
+        below = 8pt,
+    ] {
+        \Large Before Pruning
+    }
+    ;
+
+    \draw
+    (#1-net2-bottom)
+    node [
+        below = 8pt,
+    ] {
+        \Large After Pruning
+    }
+    ;
+
+    \draw [innerConnect]
+    ($(#1-net1-netend)!0.5!(#1-net2-netstart)$) ++(0, -0) coordinate (#1-arrowMid)
+
+    (#1-arrowMid) ++(-1.5, 0) coordinate (#1-arrowStart)
+    (#1-arrowMid) ++(1, 0) coordinate (#1-arrowEnd)
+
+    (#1-arrowStart) -- (#1-arrowEnd)
+
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-arrowEnd) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-arrowEnd) ++(12pt, 0) circle [radius = 3.5pt];
+
+
+}
+
+\subtikzpictureactivate{subPruning}
