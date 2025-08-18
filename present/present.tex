@@ -1599,69 +1599,69 @@
         \def\bgRomGap{0.3cm}
         \def\bgRomOp{0.7}
 
-        \begin{scope} [
-                transform canvas = {
-                    xshift = 6.313cm,
-                    yshift = -1.5cm,
-                },
-            ]
-            \filldraw [
-                ultra thick,
-                rotate = 45,
-                opacity = \bgRomOp,
-                colorLightGreen,
-                rounded corners = 0.7cm,
-            ]
-            (current page.west)
-            rectangle ++(-8cm, 8cm)
-            ;
-
-            \filldraw [
-                ultra thick,
-                rotate = 45,
-                opacity = \bgRomOp,
-                colorLightSageGreen,
-                rounded corners = 0.7cm,
-            ]
-            (current page.west) ++(\bgRomGap, 0) rectangle ++(2.5, 2.5)
-            ;
-
-            \filldraw [
-                ultra thick,
-                rotate = 45,
-                opacity = \bgRomOp,
-                colorLightGreen,
-                rounded corners = 0.7cm,
-            ]
-            (current page.west) ++(\bgRomGap, -\bgRomGap) rectangle ++(4, -4)
-            ;
-
-            \filldraw [
-                ultra thick,
-                rotate = 45,
-                opacity = \bgRomOp,
-                colorLightSageGreen,
-                rounded corners = 0.7cm,
-            ]
-            (current page.west) ++(0, -\bgRomGap) rectangle ++(-4, -4)
-            ;
-
-            \filldraw [
-                ultra thick,
-                rotate = 45,
-                opacity = \bgRomOp,
-                colorLightSageGreen,
-                rounded corners = 0.7cm,
-            ]
-            (current page.west) ++(0, -\bgRomGap - 4cm)  ++(\bgRomGap, -\bgRomGap) rectangle ++(10, -10)
-            ;
-
-
-        \end{scope}
-
-        \draw [thin, step = 0.1, white, opacity = 0.40]
-        (current page.north west) grid (current page.south east)
-        ;
+        % \begin{scope} [
+        %         transform canvas = {
+        %             xshift = 6.313cm,
+        %             yshift = -1.5cm,
+        %         },
+        %     ]
+        %     \filldraw [
+        %         ultra thick,
+        %         rotate = 45,
+        %         opacity = \bgRomOp,
+        %         colorLightGreen,
+        %         rounded corners = 0.7cm,
+        %     ]
+        %     (current page.west)
+        %     rectangle ++(-8cm, 8cm)
+        %     ;
+        %
+        %     \filldraw [
+        %         ultra thick,
+        %         rotate = 45,
+        %         opacity = \bgRomOp,
+        %         colorLightSageGreen,
+        %         rounded corners = 0.7cm,
+        %     ]
+        %     (current page.west) ++(\bgRomGap, 0) rectangle ++(2.5, 2.5)
+        %     ;
+        %
+        %     \filldraw [
+        %         ultra thick,
+        %         rotate = 45,
+        %         opacity = \bgRomOp,
+        %         colorLightGreen,
+        %         rounded corners = 0.7cm,
+        %     ]
+        %     (current page.west) ++(\bgRomGap, -\bgRomGap) rectangle ++(4, -4)
+        %     ;
+        %
+        %     \filldraw [
+        %         ultra thick,
+        %         rotate = 45,
+        %         opacity = \bgRomOp,
+        %         colorLightSageGreen,
+        %         rounded corners = 0.7cm,
+        %     ]
+        %     (current page.west) ++(0, -\bgRomGap) rectangle ++(-4, -4)
+        %     ;
+        %
+        %     \filldraw [
+        %         ultra thick,
+        %         rotate = 45,
+        %         opacity = \bgRomOp,
+        %         colorLightSageGreen,
+        %         rounded corners = 0.7cm,
+        %     ]
+        %     (current page.west) ++(0, -\bgRomGap - 4cm)  ++(\bgRomGap, -\bgRomGap) rectangle ++(10, -10)
+        %     ;
+        %
+        %
+        % \end{scope}
+        %
+        % \draw [thin, step = 0.1, white, opacity = 0.40]
+        % (current page.north west) grid (current page.south east)
+        % ;
 
         \tikzframetitlelongright{The Essence of} {Running ML on Microcontrollers}
 
@@ -1732,7 +1732,7 @@
             overlay,
         ]
 
-        \tikzframetitlelongleft{Knowledge Distillation:} {Teacher and Student Learning}
+        \tikzframetitlelongright{Knowledge Distillation:} {Teacher and Student Learning}
 
         \draw
         (current page.center) ++(0, -1)
@@ -1740,6 +1740,27 @@
             \includegraphics[width = 0.85\paperwidth]{tikzpics/endKnowledgeDistillation.pdf}
         }
         ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
+%% Software: Frameworks and Tool Chains
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitlelongright{Software:} {Frameworks and Tool Chains}
+
+        % \draw
+        % (current page.center) ++(0, -1)
+        % node [anchor = center] {
+        %     \includegraphics[width = 0.85\paperwidth]{tikzpics/endKnowledgeDistillation.pdf}
+        % }
+        % ;
 
     \end{tikzpicture}
 
