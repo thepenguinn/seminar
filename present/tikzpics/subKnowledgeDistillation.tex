@@ -1,0 +1,193 @@
+\def\teacherHeight{4cm}
+\def\teacherWidth{0.8cm}
+\def\teacherDecrement{0.5cm}
+
+\def\studentHeight{4cm}
+\def\studentWidth{0.8cm}
+\def\studentDecrement{0.5cm}
+
+\def\modelWidth{4cm}
+
+\subtikzpicturedef{subKnowledgeDistillation} {
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+    \subFigBase {#1-fb} {#1-origin} {origin}
+
+    %% teacher
+    \draw
+    (#1-origin) coordinate (#1-ts)
+    ++(\modelWidth, 0) coordinate (#1-te)
+
+    (#1-ts) coordinate (#1-t1)
+    ($(#1-ts)!0.33!(#1-te)$) coordinate (#1-t2)
+    ($(#1-ts)!0.66!(#1-te)$) coordinate (#1-t3)
+    (#1-te) coordinate (#1-t4)
+
+    ;
+
+    \foreach \x/\y in {0/1, 1/2, 2/3, 3/4} {
+        \draw [
+            absModelModule,
+        ]
+        (#1-t\y) ++(-{\teacherWidth / 2}, {((-\teacherHeight + (\x * \teacherDecrement)) / 2)})
+        rectangle ++(\teacherWidth, {\teacherHeight - (\x * \teacherDecrement)})
+        ;
+    }
+
+    %% student
+
+    \draw
+    (#1-ts) ++(0, -7) coordinate (#1-s1)
+    (#1-s1) ++(\modelWidth, 0) coordinate (#1-s3)
+    ($(#1-s1)!0.5!(#1-s3)$) coordinate (#1-s2)
+    ;
+
+    \foreach \x/\y in {0/1, 1/2, 2/3} {
+        \draw [
+            absModelModule,
+        ]
+        (#1-s\y) ++(-{\studentWidth / 2}, {((-\studentHeight + (\x * \studentDecrement)) / 2)})
+        rectangle ++(\studentWidth, {\studentHeight - (\x * \studentDecrement)})
+        ;
+    }
+
+    \draw
+    ($(#1-t1)!0.5!(#1-s1)$) ++(-2, 0) coordinate (#1-data)
+    node (#1-td) [absDataModule, left = 4pt] {
+        Training Data
+    }
+    ;
+
+    \draw
+    (#1-t4) ++(3.0, 0) coordinate (#1-softLabel)
+    node (#1-sl) [absSoftLabelModule, right = 4pt] {
+        Soft Label
+    }
+    ;
+
+    \draw
+    (#1-s3) ++(3.0, 0) coordinate (#1-label)
+    node (#1-ld) [absLabelModule, right = 4pt] {
+        Labelled Data
+    }
+    ;
+
+    \draw
+    (#1-ld.east) ++(2, 0) coordinate (#1-label)
+    node (#1-hl) [absHardLabelModule, right = 4pt] {
+        Hard Label
+    }
+    ;
+
+    %% teacher in
+
+    \draw [
+        innerConnect,
+    ]
+    (#1-t1) ++(-{(\teacherWidth / 2) - 1.0cm}, 0) coordinate (#1-tStart)
+    (#1-td.north) -- (#1-td.north |- #1-tStart) -- (#1-tStart)
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-tStart) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-tStart) ++(12pt, 0) circle [radius = 3.5pt];
+
+    %% student in
+
+    \draw [
+        innerConnect,
+    ]
+    (#1-s1) ++(-{(\teacherWidth / 2) - 1.0cm}, 0) coordinate (#1-sStart)
+    (#1-td.south) -- (#1-td.south |- #1-sStart) -- (#1-sStart)
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-sStart) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-sStart) ++(12pt, 0) circle [radius = 3.5pt];
+
+    %% teacher out
+
+    \draw [
+        innerConnect,
+    ]
+    (#1-t4) ++({(\teacherWidth / 2) + 0.75cm}, 0) coordinate (#1-tEnd)
+    (#1-tEnd) -- (#1-sl.west)
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-sl.west) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-sl.west) ++(12pt, 0) circle [radius = 3.5pt];
+
+    %% student out
+
+    \draw [
+        innerConnect,
+    ]
+    (#1-s3) ++({(\teacherWidth / 2) + 0.75cm}, 0) coordinate (#1-sEnd)
+    (#1-sEnd) -- (#1-ld.west)
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-ld.west) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-ld.west) ++(12pt, 0) circle [radius = 3.5pt];
+
+    %% hard label to labelled data
+
+    \draw [
+        innerConnect,
+    ]
+    (#1-ld.east) -- (#1-hl.west)
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-ld.east) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-ld.east) ++(-12pt, 0) circle [radius = 3.5pt];
+
+    %% soft label to hard label
+
+    \draw [
+        innerConnect,
+    ]
+    (#1-sl.south) -- (#1-ld.north)
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-ld.north) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-ld.north) ++(0, -12pt) circle [radius = 3.5pt];
+
+    %% naming teacher
+
+    \draw [
+    ]
+    ($(#1-t1)!0.5!(#1-t4)$) ++(0, \teacherHeight / 2) coordinate (#1-tTop)
+    ($(#1-t1)!0.5!(#1-t4)$) ++(0, -\teacherHeight / 2) coordinate (#1-tBottom)
+    (#1-tTop)
+    node [
+        above = 6pt,
+    ] {
+        \large \bfseries Teacher Model
+    }
+    (#1-tBottom)
+    node [
+        below = 6pt,
+    ] {
+        \large \bfseries Pre Trained Model
+    }
+    ;
+
+    \draw [
+    ]
+    ($(#1-s1)!0.5!(#1-s3)$) ++(0, \studentHeight / 2) coordinate (#1-tTop)
+    ($(#1-s1)!0.5!(#1-s3)$) ++(0, -\studentHeight / 2) coordinate (#1-tBottom)
+    (#1-tTop)
+    node [
+        above = 6pt,
+    ] {
+        \large \bfseries Training Model
+    }
+    (#1-tBottom)
+    node [
+        below = 6pt,
+    ] {
+        \large \bfseries Student Model
+    }
+    ;
+
+}
+
+\subtikzpictureactivate{subKnowledgeDistillation}
