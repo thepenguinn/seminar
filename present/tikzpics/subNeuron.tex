@@ -19,11 +19,7 @@
     origin%
 } {
     \draw (#1-start) coordinate (#1-origin);
-    \draw [
-        rounded corners = 0.2cm,
-        ultra thick,
-        fill = colorLightGreen,
-    ]
+    \draw
     (#1-origin) coordinate (#1-bottomCorner)
     ++(45:\neuronSide) coordinate (#1-rightCorner)
     ++(135:\neuronSide) coordinate (#1-topCorner)
@@ -41,9 +37,19 @@
     ($(#1-pTopCorner)!0.5!(#1-pLeftCorner)$) coordinate (#1-pTopLeft)
     ($(#1-pLeftCorner)!0.5!(#1-pBottomCorner)$) coordinate (#1-pBottomLeft)
 
-    (#1-bottomCorner) -- (#1-rightCorner) -- (#1-topCorner) -- (#1-leftCorner) -- cycle
-
     ;
 }
 
 \subtikzpictureactivate{subNeuron}
+
+\newcommand\ovrDrawNeuron[2] {
+    \draw [
+        #1%
+        rounded corners = 0.2cm,
+        ultra thick,
+    ]
+
+    (#2-bottomCorner) -- (#2-rightCorner) -- (#2-topCorner) -- (#2-leftCorner) -- cycle
+
+    ;
+}
