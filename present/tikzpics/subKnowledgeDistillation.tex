@@ -158,12 +158,14 @@
     ($(#1-t1)!0.5!(#1-t4)$) ++(0, -\teacherHeight / 2) coordinate (#1-tBottom)
     (#1-tTop)
     node [
+        absLabel,
         above = 6pt,
     ] {
         \large \bfseries Teacher Model
     }
     (#1-tBottom)
     node [
+        absLabel,
         below = 6pt,
     ] {
         \large \bfseries Pre Trained Model
@@ -176,12 +178,14 @@
     ($(#1-s1)!0.5!(#1-s3)$) ++(0, -\studentHeight / 2) coordinate (#1-tBottom)
     (#1-tTop)
     node [
+        absLabel,
         above = 6pt,
     ] {
         \large \bfseries Training Model
     }
     (#1-tBottom)
     node [
+        absLabel,
         below = 6pt,
     ] {
         \large \bfseries Student Model
