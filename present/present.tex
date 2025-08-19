@@ -1863,4 +1863,95 @@
 
 \end{frame}
 
+%% General Application of TinyML
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleleft {General} {Applications of TinyML}
+
+        \filldraw
+        ($(current page.center)!0.5!(current page.west)$) ++(1.5cm, -3.0cm) coordinate (center)
+        ;
+
+        \subSquare{s1}{center}{padBotCorner} % second
+        \subSquare{s2}{center}{padLeftCorner} % third
+        \subSquare{s3}{center}{padRightCorner} % first
+        \subSquare{s4}{s2-padRightCorner}{padBotCorner} % fourth
+
+        \subSquare{s5}{s4-padBotCorner}{padLeftCorner} % fifth
+
+        \subSquare{s6}{s4-padRightCorner}{padBotCorner} % sixth
+
+        \subSquare{tmpS1}{s1-padBotCorner}{padTopCorner} % fourth
+        \subSquare{tmpS2}{s4-padBotCorner}{padTopCorner} % fourth
+        \subSquare{tmpS3}{s4-padRightCorner}{padLeftCorner} % fourth
+
+        \drawSubSquare{colorLightGreen,}{s1}
+        \drawSubSquare{colorLightSageGreen,}{s2}
+        \drawSubSquare{colorLightSageGreen,}{s3}
+        \drawSubSquare{colorLightGreen,}{s4}
+
+        \drawSubSquare{colorLightSageGreen,}{s5}
+        \drawSubSquare{colorLightSageGreen,}{s6}
+
+        \drawSubSquare{colorLightGreen,}{tmpS1}
+        \drawSubSquare{colorLightGreen,}{tmpS2}
+        \drawSubSquare{colorLightGreen,}{tmpS3}
+
+        \node [anchor = center] at (s1-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Agriculture \\ Smart Farming
+            \end{minipage}
+        }
+        ;
+
+        \node [anchor = center] at (s3-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Industrial \\ Predictive Maintenance
+            \end{minipage}
+        }
+        ;
+
+        \node [anchor = center] at (s2-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Smart Homes \\ Gesture and Voice Control
+            \end{minipage}
+        }
+        ;
+
+        \node [anchor = center] at (s4-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Healthcare \\ Smart Wearables
+            \end{minipage}
+        }
+        ;
+
+        \node [anchor = center] at (s5-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Automated \\ Speech Recognition
+            \end{minipage}
+        }
+        ;
+
+        \node [anchor = center] at (s6-center) {
+            \begin{minipage} {\squareSide}
+                \centering
+                \large Wildlife \\ Conservation in Remote Areas
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
 \end{document}
