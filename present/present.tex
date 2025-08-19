@@ -1755,12 +1755,109 @@
 
         \tikzframetitlelongright{Software:} {Frameworks and Tool Chains}
 
-        % \draw
-        % (current page.center) ++(0, -1)
-        % node [anchor = center] {
-        %     \includegraphics[width = 0.85\paperwidth]{tikzpics/endKnowledgeDistillation.pdf}
-        % }
-        % ;
+        \filldraw
+
+        ($(current page.west)!0.20!(current page.east)$) coordinate (v1)
+        ($(current page.west)!0.5!(current page.east)$) coordinate (v2)
+        ($(current page.west)!0.80!(current page.east)$) coordinate (v3)
+
+        (current page.north) ++(0, -1.5) coordinate (top)
+
+        ($(top)!0.33!(current page.south)$) coordinate (h1)
+        ($(top)!0.66!(current page.south)$) coordinate (h2)
+
+        (v1 |- h1) ++(-0.5, 0) coordinate (tflPic)
+
+        (v3 |- h2) ++(0.5, -0.5) coordinate (eiPic)
+
+        (tflPic) circle (0.2cm)
+        (eiPic) circle (0.2cm)
+        ;
+
+        \def\picSide{3cm}
+
+
+        \begin{scope}
+            \clip [
+                rounded corners = 0.4cm,
+            ]
+            (tflPic) ++(-\picSide / 2, -\picSide / 2) rectangle ++(\picSide, \picSide)
+            ;
+
+            \draw
+            (tflPic)
+            node (tflPic) [
+                anchor = center,
+            ] {
+                \includegraphics[width = \picSide] {pics/tfl.png}
+            }
+            ;
+
+        \end{scope}
+
+        \begin{scope}
+            \filldraw [
+                colorDarkGreen,
+                rounded corners = 0.4cm,
+            ]
+            (eiPic) ++(-\picSide / 2, -\picSide / 2) rectangle ++(\picSide, \picSide)
+            ;
+
+            \draw
+            (eiPic)
+            node (eiPic) [
+                anchor = center,
+            ] {
+                \includegraphics[width = \picSide] {pics/ei.png}
+            }
+            ;
+
+        \end{scope}
+
+        \draw
+        (tflPic.north east) ++(0, -0.25)
+        node (tflTitle) [anchor = north west] {
+            \begin{minipage} {0.75\textwidth}
+                {\large {TensorFlow Lite}}
+            \end{minipage}
+        }
+        ;
+
+        \draw
+        (eiPic.north west) ++(0, -0.25)
+        node (eiTitle) [anchor = north east] {
+            \begin{minipage} {0.75\textwidth}
+                \raggedleft
+                {\large {Edge Impulse}}
+            \end{minipage}
+        }
+        ;
+
+
+        \draw
+        ($(tflTitle.south west)!0.5!(tflTitle.south west |- tflPic.south)$)
+        node [anchor = west] {
+            \begin{minipage} {0.75\textwidth}
+                \begin{itemize}
+                    \item Developed by \alert{Google} building and deploying ML Models on Embedded Systems.
+                    \item Open-source Framework.
+                    \item Gives more control.
+                \end{itemize}
+            \end{minipage}
+        }
+        ;
+
+        \draw
+        ($(eiTitle.south east)!0.5!(eiTitle.south east |- eiPic.south)$)
+        node [anchor = east] {
+            \begin{minipage} {0.75\textwidth}
+                \begin{itemize}
+                    \item Offers a comprehensive set of tools for the entire embedded machine learning lifecycle.
+                    \item \alert{Simplifies} the process of building edge AI solutions.
+                \end{itemize}
+            \end{minipage}
+        }
+        ;
 
     \end{tikzpicture}
 
