@@ -121,6 +121,69 @@
     ;
 }
 
+\def\picSquareDiagonal{4.5cm}
+\def\picSquareGap{0.3cm}
+
+\subtikzpicturedef{subPicSquare} {
+    rightCorner,
+    leftCorner,
+    botCorner,
+    topCorner,
+    padRightCorner,
+    padLeftCorner,
+    padBotCorner,
+    padTopCorner,
+    center,
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+    \draw
+    (#1-origin) coordinate (#1-botCorner)
+    %%
+    (#1-botCorner) ++(0, \picSquareDiagonal) coordinate (#1-topCorner)
+    (#1-botCorner) ++(-\picSquareDiagonal / 2, \picSquareDiagonal / 2) coordinate (#1-leftCorner)
+    (#1-botCorner) ++(\picSquareDiagonal / 2, \picSquareDiagonal / 2) coordinate (#1-rightCorner)
+    %%
+    ($(#1-leftCorner)!0.5!(#1-rightCorner)$) coordinate (#1-center)
+    %%
+    (#1-rightCorner) ++(\picSquareGap, 0)  coordinate (#1-padRightCorner)
+    (#1-leftCorner) ++(-\picSquareGap, 0)   coordinate (#1-padLeftCorner)
+    (#1-botCorner) ++(0, -\picSquareGap)    coordinate (#1-padBotCorner)
+    (#1-topCorner) ++(0, \picSquareGap)    coordinate (#1-padTopCorner)
+    ;
+}
+
+\subtikzpictureactivate{subPicSquare}
+
+\newcommand\putPicInRombus[4] {
+    \begin{scope}
+        \clip [
+            rounded corners = 0.7cm,
+        ]
+        (#3-botCorner) -- (#3-rightCorner) -- (#3-topCorner) -- (#3-leftCorner) -- cycle
+        ;
+
+        \draw
+        (#3-center) #2
+        node [anchor = center] {
+            \includegraphics[height = \picSquareDiagonal]{#4}
+        }
+        ;
+    \end{scope}
+
+    % \draw [
+    %     #1%
+    %     draw = colorLightRed,
+    %     % fill = colorLightRed,
+    %     ultra thick,
+    %     rounded corners = 0.7cm,
+    % ]
+    % (#3-botCorner) -- (#3-rightCorner) -- (#3-topCorner) -- (#3-leftCorner) -- cycle
+    % ;
+
+
+}
+
 \begin{document}
 
 \maketitle
@@ -1949,6 +2012,75 @@
             \end{minipage}
         }
         ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
+%% Applications of TinyML in Agriculture
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleleft{Applications of} {TinyML in Agriculture}
+
+        \filldraw
+
+        (current page.west) ++(1, 0) coordinate (west)
+        (current page.east) ++(-1, 0) coordinate (east)
+
+        ($(west)!0.15!(east)$) coordinate (v1)
+        ($(west)!0.5!(east)$) coordinate (v2)
+        ($(west)!0.85!(east)$) coordinate (v3)
+        % ($(west)!0.875!(east)$) coordinate (v4)
+
+        % ($(west)!0.125!(east)$) coordinate (v1)
+        % ($(west)!0.375!(east)$) coordinate (v2)
+        % ($(west)!0.625!(east)$) coordinate (v3)
+        % ($(west)!0.875!(east)$) coordinate (v4)
+
+        (current page.north) ++(0, -2.5) coordinate (top)
+
+        ($(top)!0.33!(current page.south)$) coordinate (h1)
+        ($(top)!0.66!(current page.south)$) coordinate (h2)
+
+        (v1 |- h1) coordinate (p1)
+        (v2 |- h1) coordinate (p2)
+        (v3 |- h1) coordinate (p3)
+
+        ;
+
+        \subPicSquare {s1} {p1} {center}
+        \putPicInRombus {} {} {s1} {pics/leaves.png}
+
+        \subPicSquare {s2} {p2} {center}
+        \putPicInRombus {} {} {s2} {pics/greenhouse.png}
+
+        \subPicSquare {s3} {p3} {center}
+        \putPicInRombus {} {++(0.25,0)} {s3} {pics/apples.png}
+
+        \draw (s1-padBotCorner) node [anchor = north, below = -4pt] {
+            \begin{minipage} {\picSquareDiagonal}
+                \centering
+                Plant Disease \\ Detection %% will stay
+            \end{minipage}
+        } ;
+        \draw (s3-padBotCorner) node [anchor = north, below = -4pt] {
+            \begin{minipage} {\picSquareDiagonal}
+                \centering
+                Fruit Detection \\ In Plants
+            \end{minipage}
+        } ;
+
+        \draw (s2-padBotCorner) node [anchor = north, below = -4pt] {
+            \begin{minipage} {\picSquareDiagonal}
+                \centering
+                Micro Climate \\ Management
+            \end{minipage}
+        } ;
 
     \end{tikzpicture}
 
