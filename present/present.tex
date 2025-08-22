@@ -184,6 +184,58 @@
 
 }
 
+\def\csPicSquareSide{3.75cm}
+\def\csPicSquareGap{0.3cm}
+
+\subtikzpicturedef{subCsPicSquare} {
+    botLeftCorner,
+    botRightCorner,
+    topLeftCorner,
+    topRightCorner,
+    center,
+    pRight,
+    pLeft,
+    pBot,
+    pTop,
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+    \filldraw
+    (#1-origin) coordinate (#1-botLeftCorner)
+    (#1-origin) ++(\csPicSquareSide, 0) coordinate (#1-botRightCorner)
+    (#1-origin) ++(0, \csPicSquareSide) coordinate (#1-topLeftCorner)
+    (#1-origin) ++(\csPicSquareSide, \csPicSquareSide) coordinate (#1-topRightCorner)
+    %%
+    (#1-origin) ++(\csPicSquareSide / 2, \csPicSquareSide / 2) coordinate (#1-center)
+    %%
+    % (#1-botLeftCorner) -- (#1-botRightCorner) -- (#1-topRightCorner) -- (#1-topLeftCorner) -- cycle
+    %%
+    (#1-center) ++(\csPicSquareSide / 2 + \csPicSquareGap, 0) coordinate (#1-pRight)
+    (#1-center) ++(-\csPicSquareSide / 2 - \csPicSquareGap, 0) coordinate (#1-pLeft)
+    (#1-center) ++(0, \csPicSquareSide / 2 + \csPicSquareGap) coordinate (#1-pTop)
+    (#1-center) ++(0, -\csPicSquareSide / 2 - \csPicSquareGap) coordinate (#1-pBot)
+    ;
+}
+
+\subtikzpictureactivate{subCsPicSquare}
+
+\newcommand\putCsPicInSquare[4] {
+    \begin{scope}
+        \clip [
+            rounded corners = 0.7cm,
+        ]
+        (#3-botLeftCorner) -- (#3-botRightCorner) -- (#3-topRightCorner) -- (#3-topLeftCorner) -- cycle
+        ;
+
+        \draw
+        (#3-center) #2
+        node [anchor = center] {
+            \includegraphics[height = \csPicSquareSide]{#4}
+        }
+        ;
+    \end{scope}
+}
+
 \begin{document}
 
 \maketitle
@@ -2081,6 +2133,78 @@
                 Micro Climate \\ Management
             \end{minipage}
         } ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
+%% Case Study: Plant Disease Detection
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleright{Case Study:} {Plant Disease Detection}
+
+        \draw
+        (current page.north west) ++(1, -1) coordinate (csPic)
+        ;
+
+        \subCsPicSquare {csPic} {csPic} {topLeftCorner}
+
+        \putCsPicInSquare {} {} {csPic} {pics/leaves.png}
+
+        \draw [
+            very thick,
+            colorLightSageGreen,
+            line cap = round,
+        ]
+
+        (csPic-botLeftCorner |- csPic-pBot) ++(0, -0.1cm) coordinate (lineStart)
+        (lineStart -| current page.east) ++(-1, 0) coordinate (lineEnd)
+
+        (lineStart) -- (lineEnd)
+
+        ;
+
+        \draw
+        (frametitle.south -| csPic-pRight) ++(0, -0.3)
+        node [anchor = north west] {
+            \begin{minipage} {9.85cm}
+                \begin{itemize}
+                    \item This is interesting. This is interesting. This is interesting. This is interesting.
+                    \item This is interesting. This is interesting. This is interesting. This is interesting.
+                \end{itemize}
+            \end{minipage}
+        }
+        ;
+
+        \draw
+        (csPic-botLeftCorner |- csPic-pBot) ++(0, -\csPicSquareGap - 0.2cm) coordinate (bcTop)
+        (current page.south) ++(0, 1) coordinate (bcBot)
+        (bcTop -| bcBot)
+        node [
+            anchor = north,
+            fill = colorLightSageGreen,
+            inner sep = 0.25cm,
+            rounded corners = 0.5cm,
+            minimum width = 13.85cm,
+            minimum height = 2.7cm,
+        ] {
+            \begin{minipage} {0.925\textwidth}
+                \vspace{0.25cm}
+                \begin{itemize}
+                    \item This is interesting. This is interesting. This is interesting. This is interesting.
+                    \item This is interesting. This is interesting. This is interesting. This is interesting.
+                    \item This is interesting. This is interesting. This is interesting. This is interesting.
+                \end{itemize}
+                \vspace{0.25cm}
+            \end{minipage}
+        }
+        ;
+
 
     \end{tikzpicture}
 
