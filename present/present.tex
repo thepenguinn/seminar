@@ -2431,4 +2431,67 @@
 
 \end{frame}
 
+%% Thank you Slide
+\begin{frame} {}
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.east) ++(1, 0) coordinate (edge)
+        ;
+
+        \begin{scope}
+
+            \clip [rotate = 45, rounded corners = 0.7cm]
+            (edge) ++(-8, -16) rectangle ++(20, 20)
+            ;
+
+            \begin{scope}
+                \node [anchor = east] (img) at (edge) {
+                    \includegraphics[height = \paperheight]{pics/red_forest.png}
+                }
+                ;
+
+            \end{scope}
+        \end{scope}
+
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.west) ++(-10.0, 6.5) coordinate (edge)
+        ;
+
+        \begin{scope}
+
+            \clip [rotate = 45, rounded corners = 0.7cm]
+            (edge) ++(-10, -15) rectangle ++(20, 20)
+            ;
+
+            \begin{scope}
+                \node [anchor = west, inner sep = 0pt] (img) at (current page.west) {
+                    \includegraphics[height = \paperheight]{pics/red_forest.png}
+                }
+                ;
+
+            \end{scope}
+        \end{scope}
+
+        \draw (current page.center) coordinate (frametitle) ;
+        \node [anchor = center] (frametitle) at (frametitle) {
+            \begin{minipage} {9cm}
+                \centering
+                \bfseries
+                \setstretch{0.95}
+                \large
+                {\Large Thank You} \\ Question?
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
 \end{document}
