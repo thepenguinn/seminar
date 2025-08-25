@@ -2127,7 +2127,7 @@
         \draw (s3-padBotCorner) node [anchor = north, below = -4pt] {
             \begin{minipage} {\picSquareDiagonal}
                 \centering
-                Fruit Detection \\ In Plants
+                Pest Detection \\ In Plants
             \end{minipage}
         } ;
 
@@ -2214,7 +2214,7 @@
 
 \end{frame}
 
-%% Case Study: Plant Disease Detection
+%% Case Study: Micro Climate Management
 \begin{frame} {}
 
     \begin{tikzpicture} [
@@ -2286,4 +2286,76 @@
 
 \end{frame}
 
+%% Case Study: Fruit Fly Trap
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleleft{Case Study:} {Fruit Fly Trap}
+
+        \draw
+        (current page.north east) ++(-1, -1) coordinate (csPic)
+        ;
+
+        \subCsPicSquare {csPic} {csPic} {topRightCorner}
+
+        \putCsPicInSquare {} {} {csPic} {width = \csPicSquareSide,} {pics/trap.png}
+
+        \draw [
+            very thick,
+            colorLightSageGreen,
+            line cap = round,
+        ]
+
+        (csPic-botLeftCorner |- csPic-pBot) ++(0, -0.1cm) coordinate (lineStart)
+        (lineStart -| current page.west) ++(1, 0) coordinate (lineStart)
+        (lineStart -| current page.east) ++(-1, 0) coordinate (lineEnd)
+
+        (lineStart) -- (lineEnd)
+
+        ;
+
+        \draw
+        (frametitle.south -| csPic-pLeft) ++(0, -0.3)
+        node [anchor = north east] {
+            \begin{minipage} {9.85cm}
+                \begin{itemize}
+                    \item Developed a TinyML based \alert{Fruit fly surveillance system}, implemented using \alert{ESP-EYE}
+                        mircrocontroller.
+                    \item Used \alert{FOMO} (Faster Objects, More Objects) algorithm developed on Edge Impulse platform.
+                \end{itemize}
+            \end{minipage}
+        }
+        ;
+
+        \draw
+        (csPic-botLeftCorner |- csPic-pBot) ++(0, -\csPicSquareGap - 0.2cm) coordinate (bcTop)
+        (current page.south) ++(0, 1) coordinate (bcBot)
+        (bcTop -| bcBot)
+        node [
+            anchor = north,
+            fill = colorLightSageGreen,
+            inner sep = 0.25cm,
+            rounded corners = 0.5cm,
+            minimum width = 13.85cm,
+            minimum height = 2.7cm,
+        ] {
+            \begin{minipage} {0.925\textwidth}
+                \vspace{0.25cm}
+                \begin{itemize}
+                    \item The system performed with a maximum RAM usage of \alert{2.4Mb} and an inference time
+                        of \alert{5.694} seconds.
+                    \item The FOMO model only required \alert{53 kilo bytes} of flash memory.
+                \end{itemize}
+                \vspace{0.25cm}
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
 \end{document}
