@@ -7,15 +7,15 @@
 
 \usepackage{fontspec}
 
-\title{TinyML in Agriculture Sector}
+\def\title{TinyML in Agriculture Sector}
 
-\subtitle{Awakening of Minds in Low Power Edge Devices}
+\def\subtitle{Awakening of Minds in Low Power Edge Devices}
 
-\author{
+\def\author{
     Daniel V Mathew \\ KTE22EC029
 }
 
-\institute{Rajiv Gandhi Institute of Technology, Kottayam}
+\def\institute{Rajiv Gandhi Institute of Technology, \\ Kottayam}
 
 \def\supervisor{
     Prof. Sujithamol S
@@ -242,7 +242,7 @@
 
 \begin{document}
 
-\maketitle
+% \maketitle
 
 % \begin{frame} {Introduction}
 %     \begin{tikzpicture}
@@ -268,6 +268,78 @@
 %
 %     \end{tikzpicture}
 % \end{frame}
+
+%% Title Page
+\begin{frame} {}
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \draw (0, 0)
+        coordinate (origin)
+        (current page.east) ++(1, 0) coordinate (edge)
+        ;
+
+        \begin{scope}
+
+            \clip [rotate = 45, rounded corners = 0.7cm]
+            (edge) ++(-10, -15) rectangle ++(20, 20)
+            ;
+
+            \begin{scope}
+                \node [anchor = east] (img) at (edge) {
+                    \includegraphics[height = \paperheight]{pics/red_forest.png}
+                }
+                ;
+
+            \end{scope}
+        \end{scope}
+
+
+        \draw (current page.north west) ++(1.00cm, -1.75cm) coordinate (frametitle) ;
+        \node [anchor = north west] (frametitle) at (frametitle) {
+            \begin{minipage} {9cm}
+                \bfseries
+                \setstretch{0.95}
+                \large
+                {\Large \title:} \\ \subtitle
+            \end{minipage}
+        }
+        ;
+
+        \draw [
+            very thick,
+            colorRed,
+            line cap = round,
+        ]
+
+        (frametitle.south -| current page.west) ++(1.25, -0.5) coordinate (lineStart)
+        (lineStart) ++(8, 0) coordinate (lineEnd)
+
+        (lineStart) -- (lineEnd)
+
+        ;
+
+        \draw (current page.north west |- lineStart) ++(1.00cm, -0.75cm) coordinate (content) ;
+        \node [anchor = north west] (content) at (content) {
+            \begin{minipage} {9cm}
+                \bfseries
+                \setstretch{0.95}
+                % \normal
+                \author
+                \vspace{10pt}
+                \\
+                Guided by: \supervisor
+                \vspace{10pt}
+                \\
+                {\small \institute}
+            \end{minipage}
+        }
+        ;
+    \end{tikzpicture}
+
+\end{frame}
 
 %% Making Sense of Data
 \begin{frame} {}
@@ -2358,4 +2430,5 @@
     \end{tikzpicture}
 
 \end{frame}
+
 \end{document}
