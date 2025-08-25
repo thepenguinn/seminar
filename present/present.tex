@@ -2431,6 +2431,50 @@
 
 \end{frame}
 
+%% Conclusion: Key Take Aways
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleleft{Conclusion:} {Key Take Aways}
+
+        \begin{scope}
+            \clip
+            (current page.north) rectangle (current page.south east)
+            ;
+            \draw
+            (current page.south east) ++(0, -4.25)
+            node [anchor = south east, inner sep = 0pt]  {
+                \includegraphics[width = 0.5\paperwidth]{pics/field.png}
+            }
+            ;
+        \end{scope}
+
+
+        \draw (frametitle.south west) ++(0, -0.5cm) coordinate (content) ;
+        \node [anchor = north west]  (content) at (content) {
+            \begin{minipage} {0.45\textwidth}
+
+                \begin{itemize}
+                    \item \alert{TinyML} provides a way to bring ML to low power edge devices.
+                    \item This enables ML to be used in a plethora of \alert{Embedded Applications}.
+                    \item Paves a way for the adoption of \alert{Edge Computing}.
+                    \item \alert{Agricultural Sector} could greatly benefit from TinyML,
+                        as it encourages to use ML in \alert{Remote} and \alert{Resource Constrained} systems
+                        in an \alert{Economically Viable} manner.
+                \end{itemize}
+
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
 \begin{frame}[allowframebreaks] {}
 
     \nocite{ieee01africa, microclimate, fruitfly, ieee03, sd00, quantization, ieee05, sd02}
