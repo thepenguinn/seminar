@@ -184,6 +184,8 @@
 
 }
 
+\def\csPicSquarePadSide{4.00cm}
+
 \def\csPicSquareSide{3.75cm}
 \def\csPicSquareGap{0.3cm}
 
@@ -2202,6 +2204,78 @@
                     \item TinyML based system gave a \alert{promising performance} even though the Cloud based
                         system was better in terms of \alert{accuracy}.
                     \item On an \alert{economic bases}, TinyML based system was \alert{more feasible} than the Cloud based one.
+                \end{itemize}
+                \vspace{0.25cm}
+            \end{minipage}
+        }
+        ;
+
+    \end{tikzpicture}
+
+\end{frame}
+
+%% Case Study: Plant Disease Detection
+\begin{frame} {}
+
+    \begin{tikzpicture} [
+            remember picture,
+            overlay,
+        ]
+
+        \tikzframetitleright{Case Study:} {Micro Climate Management}
+
+        \draw
+        (current page.north west) ++(1, -1) coordinate (csPic)
+        ;
+
+        \subCsPicSquare {csPic} {csPic} {topLeftCorner}
+
+        \putCsPicInSquare {} {} {csPic} {height = \csPicSquarePadSide,} {pics/microclimate.png}
+
+        \draw [
+            very thick,
+            colorLightSageGreen,
+            line cap = round,
+        ]
+
+        (csPic-botLeftCorner |- csPic-pBot) ++(0, -0.1cm) coordinate (lineStart)
+        (lineStart -| current page.east) ++(-1, 0) coordinate (lineEnd)
+
+        (lineStart) -- (lineEnd)
+
+        ;
+
+        \draw
+        (frametitle.south -| csPic-pRight) ++(0, -0.3)
+        node [anchor = north west] {
+            \begin{minipage} {9.85cm}
+                \begin{itemize}
+                    \item Focused on developing a TinyML solution for an \alert{autonomous strawberry greenhouse} microclimate control based
+                        on multi-variate sensed data.
+                    \item Used an \alert{MLP} architecture and experimented with several hyperparameters.
+                \end{itemize}
+            \end{minipage}
+        }
+        ;
+
+        \draw
+        (csPic-botLeftCorner |- csPic-pBot) ++(0, -\csPicSquareGap - 0.2cm) coordinate (bcTop)
+        (current page.south) ++(0, 1) coordinate (bcBot)
+        (bcTop -| bcBot)
+        node [
+            anchor = north,
+            fill = colorLightSageGreen,
+            inner sep = 0.25cm,
+            rounded corners = 0.5cm,
+            minimum width = 13.85cm,
+            minimum height = 2.7cm,
+        ] {
+            \begin{minipage} {0.925\textwidth}
+                \vspace{0.25cm}
+                \begin{itemize}
+                    \item Trained several model instances (90), and one of the model scored \alert{97\%} in validation
+                        sets and \alert{96\%} on test sets.
+                    \item The developed model was a \alert{light weight} one, thanks to the TinyML approach employed.
                 \end{itemize}
                 \vspace{0.25cm}
             \end{minipage}
