@@ -434,7 +434,7 @@
             \begin{minipage} {8.75cm}
 
                 Every system is in some sense a \alert{Data Processing System}.
-                They \alert{Convert / Extract / Manipulate} Data in different ways.
+                They \alert{Convert} / \alert{Extract} / \alert{Manipulate} Data in different ways.
                 There are several kinds of data, such as \alert{Visual}, \alert{Auditory},
                 \alert{Sensory}, etc. Goal of almost any system is to make the most use of
                 the data available to it.
@@ -933,7 +933,7 @@
 
         \end{scope}
 
-        \draw (frametitle.south west) ++(0, -0.3cm) coordinate (content) ;
+        \draw (frametitle.south west) ++(0, -0.7cm) coordinate (content) ;
         \node [anchor = north west]  (content) at (content) {
             \begin{minipage} {6.8cm}
                 We haven't addressed how we are going to know the right questions to ask about
@@ -945,7 +945,7 @@
         \draw (content.south west) ++(0, -0.3cm) coordinate (content) ;
         \node [anchor = north west]  (content) at (content) {
             \begin{minipage} {8.1cm}
-                The \alert{coefficients / weights} in our question matrix decides the output
+                The \alert{coefficients} / \alert{weights} in our question matrix decides the output
                 we get.
             \end{minipage}
         }
@@ -1044,7 +1044,7 @@
                     \item Increased Carbon Footprint.
                     \item Reliance of Cloud Computing.
                     \item Latency related with Cloud Computing.
-                    \item Need for powerful Hardware.
+                    \item Need for Expensive Hardware.
                 \end{itemize}
 
                 \alert{TinyML} is a subset of ML that is trying to address these issues.
@@ -1076,8 +1076,10 @@
 
                 \begin{itemize}
                     \item Microcontrollers (MCUs)
-                    \item System-on-Chip (SoCs)
+                    \item System-on-Chips (SoCs)
                     \item FPGAs
+                    \item DSPs
+                    \item Anything that is low powered and resource constrained.
                 \end{itemize}
 
             \end{minipage}
@@ -1139,7 +1141,7 @@
 
                 \draw
                 (current page.north west)
-                ++(-0.25, 0)
+                ++(-0.0, 0)
                 node [anchor = north west] (img) {
                     \includegraphics[height = 0.85\paperheight]{pics/brain.png}
                 }
@@ -1212,7 +1214,7 @@
         \node [anchor = center] at (s2-center) {
             \begin{minipage} {\squareSide}
                 \centering
-                \large Improved \\ Latency
+                \large Improved \\ Network \\ Latency
             \end{minipage}
         }
         ;
@@ -1358,7 +1360,7 @@
             \begin{minipage} {0.425\textwidth}
 
                 \begin{itemize}
-                    \item Modern day Microcontrollers are \alert{extremely cheap}.
+                    \item Modern day Microcontrollers are \alert{Extremely Cheap}.
                     \item And they are literally used everywhere.
                     % \item So it is highly economical to use these tiny devices than
                     %     to use other \alert{expensive devices}.
@@ -1371,7 +1373,7 @@
                         }
                         \toprule
 
-                        Microcontroller & Price \\ \midrule
+                        Microcontroller & Price (INR) \\ \midrule
 
                         ESP32 & 550 \\
 
@@ -1433,7 +1435,7 @@
             \begin{minipage} {0.425\textwidth}
 
                 \begin{itemize}
-                    \item Modern day Microcontrollers are \alert{extremely power efficient}.
+                    \item Modern day Microcontrollers are \alert{Extremely Power Efficient}.
                     \item While a Raspberry Pi 4 can draw around 1.5A.
                     % \item So it is highly economical to use these tiny devices than
                     %     to use other \alert{expensive devices}.
@@ -1474,7 +1476,7 @@
             overlay,
         ]
 
-        \tikzframetitleright{Improved} {Latency}
+        \tikzframetitleright{Improved} {Network Latency}
 
         \def\picSide{7cm}
 
@@ -1507,13 +1509,14 @@
             \begin{minipage} {0.425\textwidth}
 
                 \begin{itemize}
-                    \item No need for cloud processing.
+                    \item No need for Cloud Processing.
 
-                    \item Everything is \alert{processed locally}.
+                    \item Everything is \alert{Processed Locally}.
 
-                    \item So zero network latency.
+                    \item So literally \alert{Zero Network Latency}.
 
-                    \item Can be deployed to \alert{remote location}.
+                    \item Can be deployed to \alert{Remote Locations},
+                        where no internet access is available.
                 \end{itemize}
 
             \end{minipage}
@@ -1541,8 +1544,8 @@
                 In 2014, Engineers at Google had to implement the ``Ok Google"
                 waking feature. But they couldn't use the main CPU for this, as
                 it was powered off to conserve battery. So they developed a
-                \alert{14 kilo-byte (KB)} neural network that ran on an embedded
-                DSPs that had only \alert{tens of kilo-bytes of memory}!
+                \alert{14 kilo-byte (KB)} neural network that ran on embedded
+                DSPs having only \alert{tens of kilo-bytes of memory}!
 
                 \vspace{0.5cm}
 
@@ -1691,7 +1694,7 @@
                     \item The low fidelity model \alert{may} or \alert{may not} be applicable for the
                         given task.
 
-                    \item Sometimes we need \alert{cascade} different models having different fidelity.
+                    \item Sometimes we need to \alert{cascade} different models having different fidelity.
 
                 \end{itemize}
 
@@ -2030,7 +2033,7 @@
         node [anchor = west] {
             \begin{minipage} {0.75\textwidth}
                 \begin{itemize}
-                    \item Developed by \alert{Google} building and deploying ML Models on Embedded Systems.
+                    \item Developed by \alert{Google} to build and deploy ML Models on Embedded Systems.
                     \item Open-source Framework.
                     \item Gives more control.
                 \end{itemize}
@@ -2251,7 +2254,7 @@
             \begin{minipage} {9.85cm}
                 \begin{itemize}
                     \item Developed a TinyML system to detect \alert{Brown Streak} and \alert{Mosaic} Disease on Cassava plants.
-                    \item Held an comparative study on \alert{TinyML} based system vs \alert{Cloud} based system.
+                    \item Held a comparative study on \alert{TinyML} based system vs \alert{Cloud} based system.
                     \item For farmers in the remote places of \alert{Ghana} (West Africa).
                 \end{itemize}
             \end{minipage}
@@ -2322,7 +2325,7 @@
         node [anchor = north west] {
             \begin{minipage} {9.85cm}
                 \begin{itemize}
-                    \item Focused on developing a TinyML solution for an \alert{autonomous strawberry greenhouse} microclimate control based
+                    \item Focused on developing a TinyML solution for an \alert{autonomous strawberry greenhouse} microclimate control system based
                         on multi-variate sensed data.
                     \item Used an \alert{MLP} architecture and experimented with several hyperparameters.
                 \end{itemize}
@@ -2548,7 +2551,7 @@
                 \bfseries
                 \setstretch{0.95}
                 \large
-                {\Large Thank You} \\ Question?
+                {\Large Thank You} \\ Questions?
             \end{minipage}
         }
         ;
