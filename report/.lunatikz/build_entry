@@ -1,3 +1,17 @@
 return {
     [""] = "main.tex",
+    ["chapter_01"] = "chapter.tex",
+    ["chapter_02"] = "chapter.tex",
+    ["chapter_03"] = "chapter.tex",
+    ["chapter_04"] = "chapter.tex",
+    ["chapter_05"] = "chapter.tex",
+    ["chapter_06"] = "chapter.tex",
+    ["chapter_07"] = "chapter.tex",
+    ["chapter_08"] = "chapter.tex",
+    ["chapter_09"] = "chapter.tex",
+    ["chapter_10"] = "chapter.tex",
+    ["chapter_11"] = "chapter.tex",
+    ["chapter_12"] = "chapter.tex",
+    ["chapter_13"] = "chapter.tex",
+    ["chapter_14"] = "chapter.tex",
 }
