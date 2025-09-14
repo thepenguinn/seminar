@@ -1,7 +1,7 @@
 % height = 5.9in width = 4.37in
 % make this variable
 %% \usepackage[paperheight = 4.37in, paperwidth = 5.9in, margin=0.2in]{geometry}
-\usepackage[a4paper, margin=1in]{geometry}
+\usepackage[a4paper, margin = 1.25in]{geometry}
 
 \usepackage[export]{adjustbox}
 \usepackage{graphicx}
@@ -34,6 +34,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{setspace}
 \usepackage[numbib]{tocbibind}
+\usepackage{fancyhdr}
 
 %% for bold textsc to work
 \rmfamily % To load Latin Modern Roman and enable the following NFSS declarations.
@@ -244,3 +245,10 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+
+\pagestyle{plain}
+\lhead{\textit{SOMETHING INTERESTING}}
+\rhead{}
+\lfoot{\textit{Dept. of ECE, RIT Kottayam}}
+\renewcommand{\headrulewidth}{0.07pt}
+\renewcommand{\footrulewidth}{0.4pt}

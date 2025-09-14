@@ -12,6 +12,10 @@ TIKZPICS := $(shell find -type f -wholename "*/tikzpics/*.tex")
 
 ABSTRACT := abstract_template.tex abstract.tex
 
+FRONTMATTER := frontmatter.tex
+
+ACKNOWLEDGMENT := acknowledgment.tex
+
 build: main.pdf view
 
 force:
@@ -19,7 +23,7 @@ force:
 	pdflatex -shell-escape -halt-on-error main.tex
 	$(VIEWER) main.pdf
 
-main.pdf: main.tex preamble.tex colorscheme.sty $(ABSTRACT) $(CHAPTERS) $(SECTIONS) $(WORKS) $(TIKZPICS)
+main.pdf: main.tex preamble.tex colorscheme.sty $(ABSTRACT) $(CHAPTERS) $(SECTIONS) $(WORKS) $(TIKZPICS) $(ACKNOWLEDGMENT) $(FRONTMATTER)
 	lunatikz build main.tex
 	pdflatex -shell-escape -halt-on-error main.tex
 
