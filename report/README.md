@@ -1,8 +1,10 @@
-# Tiny Minds: An Introduction
+# Tiny Minds and Immense Data
 
-## Tiny Minds Around Us
+## Tiny Minds
 
-## Immense Data Around Us
+## Immense Data
+
+## Doing More
 
 # Making Sense of Data
 
