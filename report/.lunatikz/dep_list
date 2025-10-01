@@ -1,0 +1,5 @@
+return {
+    ["endCode"] = {
+        ["parent_dir"] = "chapter_02/section_03/tikzpics",
+    },
+}
