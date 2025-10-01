@@ -1,0 +1,18 @@
+\begin{tikzpicture} []
+
+    \draw
+    node (code) [inner sep = 0pt, anchor = center] {
+        \begin{minipage} {6.9cm}
+        \begin{minted}[breaklines, autogobble, mathescape] {text}
+            if this_pixel == this_color:
+                if this_pixel is at_edge:
+                    # more and more if statements
+            elif this_pixel == that_color:
+                if this_pixel is in_the_middle:
+                    # many more
+        \end{minted}
+        \end{minipage}
+    }
+    ;
+
+\end{tikzpicture}
