@@ -1,0 +1,45 @@
+\documentclass[../../main]{subfiles}
+
+\input{section_header.tex}
+
+\begin{document}
+
+\section{Low Power Consumption} \label{sec:}
+
+These tiny devices have advanced much more in the aspect of energy conservation.
+They can do much more with much less power consumption. Take a look at table
+\ref{tbl:powerMicrocontrollers}, it gives an idea about the current consumption
+of some of the microcontrollers.
+
+Comparing to a Raspberry Pi 4, this is really low. Pi 4 consumes about $1.5\si{A}$
+of current while running. It is possible to configure these microcontrollers in
+their respective power saving mode to bring down the current consumption even less.
+ESP32 has a ULP\footnote{Ultra Low Power.} co-processor that can do various tasks
+while the main CPU is sleeping for conserving power.
+
+\begin{center}
+    \begin{tabularx} {\textwidth} {
+            >{\centering \arraybackslash}X
+            >{\centering \arraybackslash}X
+        }
+
+        \toprule
+
+        Microcontroller & Current Consumption \\ \midrule
+
+        ESP32 & 20-60 mA \\
+
+        Arduino UNO & 45-80 mA \\
+
+        Raspberry Pi Pico & 18-50 mA \\
+
+        \bottomrule
+
+    \end{tabularx}
+
+    \captionof{table}{Table comparing typical current consumption of some of the popular microcontrollers.}
+    \label{tbl:powerMicrocontrollers}
+
+\end{center}
+
+\end{document}
