@@ -1,0 +1,25 @@
+\documentclass[../../main]{subfiles}
+
+\input{section_header.tex}
+
+\begin{document}
+
+\section{``Ok Google'' ML Model} \label{sec:}
+
+In 2014, engineers at Google had to solve a peculiar problem. They
+wanted the Android phones to be able to wake from sleep mode just using
+``Ok Google'' wake word(s). In order for this to work, these Android
+phone needs to continuously process the audio signal from its surroundings
+and look for the wake words. But unfortunately this can't be carried
+out by the main CPU, obviously, as it will be in the sleep mode for
+conserving battery.
+
+So they had to turn to the embedded DSPs in these devices, that only had
+\emph{tens of kilo-bytes} of memory and \emph{really low} processing power.
+In short, they had to develop an ML model that will look for the wake words
+that would fit into the constrains of these tiny DSPs. They in turn, succeeded
+in this and developed a neural network that does this heavy lifting that sized under
+just \emph{14 kilo-bytes}. And those DSPs only used few milli-watts of power
+while running.
+
+\end{document}
