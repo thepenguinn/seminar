@@ -1,0 +1,194 @@
+\subtikzpicturedef{subDesignFlow} {
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+    \subFigBase {figBase} {#1-origin} {#1-origin}
+
+    \node (#1-dcp) [
+        absNotImpModule,
+
+    ] {\textsc{Data \\ Collection \\ and \\ Preprocessing}};
+
+    \node (#1-mas) [
+        absImpModule,
+        right = of #1-dcp,
+    ] {\textsc{ML \\ Algorithm \\ Selection}}
+    ;
+
+    \node (#1-mmt) [
+        absNotImpModule,
+        right = of #1-mas,
+    ] {\textsc{ML \\ Model \\ Training}}
+    ;
+
+    \draw
+    (#1-mmt.east) ++(1, 0) coordinate (#1-mcStart)
+    ;
+
+    \node (#1-mcq) [
+        absImpMCModule,
+        right = of #1-mcStart,
+    ] {\textsc{Quantization}}
+    ;
+
+    \node (#1-mcp) [
+        absImpMCModule,
+        above = of #1-mcq,
+    ] {\textsc{Pruning}}
+    ;
+
+    \node (#1-mckd) [
+        absImpMCModule,
+        below = of #1-mcq,
+    ] {\textsc{Knowledge \\ Distillation}}
+    ;
+
+
+    \draw
+    (#1-mcq.east) ++(1, 0) coordinate (#1-uhaStart)
+    ;
+
+
+    \node (#1-uha) [
+        absImpModule,
+        right = of #1-uhaStart,
+    ] {\textsc{Using \\ Hardware \\ Accelerators}}
+    ;
+
+    \node (#1-d) [
+        absNotImpModule,
+        right = of #1-uha,
+    ] {\textsc{Deployment}}
+    ;
+
+    \draw
+
+    (#1-mcp.north west) ++(-0.5, 0.5) coordinate (#1-mcTop)
+    (#1-mckd.south east) ++(0.5, -0.5) coordinate (#1-mcBot)
+
+    ;
+
+    \innerEnclosureNode {#1-mc} {#1-mcTop} {#1-mcBot}
+
+    \draw [
+        absLabel,
+    ]
+    (#1-mc.north) ++(0, -0.25) node [ultra thick] {\textsc{Model Compression}}
+    ;
+
+    \draw [innerConnect]
+    (#1-dcp.center) ++(0, 2.5) coordinate (#1-top)
+    (#1-dcp.north) -- (#1-top) -- (#1-top -| #1-mas.north) -- (#1-mas.north)
+    ;
+
+    \draw [innerConnect]
+    (#1-mas.center) ++(0, -2.5) coordinate (#1-bot)
+    (#1-mas.south) -- (#1-bot) -- (#1-bot -| #1-mmt.south) -- (#1-mmt.south)
+    ;
+
+    \draw [innerConnect]
+    ($(#1-mmt.east)!0.33!(#1-mcq.west)$) coordinate (#1-firstVert)
+    ($(#1-mmt.east)!0.66!(#1-mcq.west)$) coordinate (#1-secondVert)
+
+    (#1-mmt.east) -- (#1-firstVert) -- (#1-firstVert |- #1-mcp.west) -- (#1-mcp.west)
+    ;
+
+    \draw [innerConnect]
+    (#1-mmt.east) -- (#1-firstVert) -- (#1-firstVert |- #1-mckd.west) -- (#1-mckd.west)
+    ;
+
+    \draw [innerConnect]
+    (#1-mmt.east) -- (#1-mcq.west)
+    ;
+
+
+    \draw [innerConnect]
+    ($(#1-uha.west)!0.33!(#1-mcq.east)$) coordinate (#1-firstVert)
+    ($(#1-uha.west)!0.66!(#1-mcq.east)$) coordinate (#1-secondVert)
+
+    (#1-uha.west) -- (#1-firstVert) -- (#1-firstVert |- #1-mcp.east) -- (#1-mcp.east)
+    ;
+
+    \draw [innerConnect]
+    (#1-uha.west) -- (#1-firstVert) -- (#1-firstVert |- #1-mckd.east) -- (#1-mckd.east)
+    ;
+
+    \draw [innerConnect]
+    (#1-uha.west) -- (#1-mcq.east)
+    ;
+
+    \draw [innerConnect]
+    (#1-uha.center) ++(0, 2.5) coordinate (#1-top)
+    (#1-uha.north) -- (#1-top) -- (#1-top -| #1-d.north) -- (#1-d.north)
+    ;
+
+    \draw [innerConnect]
+    ($(#1-dcp.east)!0.5!(#1-mas.west)$) ++(0, 4) coordinate (#1-arrowMid)
+
+    (#1-arrowMid) ++(-1.5, 0) coordinate (#1-arrowStart)
+    (#1-arrowMid) ++(1.5, 0) coordinate (#1-arrowEnd)
+
+    (#1-arrowStart) -- (#1-arrowEnd)
+
+    ;
+
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-arrowEnd) circle [radius = 6pt];
+    \draw [very thick, colorDarkGreen, fill = bgcol] (#1-arrowEnd) ++(12pt, 0) circle [radius = 3.5pt];
+
+    \draw
+    (#1-arrowMid) ++(6pt, 0.5)
+    node [
+        absLabel,
+        anchor = south,
+    ] {\textsc{Design Flow Direction}}
+    ;
+
+
+    \draw [
+        ultra thick,
+        rounded corners = 0.2cm,
+        fill = colorLightRed,
+        draw = black,
+    ]
+    (#1-uha.south) ++(0, -1.5) coordinate (#1-legend)
+
+    (#1-legend) ++(-0.3, -0.3) rectangle ++(0.6, 0.6)
+
+    (#1-legend) ++(0.5, 0)
+    node [anchor = west, absLabel] {\textsc{Model Compression Techniques}}
+
+    ;
+
+    \draw [
+        ultra thick,
+        rounded corners = 0.2cm,
+        fill = colorLightSageGreen,
+        draw = black,
+    ]
+    (#1-legend) ++(0, -1.0) coordinate (#1-legend)
+
+    (#1-legend) ++(-0.3, -0.3) rectangle ++(0.6, 0.6)
+
+    (#1-legend) ++(0.5, 0)
+    node [anchor = west, absLabel] {\textsc{Design Flow Unique to TinyML}}
+    ;
+
+    \draw [
+        fill = colorLightGreen,
+        draw = black,
+        ultra thick,
+        % dashdotted,
+        rounded corners = 0.2cm,
+    ]
+    (#1-legend) ++(0, -1.0) coordinate (#1-legend)
+
+    (#1-legend) ++(-0.3, -0.3) rectangle ++(0.6, 0.6)
+
+    (#1-legend) ++(0.5, 0)
+    node [anchor = west, absLabel] {\textsc{Design Flow Common with ML}}
+    ;
+
+
+}
+
+\subtikzpictureactivate{subDesignFlow}
