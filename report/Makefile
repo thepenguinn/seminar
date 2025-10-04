@@ -27,6 +27,13 @@ main.pdf: main.tex preamble.tex colorscheme.sty $(ABSTRACT) $(CHAPTERS) $(SECTIO
 	lunatikz build main.tex
 	pdflatex -shell-escape -halt-on-error main.tex
 
+final:
+	lunatikz build main.tex
+	pdflatex -shell-escape -halt-on-error main.tex
+	biber main
+	pdflatex -shell-escape -halt-on-error main.tex
+	$(VIEWER) main.pdf
+
 abstract: abstract.pdf view_abstract
 
 abstract.pdf: preamble.tex colorscheme.sty $(ABSTRACT)

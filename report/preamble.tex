@@ -36,6 +36,7 @@
 \usepackage[numbib]{tocbibind}
 \usepackage{fancyhdr}
 \usepackage{blindtext}
+\usepackage{wrapfig}
 
 %% for bold textsc to work
 \rmfamily % To load Latin Modern Roman and enable the following NFSS declarations.
@@ -45,7 +46,9 @@
 \DeclareFontShape{T1}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
 \DeclareFontShape{T1}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
 
-\addbibresource{abstract.bib} %Import the bibliography file
+% \addbibresource{abstract.bib} %Import the bibliography file
+
+\addbibresource{references.bib} %Import the bibliography file
 
 \usepackage[bottom]{footmisc}
 
@@ -208,6 +211,24 @@
 \DeclareRobustCommand{\FAtwo}{\usefont{U}{fontawesome2}{m}{n}}
 \DeclareRobustCommand{\FAthree}{\usefont{U}{fontawesome3}{m}{n}}
 \DeclareRobustCommand{\FAfive}{\usefont{U}{fontawesome5}{m}{n}}
+
+\newcommand\setcasestudy[0] {
+    \titleformat{\chapter} [display]
+    {\bfseries\normalfont\huge\filright\sffamily\vspace{-2cm}}
+    {\Large\textsc{chapter \num[minimum-integer-digits = 2]{\thechapter} \hfill case study} \vspace{1em}}
+    {1pc}
+    {\titlerule\vspace{0.35em}\scshape}
+    [\vspace{0.35em}{\titlerule[1pt]}]
+}
+
+\newcommand\unsetcasestudy[0] {
+    \titleformat{\chapter} [display]
+    {\bfseries\normalfont\huge\filright\sffamily\vspace{-2cm}}
+    {\Large\textsc{chapter \num[minimum-integer-digits = 2]{\thechapter}} \vspace{1em}}
+    {1pc}
+    {\titlerule\vspace{0.35em}\scshape}
+    [\vspace{0.35em}{\titlerule[1pt]}]
+}
 
 \titleformat{\chapter} [display]
 {\bfseries\normalfont\huge\filright\sffamily\vspace{-2cm}}
