@@ -1,88 +1,101 @@
-# Tiny Minds and Immense Data
+<!-- # Tiny Minds and Immense Data -->
+<!---->
+<!-- ## Tiny Minds -->
+<!---->
+<!-- ## Immense Data -->
+<!---->
+<!-- ## Doing More -->
+<!---->
+<!-- # Making Sense of Data -->
+<!---->
+<!-- ## Data Processing Systems -->
+<!---->
+<!-- ## Asking the Right Questions (Find something else) -->
+<!---->
+<!-- ## Ways of Asking Questions -->
+<!---->
+<!-- ## Learning to Ask Questions -->
 
-## Tiny Minds
+<!-- # Powerful ML Models -->
+<!---->
+<!-- ## ML Models with More and More Capabilities -->
+<!---->
+<!-- ## Drawbacks of Advanced ML Models -->
+<!---->
 
-## Immense Data
+<!-- # An Introduction to TinyML -->
+<!---->
+<!-- ## TinyML -->
+<!---->
+<!-- ## Devices TinyML Aims -->
+<!---->
 
-## Doing More
+<!-- # Benefits of TinyML -->
+<!---->
+<!-- ## Reasons to Run ML on Microcontrollers -->
+<!---->
+<!-- ## Privacy and Security -->
+<!---->
+<!-- ## Economic Viability -->
+<!---->
+<!-- ## Low Power Consumption -->
+<!---->
+<!-- ## Improved Network Latency -->
 
-# Making Sense of Data
+<!-- # Modern Day's Tiny Minds -->
+<!---->
+<!-- ## "Ok Google" ML Model -->
+<!---->
+<!-- ## Modern Day's Microcontrollers -->
+<!---->
+<!-- <!-- Compare Modern day micro controllers showing how powerful they actually are --> -->
+<!---->
 
-## Data Processing Systems
+<!-- # Drawbacks of TinyML -->
+<!---->
+<!-- ## Low Fidelity Nature -->
+<!---->
+<!-- ## Cascaded Systems -->
 
-## Asking the Right Questions (Find something else)
+<!-- # Essence of TinyML -->
+<!---->
+<!-- ## General Workflow -->
+<!---->
+<!-- ## Bread and Butter of TinyML Workflow -->
+<!---->
+<!-- ### Quantization -->
+<!---->
+<!-- ### Pruning -->
+<!---->
+<!-- ### Knowledge Distillation -->
+<!---->
+<!-- ## Frameworks and Tool Chains -->
+<!---->
+<!-- ### TensorFlow Lite -->
+<!---->
+<!-- ### Edge Impulse -->
 
-## Ways of Asking Questions
-
-## Learning to Ask Questions
-
-# Powerful ML Models
-
-## Drawbacks of Advanced ML Models
-
-<!-- TODO: Add something more -->
-
-# An Introduction to TinyML
-
-## Devices TinyML Aims
-
-# Benefits of TinyML
-
-## Privacy and Security
-
-## Economic Viability
-
-## Low Power Consumption
-
-## Improved Network Latency
-
-# Modern Day's Tiny Minds
-
-<!-- Compare Modern day micro controllers showing how powerful they actually are -->
-
-# Drawbacks of TinyML
-
-## Cascaded Systems
-
-# Essence of TinyML
-
-## General Workflow Common with ML
-
-## Bread and Butter of TinyML Workflow
-
-<!-- Maybe put these under as subsubsections -->
-
-## Quantization
-
-## Pruning
-
-## Knowledge Distillation
-
-## Frameworks and Tool Chains
-
-### TensorFlow Lite
-
-### Edge Impulse
-
-# General Applications
-
-<!-- tabularize of list them -->
-
-# Agricultural Applications
-
-<!-- tabularize of list them -->
-
-# Plant Disease Detection
-
-## What they did?
-
-## Result
-
-# Micro Climate Management
-
-## What they did?
-
-## Result
+<!-- # TinyML Applications -->
+<!---->
+<!-- ## General Applications -->
+<!---->
+<!-- ## Agricultural Applications -->
+<!---->
+<!-- <!-- tabularize of list them --> -->
+<!---->
+<!-- <!-- tabularize of list them --> -->
+<!---->
+<!-- # Plant Disease Detection -->
+<!---->
+<!-- ## What they did? -->
+<!---->
+<!-- ## Result -->
+<!---->
+<!-- # Micro Climate Management -->
+<!---->
+<!-- ## What they did? -->
+<!---->
+<!-- ## Result -->
 
 # Pest Prevention
 
