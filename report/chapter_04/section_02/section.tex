@@ -31,24 +31,30 @@ We need to map them into $8$ bit integers. This process is know as
 Figure \ref{fig:quantizationTinyML} show two ways to quantize our trained model. One
 is \emph{Quantization Aware Training} and the other is \emph{Post Training Quantization}.
 
-\begin{itemize}
-    \item \textsc{Quantization Aware Training:}
-        \begin{itemize} [label=]
-            \item If we have enough data, we can leverage it to tweak and tune the
-                model after the quantization process. What we are doing is essentially
-                re-training the model once more after the quantization. Therefore the
-                name Quantization Aware Training. See figure \ref{fig:quantizationTinyML}
-                to get a better idea.
-        \end{itemize}
+\subsubsection{Quantization Aware Training}
 
-    \item \textsc{Post Training Quantization:}
-        \begin{itemize} [label=]
-            \item In Post Training Quantization, we are simply quantizing after an
-                initial calibration process. Even though this gets the job done, it
-                is preferable to do QAT when ever possible.
-        \end{itemize}
+If we have enough data, we can leverage it to tweak and tune the
+model after the quantization process. What we are doing is essentially
+re-training the model once more after the quantization. Therefore the
+name Quantization Aware Training. See figure \ref{fig:quantizationTinyML}
+to get a better idea.
 
-\end{itemize}
+\subsubsection{Post Training Quantization}
+
+In Post Training Quantization, we are simply quantizing after an
+initial calibration process. Even though this gets the job done, it
+is preferable to do QAT when ever possible.
+
+% \begin{itemize}
+%     \item \textsc{Quantization Aware Training:}
+%         \begin{itemize} [label=]
+%         \end{itemize}
+%
+%     \item \textsc{Post Training Quantization:}
+%         \begin{itemize} [label=]
+%         \end{itemize}
+%
+% \end{itemize}
 
 \subsection{Pruning}
 
@@ -64,7 +70,8 @@ still keep the performance almost the same. This process is know as \emph{prunin
 \begin{figure} [H]
     \centering
     \includegraphics [
-        max width = 0.9\textwidth,
+        % width = 0.9\textwidth,
+        max width = \IGXMaxWidth,
         max height = \IGXMaxHeight,
         \IGXDefaultOptionalArgs,
     ] {pics/endPruning.pdf}
