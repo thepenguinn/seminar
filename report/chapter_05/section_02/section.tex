@@ -4,46 +4,37 @@
 
 \begin{document}
 
-\section{Drawbacks of TinyML} \label{sec:}
+\section{Agricultural Applications} \label{sec:}
 
-\subsection{Low Fidelity Nature}
+Now let's see some of the applications that are agriculture specific.
+Table \ref{tbl:agriculturalApplicationTinyML} list some of the agriculture
+specific applications of TinyML. We will see some case study related to
+these in the following chapters.
 
-The con of a sword is that it's sharp. Just like that, TinyML's
-greatest advantage is it's greatest disadvantage. It is essential
-to compress the size of the model to fit with the constrains of the
-host device. In this process the model could turn into a \emph{low fidelity}
-one.
+\begin{center}
 
-But in most cases this will be fine, as the low fidelity one can
-still infer useful information from the surroundings. Another useful
-technique to increase the performance of the overall system is to
-\emph{cascade} the low fidelity one with a high fidelity one.
+    \renewcommand\arraystretch{1.75}
 
-\subsection{Cascaded Systems}
+    \begin{tabularx} {\textwidth} {
+            >{\centering\arraybackslash}X
+        }
 
-One way to deal with low fidelity models is to cascade it with
-a high fidelity model. Figure \ref{fig:cascadingMLModels} shows
-such a system.
+        \toprule
+        \midrule
 
-\begin{figure}
-    \centering
-    \includegraphics [
-        max width = \IGXMaxWidth,
-        max height = 0.3\textheight,
-        \IGXDefaultOptionalArgs,
-    ] {pics/cascading_ml_models.pdf}
-    \captionof{figure} {Cascading different fidelity ML models.}
-    \label{fig:cascadingMLModels}
-\end{figure}
+        Plant Disease Detection \\ \midrule
+        Micro Climate Management \\ \midrule
+        Pest Detection in Plants \\ \midrule
+        Fruit Detection \\
 
-In this case, the low fidelity one will run continuously and consumes
-the least amount of energy. Once it picks up something it can wake
-up the higher fidelity one to run more inferences. If the higher fidelity
-one confirms the lower fidelity one's inferences, then it can trigger
-other parts of the system.
+        \midrule
+        \bottomrule
 
-In this way, the low fidelity one can help to conserve energy, by preventing
-higher fidelity one from running continuously.
+    \end{tabularx}
 
+    \captionof{table}{Table listing some of the agricultural application of TinyML.}
+    \label{tbl:agriculturalApplicationTinyML}
+
+\end{center}
 
 \end{document}

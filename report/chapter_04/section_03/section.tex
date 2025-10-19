@@ -4,22 +4,79 @@
 
 \begin{document}
 
-\section{``Ok Google'' ML Model} \label{sec:}
+\section{Frameworks and Tool Chains} \label{sec:}
 
-In 2014, engineers at Google had to solve a peculiar problem. They
-wanted the Android phones to be able to wake from sleep mode just using
-``Ok Google'' wake word(s). In order for this to work, these Android
-phone needs to continuously process the audio signal from its surroundings
-and look for the wake words. But unfortunately this can't be carried
-out by the main CPU, obviously, as it will be in the sleep mode for
-conserving battery.
+When it comes to the frameworks and toolchains used in TinyML development, two
+popular frameworks are widely used:
 
-So they had to turn to the embedded DSPs in these devices, that only had
-\emph{tens of kilo-bytes} of memory and \emph{really low} processing power.
-In short, they had to develop an ML model that will look for the wake words
-that would fit into the constrains of these tiny DSPs. They in turn, succeeded
-in this and developed a neural network that does this heavy lifting that sized under
-just \emph{14 kilo-bytes}. And those DSPs only used few milli-watts of power
-while running.
+% \begin{itemize}
+%     \item TensorFlow Lite.
+%     \item Edge Impulse.
+% \end{itemize}
+
+\begin{center}
+
+    \setlength{\arraycolsep}{0.15cm}
+    % \renewcommand\arraystretch{1.75}
+
+
+    \begin{tabularx} {\textwidth} {
+            >{\centering \arraybackslash}X
+            >{\centering \arraybackslash}X
+        }
+
+        \includegraphics [width = 0.3\textwidth] {pics/tfl.pdf}
+
+        &
+
+        \includegraphics [width = 0.3\textwidth] {pics/ei.pdf}
+
+        \\
+        \vspace{0.35cm}
+        (a)
+        &
+        \vspace{0.35cm}
+        (b)
+        \\
+
+        % \bottomrule
+        \multicolumn{2}{c}{
+            \begin{minipage} {\textwidth}
+                \vspace{0.25cm}
+                \captionof{figure}{(a) TensorFlow Lite. (b) Edge Impulse.}
+                \label{fig:}
+            \end{minipage}
+        }
+
+
+    \end{tabularx}
+
+\end{center}
+
+\subsection{TensorFlow Lite}
+
+TensorFlow Lite is developed by Google to build and deploy ML models on
+resource constrained devices. It is an open source framework. And gives
+more fine grained control to the user.
+
+% \begin{itemize}
+%     \item Developed by Google to build and deploy ML Models on
+%         Embedded Systems.
+%     \item Open-source Framework.
+%     \item Gives more control.
+% \end{itemize}
+
+\subsection{Edge Impulse}
+
+Edge Impulse is an end-to-end development framework for TinyML. It
+offers a comprehensive set of tools for the entire embedded machine learning
+lifecycle. It simplifies the entire process of building edge AI solutions.
+And it makes TensorFlow Lite's capabilities approachable to new and novice
+users.
+
+% - Offers a comprehensive set of tools for the entire embedded
+% machine learning lifecycle.
+% - Simplifies the process of building edge AI solutions.
+
 
 \end{document}
