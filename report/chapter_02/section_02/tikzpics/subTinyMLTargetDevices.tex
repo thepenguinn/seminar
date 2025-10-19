@@ -1,0 +1,67 @@
+\subtikzpicturedef{subTinyMLTargetDevices} {
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+
+    \subFigBase {#1-figBase} {#1-origin} {origin}
+
+    \draw
+    (#1-origin)
+
+    node (#1-tinyml) [
+        absTinyMLModule,
+    ] {
+        \scshape
+        TinyML
+    }
+
+    node (#1-mcu) [
+        absDeviceModule,
+        above = 0.5cm of #1-tinyml,
+    ] {
+        \scshape
+        MCUs
+    }
+
+    node (#1-soc) [
+        absDeviceModule,
+        below = 0.5cm of #1-tinyml,
+    ] {
+        \scshape
+        SoCs
+    }
+
+    node (#1-fpga) [
+        absDeviceModule,
+        left = 2.0cm of #1-tinyml,
+    ] {
+        \scshape
+        FPGAs
+    }
+
+    node (#1-dsp) [
+        absDeviceModule,
+        right = 2.0cm of #1-tinyml,
+    ] {
+        \scshape
+        DSPs
+    }
+
+    ;
+
+    \foreach \x/\y in {
+        tinyml/fpga,
+        tinyml/dsp,
+        tinyml/mcu,
+        tinyml/soc%
+    } {
+        \draw [
+            innerConnect,
+        ]
+        (#1-\x) -- (#1-\y)
+        ;
+    }
+
+}
+
+\subtikzpictureactivate{subTinyMLTargetDevices}

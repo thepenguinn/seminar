@@ -9,15 +9,19 @@
 TinyML mainly targets devices that are resource constrained with
 kilo-bytes sized RAM and mega hertz clocked CPUs. These devices
 usually comes with low volume of flash memory\footnote{Few MBs of flash memory.}.
-For example:
+See figure \ref{fig:tinyMLTargetDevices} for some of the target devices
+of TinyML.
 
-\begin{itemize}
-    \item Microcontrollers (MCUs).
-    \item System-on-Chips (SoCs).
-    \item FPGAs.
-    \item DSPs.
-    \item Hand-held Devices.
-\end{itemize}
-
+\begin{figure}
+    \centering
+    \includegraphics [
+        height = 0.20\textheight,
+        max width = \IGXMaxWidth,
+        max height = \IGXMaxHeight,
+        \IGXDefaultOptionalArgs,
+    ] {tikzpics/endTinyMLTargetDevices.pdf}
+    \captionof{figure} {TinyML and its target devices.}
+    \label{fig:tinyMLTargetDevices}
+\end{figure}
 
 \end{document}
