@@ -1,0 +1,69 @@
+\subtikzpicturedef{subSolvingAProblem} {
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+
+    \subFigBase {#1-figBase} {#1-origin} {origin}
+
+    \draw
+
+    (#1-origin)
+    node (#1-prob) [
+        absAlgoModule,
+    ] {
+        \scshape
+        Pick a Problem
+    }
+
+    node (#1-algo) [
+        absAlgoModule,
+        right = 1.5cm of #1-prob,
+    ] {
+        \scshape
+        Select an Algorithm
+    }
+
+    node (#1-impl) [
+        absAlgoModule,
+        right = 1.5cm of #1-algo,
+    ] {
+        \scshape
+        Implement the Algorithm
+    }
+
+    node (#1-solv) [
+        absAlgoModule,
+        right = 1.5cm of #1-impl,
+    ] {
+        \scshape
+        Solve the Problem
+    }
+
+    ;
+
+    \foreach \x/\y in {
+        prob/algo.west,
+        algo/impl.west,
+        impl/solv.west%
+    } {
+        \draw [
+            innerConnect,
+        ]
+        (#1-\y) ++(-12pt, 0) coordinate (#1-tmp)
+        (#1-\x) -- (#1-tmp)
+        ;
+        \draw [
+            fill = bgcol,
+            very thick,
+            draw = colorDarkGreen,
+        ]
+        (#1-tmp) circle (6pt)
+        (#1-\y) circle (4pt)
+        ;
+
+    }
+
+
+}
+
+\subtikzpictureactivate{subSolvingAProblem}

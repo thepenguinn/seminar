@@ -8,6 +8,9 @@ return {
     ["endDesignFlow"] = {
         ["parent_dir"] = "chapter_04/section_01/tikzpics",
     },
+    ["endSolvingAProblem"] = {
+        ["parent_dir"] = "chapter_01/section_05/tikzpics",
+    },
     ["subCascadingMLModels"] = {
         ["parent_dir"] = "chapter_03/section_02/tikzpics",
     },
@@ -16,5 +19,8 @@ return {
     },
     ["subFigBase"] = {
         ["parent_dir"] = "tikzpics",
+    },
+    ["subSolvingAProblem"] = {
+        ["parent_dir"] = "chapter_01/section_05/tikzpics",
     },
 }
