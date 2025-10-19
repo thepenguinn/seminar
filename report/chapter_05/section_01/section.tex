@@ -4,7 +4,7 @@
 
 \begin{document}
 
-\section{Why Run ML on Microcontrollers?} \label{sec:}
+\section{Benefits of TinyML} \label{sec:}
 
 There are several reasons to run TinyML on these tiny devices. Table
 \ref{tbl:advantagesTinyML} show some of them.
@@ -32,5 +32,99 @@ There are several reasons to run TinyML on these tiny devices. Table
 \end{center}
 
 We will see each of these in detail in the following sections.
+
+\subsection{Privacy and Security}
+
+The most \emph{secure} connection is \emph{no connection} at all. Since the
+ML model is running on the device itself, there is no need to sent anything
+over the wire or air. That is the beauty of \emph{edge computing}, everything
+stays locally on the device itself. From the privacy and security point of
+view this is really desirable.
+
+\subsection{Economic Viability}
+
+Modern day's microcontrollers are \emph{extremely cheap}. And they are
+literally used everywhere. So giving them additional capabilities is
+much more preferable than replacing them with something that is powerful
+but expensive. Refer table \ref{tbl:priceMicrocontrollers} to get
+an idea about the market price of some of the popular microcontrollers.
+
+From table \ref{tbl:priceMicrocontrollers} we can see that the average price
+of these microcontrollers is around 500 INR. At the same time the cheapest
+SBC\footnote{Single Board Computer} costs about 1500 INR. That's just for
+the board itself. Inorder to run the device one needs to get other
+accessories\footnote{Namely, SD card, power supply, etc.}.
+
+\begin{center}
+    \begin{tabularx} {\textwidth} {
+            >{\centering \arraybackslash}X
+            >{\centering \arraybackslash}X
+        }
+
+        \toprule
+
+        Microcontroller & Price (INR) \\ \midrule
+
+        ESP32 & 550 \\
+
+        Arduino UNO &  570 \\
+
+        Raspberry Pi Pico & 450 \\
+
+        \bottomrule
+
+    \end{tabularx}
+
+    \captionof{table}{Table comparing market price of some of the popular microcontrollers.}
+    \label{tbl:priceMicrocontrollers}
+
+\end{center}
+
+\subsection{Low Power Consumption}
+
+These tiny devices have advanced much more in the aspect of energy conservation.
+They can do much more with much less power consumption. Take a look at table
+\ref{tbl:powerMicrocontrollers}, it gives an idea about the current consumption
+of some of the microcontrollers.
+
+Comparing to a Raspberry Pi 4, this is really low. Pi 4 consumes about $1.5\si{A}$
+of current while running. It is possible to configure these microcontrollers in
+their respective power saving mode to bring down the current consumption even less.
+ESP32 has a ULP\footnote{Ultra Low Power.} co-processor that can do various tasks
+while the main CPU is sleeping for conserving power.
+
+\begin{center}
+    \begin{tabularx} {\textwidth} {
+            >{\centering \arraybackslash}X
+            >{\centering \arraybackslash}X
+        }
+
+        \toprule
+
+        Microcontroller & Current Consumption \\ \midrule
+
+        ESP32 & 20-60 mA \\
+
+        Arduino UNO & 45-80 mA \\
+
+        Raspberry Pi Pico & 18-50 mA \\
+
+        \bottomrule
+
+    \end{tabularx}
+
+    \captionof{table}{Table comparing typical current consumption of some of the popular microcontrollers.}
+    \label{tbl:powerMicrocontrollers}
+
+\end{center}
+
+\subsection{Improved Network Latency}
+
+This is yet another benefit of \emph{edge computing}. Everything is
+processed locally, so the latency related with \emph{cloud computing}
+literally become \emph{zero}. This enables these systems to be deployed
+to \emph{remote locations} where there have unreliable connections or have
+no connection at all.
+
 
 \end{document}
