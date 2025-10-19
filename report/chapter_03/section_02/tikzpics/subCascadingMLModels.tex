@@ -1,0 +1,84 @@
+\subtikzpicturedef{subCascadingMLModels} {
+    origin%
+} {
+    \draw (#1-start) coordinate (#1-origin);
+
+    \subFigBase {#1-figBase} {#1-origin} {origin}
+
+    \draw
+
+    (#1-origin)
+    node (#1-lfi) [
+        absCascadeModule,
+    ] {
+        \scshape
+        Low fidelity ML Model
+    }
+
+    node (#1-hfi) [
+        absCascadeModule,
+        right = of #1-lfi,
+    ] {
+        \scshape
+        High fidelity ML Model
+    }
+
+    node (#1-cpu) [
+        absCascadeModule,
+        right = of #1-hfi,
+    ] {
+        \scshape
+        Main CPU
+    }
+
+    node [
+        absCascadeLabelModule,
+        below = -2.25cm of #1-lfi,
+    ] {
+        \scshape
+        (Always Running)
+    }
+
+    node [
+        absCascadeLabelModule,
+        below = -2.25cm of #1-hfi,
+    ] {
+        \scshape
+        (Triggered by Low-Fi Model)
+    }
+
+    node [
+        absCascadeLabelModule,
+        below = -2.25cm of #1-cpu,
+    ] {
+        \scshape
+        (Triggered by High-Fi Model)
+    }
+
+    ;
+
+    \foreach \x/\y in {
+        lfi/hfi,
+        hfi/cpu%
+    } {
+        \draw [
+            innerConnect,
+        ]
+        (#1-\x) -- (#1-\y)
+        ;
+    }
+
+    \draw
+    node [
+        absCascadeLabelModule,
+        above = -1.5cm of #1-cpu,
+    ] {
+        \scshape
+        Cascading ML Models
+    }
+    ;
+
+
+}
+
+\subtikzpictureactivate{subCascadingMLModels}

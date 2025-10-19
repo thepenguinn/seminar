@@ -1,0 +1,5 @@
+return {
+    ["margin"] = "0pt",
+    ["style.file"] = "colorscheme.sty",
+    ["style.macro"] = "usepackage",
+}
