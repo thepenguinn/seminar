@@ -1,6 +1,12 @@
 return {
     ["endCode"] = {
-        ["parent_dir"] = "chapter_02/section_03/tikzpics",
+        ["parent_dir"] = "chapter_01/section_06/tikzpics",
+    },
+    ["endDesignFlow"] = {
+        ["parent_dir"] = "chapter_08/section_01/tikzpics",
+    },
+    ["subDesignFlow"] = {
+        ["parent_dir"] = "chapter_08/section_01/tikzpics",
     },
     ["subFigBase"] = {
         ["parent_dir"] = "tikzpics",
